@@ -13,20 +13,18 @@ meta:
 
 # Getting Started
 
-Create a `docs/` directory with an `index.md` file, then run Build Pages with a destination directory.
+Create a Markdown source directory, run Build Pages, and deploy the generated static output.
 
-```bash
-npx @zeropress/build-pages --source ./docs --destination ./_site
-```
+Build Pages does not require a framework project. A repository can start with only Markdown files.
 
-The command discovers Markdown pages, prepares generated build data, copies public files, and writes a static site to `_site/`.
-
-## Minimal Source
+## 1. Create A Source Directory
 
 ```txt
 docs/
   index.md
 ```
+
+Create `docs/index.md`:
 
 ```md
 # My Docs
@@ -34,9 +32,25 @@ docs/
 Welcome to the project documentation.
 ```
 
-## Add Configuration
+## 2. Build The Site
 
-Optional site configuration lives under the source directory:
+```bash
+npx @zeropress/build-pages --source ./docs --destination ./_site
+```
+
+The command:
+
+- discovers Markdown pages under `docs/`
+- prepares internal ZeroPress build data
+- copies public files
+- runs the bundled docs theme
+- writes static output to `_site/`
+
+The generated `_site/` directory is the directory you deploy.
+
+## 3. Add Site Config
+
+Optional site configuration lives under the source directory.
 
 ```txt
 docs/
@@ -45,7 +59,59 @@ docs/
   index.md
 ```
 
-Use config when you want to set site metadata, menus, footer text, or a custom front page source.
+Example `docs/.zeropress/config.json`:
+
+```json
+{
+  "$schema": "https://schemas.zeropress.dev/build-pages-config/v0.1/schema.json",
+  "version": "0.1",
+  "site": {
+    "title": "My Docs",
+    "description": "Project documentation.",
+    "url": "https://example.com",
+    "footer": {
+      "copyright_text": "My Docs",
+      "attribution": true
+    }
+  },
+  "front_page": {
+    "type": "markdown",
+    "file": "index.md"
+  }
+}
+```
+
+Use config when you want to set site metadata, menus, footer text, search behavior, or a custom front page source.
+
+## 4. Add Public Files
+
+By default, the source directory is also used as the public passthrough root. For larger projects, keep public files in a separate directory:
+
+```txt
+docs/
+  index.md
+public/
+  favicon.svg
+  robots.txt
+  images/
+```
+
+```bash
+npx @zeropress/build-pages \
+  --source ./docs \
+  --public-dir ./public \
+  --destination ./_site
+```
+
+`favicon.*`, `robots.txt`, and `sitemap.xsl` are discovered from the public directory.
+
+## 5. Deploy
+
+Deploy `_site/` with your host.
+
+- GitHub Pages: use the [GitHub Action](/github-action/).
+- Vercel, Cloudflare Pages, Netlify: set the build command and output directory in project settings.
+- Local package workflow: use a [package.json script](/package-json/).
 
 ## Next Step
 

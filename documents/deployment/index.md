@@ -31,9 +31,65 @@ npx --yes @zeropress/build-pages \
   --destination ./_site
 ```
 
-## Provider Examples
+## GitHub Pages
 
-- GitHub Pages: use the ZeroPress action, then upload `_site`.
-- Vercel: use the `Other` framework preset and `_site` output directory.
-- Cloudflare Pages: set the build command and output directory in project settings.
-- Netlify: set the build command and publish directory.
+Use the [GitHub Action](/github-action/) and upload `_site` with `actions/upload-pages-artifact`.
+
+```yaml
+- name: Build ZeroPress Pages
+  uses: zeropress-app/zeropress-build-pages@v0
+  with:
+    source: ./docs
+    destination: ./_site
+```
+
+## Vercel
+
+Use the `Other` framework preset.
+
+| Setting | Value |
+| --- | --- |
+| Framework Preset | `Other` |
+| Build Command | `npx --yes @zeropress/build-pages --source ./docs --destination ./_site` |
+| Output Directory | `_site` |
+
+If you use a separated public directory:
+
+```bash
+npx --yes @zeropress/build-pages --source ./docs --public-dir ./public --destination ./_site
+```
+
+## Cloudflare Pages
+
+Use the same shape in Cloudflare Pages project settings.
+
+| Setting | Value |
+| --- | --- |
+| Build command | `npx --yes @zeropress/build-pages --source ./docs --destination ./_site` |
+| Build output directory | `_site` |
+| Root directory | repository root, unless your site lives in a subdirectory |
+
+For projects with `package.json`, set the build command to:
+
+```bash
+npm run build
+```
+
+and put the Build Pages command in the package script.
+
+## Netlify
+
+Use `_site` as the publish directory.
+
+```toml
+[build]
+  command = "npx --yes @zeropress/build-pages --source ./docs --destination ./_site"
+  publish = "_site"
+```
+
+## Static Host Checklist
+
+- The deployed directory is the Build Pages destination.
+- The destination contains `index.html`.
+- `sitemap.xml` and fallback `robots.txt` are generated unless public files override them.
+- If Pagefind is used, run Pagefind before uploading the final output.
