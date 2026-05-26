@@ -8,8 +8,8 @@
   "runtime": "0.6",
   "description": "Editorial Mentor docs theme. Warm paper-and-ink palette, Lora display + Outfit body, grouped colored sidebar, command-palette search, deep-paper dark mode.",
   "features": {
-    "comments": false,
-    "post_index": false
+    "post_index": false,
+    "search": true
   },
   "menu_slots": {
     "foundations": {
