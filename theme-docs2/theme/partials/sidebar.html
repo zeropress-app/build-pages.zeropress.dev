@@ -14,7 +14,7 @@
 
     {{#if site.search}}
     <button type="button" class="sidebar__search" data-cmdk-open>
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
       <span>Search the docs...</span>
       <kbd class="kbd">⌘K</kbd>
     </button>
@@ -22,36 +22,48 @@
 
     <nav class="sidebar__nav">
       {{#if menus.foundations.items}}
-      <div class="sidebar__group sidebar__group--terracotta">
-        <h3 class="sidebar__title"><span class="sidebar__accent"></span>Foundations</h3>
+      <details class="sidebar__group sidebar__group--terracotta" data-group="foundations" open>
+        <summary class="sidebar__title">
+          <span class="sidebar__accent"></span>
+          <span class="sidebar__title-label">Foundations</span>
+          <svg class="sidebar__chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+        </summary>
         <ul>
           {{#for item in menus.foundations.items}}
             <li><a class="sidebar__link" href="{{item.url}}">{{item.title}}</a></li>
           {{/for}}
         </ul>
-      </div>
+      </details>
       {{/if}}
 
       {{#if menus.guides.items}}
-      <div class="sidebar__group sidebar__group--sage">
-        <h3 class="sidebar__title"><span class="sidebar__accent"></span>Guides</h3>
+      <details class="sidebar__group sidebar__group--sage" data-group="guides" open>
+        <summary class="sidebar__title">
+          <span class="sidebar__accent"></span>
+          <span class="sidebar__title-label">Guides</span>
+          <svg class="sidebar__chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+        </summary>
         <ul>
           {{#for item in menus.guides.items}}
             <li><a class="sidebar__link" href="{{item.url}}">{{item.title}}</a></li>
           {{/for}}
         </ul>
-      </div>
+      </details>
       {{/if}}
 
       {{#if menus.reference.items}}
-      <div class="sidebar__group sidebar__group--ochre">
-        <h3 class="sidebar__title"><span class="sidebar__accent"></span>Reference</h3>
+      <details class="sidebar__group sidebar__group--ochre" data-group="reference" open>
+        <summary class="sidebar__title">
+          <span class="sidebar__accent"></span>
+          <span class="sidebar__title-label">Reference</span>
+          <svg class="sidebar__chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+        </summary>
         <ul>
           {{#for item in menus.reference.items}}
             <li><a class="sidebar__link" href="{{item.url}}">{{item.title}}</a></li>
           {{/for}}
         </ul>
-      </div>
+      </details>
       {{/if}}
     </nav>
   </div>

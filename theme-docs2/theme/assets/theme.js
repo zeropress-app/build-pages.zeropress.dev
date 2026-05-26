@@ -55,9 +55,75 @@
   // ===== Mobile nav close on link click =====
   var navToggle = document.getElementById('nav-toggle');
   if (navToggle) {
-    document.querySelectorAll('.sidebar a').forEach(function (a) {
+    document.querySelectorAll('.sidebar__link').forEach(function (a) {
       a.addEventListener('click', function () { navToggle.checked = false; });
     });
+  }
+
+  // ===== Sidebar collapsible group persistence =====
+  document.querySelectorAll('.sidebar__group[data-group]').forEach(function (group) {
+    var key = 'loomis-sidebar-' + group.dataset.group;
+    try {
+      var stored = localStorage.getItem(key);
+      if (stored === 'closed') group.removeAttribute('open');
+      else if (stored === 'open') group.setAttribute('open', '');
+    } catch (e) {}
+    group.addEventListener('toggle', function () {
+      try { localStorage.setItem(key, group.open ? 'open' : 'closed'); } catch (e) {}
+    });
+  });
+
+  // ===== Heading anchor links =====
+  var prose = document.querySelector('.prose');
+  if (prose) {
+    var anchorIcon = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>';
+    var anchorCheck = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>';
+    prose.querySelectorAll('h2[id], h3[id], h4[id]').forEach(function (heading) {
+      if (heading.querySelector('.heading-anchor')) return;
+      var a = document.createElement('a');
+      a.className = 'heading-anchor';
+      a.href = '#' + heading.id;
+      a.setAttribute('aria-label', 'Copy link to ' + heading.textContent.trim());
+      a.innerHTML = anchorIcon;
+      a.addEventListener('click', function (e) {
+        var url = window.location.origin + window.location.pathname + '#' + heading.id;
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          e.preventDefault();
+          navigator.clipboard.writeText(url).then(function () {
+            a.classList.add('is-copied');
+            a.innerHTML = anchorCheck;
+            history.replaceState(null, '', '#' + heading.id);
+            setTimeout(function () {
+              a.classList.remove('is-copied');
+              a.innerHTML = anchorIcon;
+            }, 1300);
+          }).catch(function () {});
+        }
+      });
+      heading.appendChild(a);
+    });
+  }
+
+  // ===== Page stats (reading time + section count) =====
+  var statsEl = document.querySelector('[data-page-stats]');
+  if (statsEl && prose) {
+    var text = prose.innerText || prose.textContent || '';
+    var words = text.trim().split(/\s+/).filter(Boolean).length;
+    var minutes = Math.max(1, Math.round(words / 200));
+    var sections = prose.querySelectorAll('h2[id]').length;
+    var readEl = statsEl.querySelector('[data-page-stat-read-time]');
+    var sectionsEl = statsEl.querySelector('[data-page-stat-sections]');
+    if (readEl) readEl.textContent = minutes + ' min read';
+    if (sectionsEl) sectionsEl.textContent = sections === 1 ? '1 section' : sections + ' sections';
+    if (words > 30 && sections >= 1) {
+      statsEl.hidden = false;
+    } else if (words > 30) {
+      // No headings — still show reading time
+      if (sectionsEl) sectionsEl.remove();
+      var sep = statsEl.querySelector('.page-stats__sep');
+      if (sep) sep.remove();
+      statsEl.hidden = false;
+    }
   }
 
   // ===== Code copy buttons + language labels =====
