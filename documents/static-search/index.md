@@ -28,7 +28,7 @@ Themes should import `/_zeropress/search.js` and keep the search UI separate fro
 For Pagefind, run it after the ZeroPress build, then replace the native adapter:
 
 ```bash
-npx pagefind@latest \
+npx pagefind@1.4.0 \
   --site ./_site \
   --output-subdir _zeropress/pagefind
 

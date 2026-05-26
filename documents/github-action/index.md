@@ -126,7 +126,7 @@ Because Build Pages only writes static files, extra steps can run after the buil
 
 - name: Build Pagefind index
   run: |
-    npx --yes pagefind@latest \
+    npx --yes pagefind@1.4.0 \
       --site ./_site \
       --output-subdir _zeropress/pagefind
     cp ./_site/_zeropress/search_pagefind.js ./_site/_zeropress/search.js

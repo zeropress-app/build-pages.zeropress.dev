@@ -1,3 +1,4 @@
+/.zeropress/
 /.zeropress-build-page/
 /_site/
 localbuild.sh
