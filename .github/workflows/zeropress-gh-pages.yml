@@ -35,7 +35,7 @@ jobs:
           source: ./documents
           destination: ./_site
           public-dir: ./public
-          theme-path: ./theme-docs2
+          theme-path: ./theme-docs2/theme
       - name: Format generated HTML
         run: npx --yes prettier@3.8.3 --config ./.prettierrc.json --ignore-path /dev/null --write "./_site/**/*.html"
       - name: Build Pagefind index
