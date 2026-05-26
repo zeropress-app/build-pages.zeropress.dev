@@ -1,4 +1,5 @@
 /.zeropress/
 /.zeropress-build-page/
 /_site/
+/node_modules/
 localbuild.sh
