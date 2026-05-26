@@ -1,9 +1,15 @@
 <aside class="sidebar" aria-label="Documentation navigation">
   <div class="sidebar__inner">
-    <a class="sidebar__brand" href="/">
-      <span class="sidebar__brand-mark"><span class="sidebar__brand-dot"></span></span>
-      {{#if site.meta.brand_word}}{{site.meta.brand_word}}{{#else}}{{site.title}}{{/if}}
-    </a>
+    <div class="sidebar__top">
+      <a class="sidebar__brand" href="/">
+        <span class="sidebar__brand-mark"><span class="sidebar__brand-dot"></span></span>
+        {{#if site.meta.brand_word}}{{site.meta.brand_word}}{{#else}}{{site.title}}{{/if}}
+      </a>
+      <button type="button" class="icon-btn sidebar__theme-toggle" data-theme-toggle aria-label="Toggle dark mode">
+        <svg class="icon-sun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        <svg class="icon-moon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+    </div>
 
     {{#if site.search}}
     <button type="button" class="sidebar__search" data-cmdk-open>
