@@ -1,13 +1,46 @@
 (function () {
   'use strict';
 
-  // ===== Dark mode toggle =====
+  // ===== Theme toggle (three-state: light / dark / system) =====
+  function getStoredTheme() {
+    try {
+      var v = localStorage.getItem('loomis-theme');
+      return v === 'light' || v === 'dark' ? v : 'system';
+    } catch (e) { return 'system'; }
+  }
+  function applyTheme(theme) {
+    var root = document.documentElement;
+    var resolved = theme === 'system'
+      ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')
+      : theme;
+    root.dataset.theme = theme;
+    root.dataset.themeResolved = resolved;
+    root.classList.toggle('dark', resolved === 'dark');
+    try {
+      if (theme === 'system') {
+        localStorage.removeItem('loomis-theme');
+      } else {
+        localStorage.setItem('loomis-theme', theme);
+      }
+    } catch (e) {}
+  }
   document.querySelectorAll('[data-theme-toggle]').forEach(function (btn) {
     btn.addEventListener('click', function () {
-      var isDark = document.documentElement.classList.toggle('dark');
-      try { localStorage.setItem('loomis-theme', isDark ? 'dark' : 'light'); } catch (e) {}
+      var current = getStoredTheme();
+      var next = current === 'light' ? 'dark' : current === 'dark' ? 'system' : 'light';
+      applyTheme(next);
+      var label = next === 'system' ? 'System theme' : next === 'dark' ? 'Dark theme' : 'Light theme';
+      btn.setAttribute('aria-label', label + ' (click to cycle)');
+      btn.setAttribute('title', label);
     });
   });
+  // Re-resolve on system change while in 'system' mode
+  if (window.matchMedia) {
+    var mql = window.matchMedia('(prefers-color-scheme: dark)');
+    var onChange = function () { if (getStoredTheme() === 'system') applyTheme('system'); };
+    if (mql.addEventListener) mql.addEventListener('change', onChange);
+    else if (mql.addListener) mql.addListener(onChange);
+  }
 
   // ===== Sidebar active link =====
   var path = window.location.pathname.replace(/\/$/, '') || '/';
@@ -27,8 +60,19 @@
     });
   }
 
-  // ===== Code copy buttons =====
+  // ===== Code copy buttons + language labels =====
   document.querySelectorAll('pre > code, .code-block__code').forEach(function (code) {
+    // Language label: read first hljs-style language-* class on <code>
+    var pre = code.closest('pre');
+    if (pre && !pre.dataset.language) {
+      var match = (code.className || '').match(/(?:language|lang)-([\w-]+)/);
+      if (match) {
+        var lang = match[1].toLowerCase();
+        pre.classList.add('language-' + lang);
+        pre.dataset.language = lang;
+      }
+    }
+
     var host = code.closest('.code-block') || code.parentElement;
     if (!host || host.querySelector(':scope > .copy-btn')) return;
     var btn = document.createElement('button');

@@ -16,7 +16,8 @@
     "meta": {
       "brand_word": "Build Pages",
       "version_label": "v0.6",
-      "github_url": "https://github.com/zeropress-app/zeropress-build-pages"
+      "github_url": "https://github.com/zeropress-app/zeropress-build-pages",
+      "edit_url_base": "https://github.com/zeropress-app/build-pages.zeropress.dev/edit/main/documents"
     }
   },
   "front_page": {

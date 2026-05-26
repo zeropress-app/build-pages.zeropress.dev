@@ -1,10 +1,15 @@
 <script>
   (function () {
     try {
-      var stored = localStorage.getItem('loomis-theme');
-      var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      var dark = stored ? stored === 'dark' : prefersDark;
-      if (dark) document.documentElement.classList.add('dark');
+      var stored = localStorage.getItem('loomis-theme'); // 'light' | 'dark' | null (= system)
+      var theme = stored === 'light' || stored === 'dark' ? stored : 'system';
+      var resolved = theme === 'system'
+        ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')
+        : theme;
+      var root = document.documentElement;
+      root.dataset.theme = theme;
+      root.dataset.themeResolved = resolved;
+      if (resolved === 'dark') root.classList.add('dark');
     } catch (e) {}
   })();
 </script>

@@ -45,6 +45,11 @@
       "title": "GitHub URL",
       "description": "Optional GitHub link in the header.",
       "type": "string"
+    },
+    "edit_url_base": {
+      "title": "Edit page URL base",
+      "description": "Optional base URL prefixed onto each page's source_markdown_url to render an Edit on GitHub link. Example: https://github.com/owner/repo/edit/main/documents",
+      "type": "string"
     }
   }
 }
