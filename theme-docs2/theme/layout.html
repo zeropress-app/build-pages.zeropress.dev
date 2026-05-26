@@ -25,7 +25,7 @@
       </main>
       {{partial:footer}}
     </div>
-    {{partial:command-palette}}
+    {{#if site.search}}{{partial:command-palette}}{{/if}}
     {{partial:content-enhancements}}
   </body>
 </html>

@@ -106,36 +106,97 @@
   var input = palette.querySelector('[data-cmdk-input]');
   var list = palette.querySelector('[data-cmdk-list]');
   var empty = palette.querySelector('[data-cmdk-empty]');
-  var indexNode = palette.querySelector('[data-cmdk-index]');
-  var data = { groups: [] };
-  try { data = JSON.parse(indexNode.textContent); } catch (e) {}
+  var searchApiPromise;
+  var renderTicket = 0;
+
+  function loadSearchApi() {
+    if (!searchApiPromise) {
+      searchApiPromise = import('/_zeropress/search.js');
+    }
+    return searchApiPromise;
+  }
+
+  function setEmpty(message) {
+    empty.textContent = message;
+    empty.hidden = false;
+  }
+
+  function clearActive() {
+    list.querySelectorAll('a').forEach(function (item) {
+      item.classList.remove('is-active');
+    });
+  }
+
+  function toPlainText(value) {
+    if (!value) return '';
+    var template = document.createElement('template');
+    template.innerHTML = String(value);
+    return (template.content.textContent || '').trim();
+  }
+
+  function renderResult(resultData) {
+    var li = document.createElement('li');
+    var a = document.createElement('a');
+    var title = document.createElement('span');
+    var excerpt = document.createElement('span');
+    var url = resultData.url || '#';
+    var meta = resultData.meta || {};
+    var snippet = resultData.plain_excerpt || toPlainText(resultData.excerpt);
+
+    a.href = url;
+    a.className = 'cmdk__result';
+
+    title.className = 'cmdk__result-title';
+    title.textContent = meta.title || url;
+    a.appendChild(title);
+
+    if (snippet) {
+      excerpt.className = 'cmdk__result-excerpt';
+      excerpt.textContent = snippet;
+      a.appendChild(excerpt);
+    }
+
+    li.appendChild(a);
+    list.appendChild(li);
+  }
 
   function render(query) {
-    var q = (query || '').trim().toLowerCase();
+    var ticket = ++renderTicket;
+    var q = (query || '').trim();
     list.innerHTML = '';
-    var matches = 0;
-    data.groups.forEach(function (group) {
-      var items = group.items.filter(function (it) {
-        return !q || it.title.toLowerCase().indexOf(q) !== -1 || (it.url || '').toLowerCase().indexOf(q) !== -1;
+
+    if (!q) {
+      setEmpty('Type to search.');
+      return;
+    }
+
+    setEmpty('Searching...');
+    loadSearchApi()
+      .then(function (api) {
+        return api.search(q, { limit: 12 });
+      })
+      .then(function (searchResult) {
+        if (ticket !== renderTicket) return;
+        var results = (searchResult && searchResult.results) || [];
+        list.innerHTML = '';
+        if (!results.length) {
+          setEmpty('No matches.');
+          return;
+        }
+        empty.hidden = true;
+        return Promise.all(results.map(function (result) {
+          return result.data().then(renderResult);
+        })).then(function () {
+          if (ticket !== renderTicket) return;
+          var first = list.querySelector('a');
+          if (first) first.classList.add('is-active');
+        });
+      })
+      .catch(function () {
+        if (ticket !== renderTicket) return;
+        list.innerHTML = '';
+        setEmpty('Search index is unavailable.');
       });
-      if (!items.length) return;
-      var header = document.createElement('li');
-      header.className = 'cmdk__group';
-      header.textContent = group.label;
-      list.appendChild(header);
-      items.forEach(function (it) {
-        matches++;
-        var li = document.createElement('li');
-        var a = document.createElement('a');
-        a.href = it.url;
-        a.textContent = it.title;
-        li.appendChild(a);
-        list.appendChild(li);
-      });
-    });
-    empty.hidden = matches > 0;
-    var first = list.querySelector('a');
-    if (first) first.classList.add('is-active');
   }
 
   function open() {
@@ -163,7 +224,7 @@
       var items = Array.prototype.slice.call(list.querySelectorAll('a'));
       if (!items.length) return;
       var idx = items.findIndex(function (i) { return i.classList.contains('is-active'); });
-      items.forEach(function (i) { i.classList.remove('is-active'); });
+      clearActive();
       idx = e.key === 'ArrowDown' ? (idx + 1) % items.length : (idx - 1 + items.length) % items.length;
       items[idx].classList.add('is-active');
       items[idx].scrollIntoView({ block: 'nearest' });

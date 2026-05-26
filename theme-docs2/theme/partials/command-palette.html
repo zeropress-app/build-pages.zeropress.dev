@@ -7,24 +7,6 @@
       <kbd class="kbd">esc</kbd>
     </div>
     <ul class="cmdk__list" data-cmdk-list></ul>
-    <p class="cmdk__empty" data-cmdk-empty hidden>No matches.</p>
+    <p class="cmdk__empty" data-cmdk-empty hidden>Type to search.</p>
   </div>
-  <script type="application/json" data-cmdk-index>
-    {
-      "groups": [
-        {{#if menus.foundations.items}}{ "label": "Foundations", "items": [
-          {{#for item in menus.foundations.items}}{ "title": "{{item.title}}", "url": "{{item.url}}" }{{#if loop.last}}{{#else}},{{/if}}{{/for}}
-        ] }{{/if}}
-        {{#if menus.guides.items}},{ "label": "Guides", "items": [
-          {{#for item in menus.guides.items}}{ "title": "{{item.title}}", "url": "{{item.url}}" }{{#if loop.last}}{{#else}},{{/if}}{{/for}}
-        ] }{{/if}}
-        {{#if menus.reference.items}},{ "label": "Reference", "items": [
-          {{#for item in menus.reference.items}}{ "title": "{{item.title}}", "url": "{{item.url}}" }{{#if loop.last}}{{#else}},{{/if}}{{/for}}
-        ] }{{/if}}
-        {{#if menus.legal.items}},{ "label": "Legal", "items": [
-          {{#for item in menus.legal.items}}{ "title": "{{item.title}}", "url": "{{item.url}}" }{{#if loop.last}}{{#else}},{{/if}}{{/for}}
-        ] }{{/if}}
-      ]
-    }
-  </script>
 </div>
