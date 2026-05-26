@@ -373,7 +373,7 @@ html.dark .icon-moon { display: inline-block; }
 .cmdk__list { list-style: none; padding: 0.5rem; margin: 0; max-height: 50vh; overflow-y: auto; }
 .cmdk__list li { display: block; }
 .cmdk__list a, .cmdk__list button {
-  display: flex; align-items: center; gap: 0.6rem; width: 100%;
+  display: flex; gap: 0.6rem; width: 100%;
   padding: 0.5rem 0.75rem; border-radius: 0.5rem;
   text-decoration: none; color: var(--ink-base); font: inherit;
   border: 0; background: transparent; text-align: left; cursor: pointer;
