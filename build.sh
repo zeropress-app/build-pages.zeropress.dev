@@ -15,6 +15,8 @@ npx --yes @zeropress/build-pages@0.6.3 \
   --public-dir "$SCRIPT_DIR/public" \
   --theme-path "$SCRIPT_DIR/theme-docs2/theme"
 
+node "$SCRIPT_DIR/scripts/build-pages-index.mjs"
+
 npx --yes pagefind@1.4.0 \
   --site "$SITE_DIR" \
   --output-subdir _zeropress/pagefind
