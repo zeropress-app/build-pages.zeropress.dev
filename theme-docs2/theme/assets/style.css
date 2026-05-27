@@ -203,7 +203,7 @@ a { color: inherit; }
 }
 .sidebar__link--top { font-weight: 600; }
 .sidebar__link:hover { background: hsl(28 9% 51% / 0.08); color: var(--ink-dark); }
-.sidebar__link[aria-current="page"], .sidebar__link.is-active {
+.sidebar__link[aria-current="page"] {
   background: hsl(11 43% 58% / 0.1); color: var(--tab-terracotta); font-weight: 500;
 }
 

@@ -42,16 +42,6 @@
     else if (mql.addListener) mql.addListener(onChange);
   }
 
-  // ===== Sidebar active link =====
-  var path = window.location.pathname.replace(/\/$/, '') || '/';
-  document.querySelectorAll('.sidebar__link').forEach(function (a) {
-    var href = (a.getAttribute('href') || '').replace(/\/$/, '') || '/';
-    if (href === path) {
-      a.classList.add('is-active');
-      a.setAttribute('aria-current', 'page');
-    }
-  });
-
   // ===== Mobile nav close on link click =====
   var navToggle = document.getElementById('nav-toggle');
   if (navToggle) {

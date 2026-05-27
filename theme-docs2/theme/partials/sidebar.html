@@ -32,18 +32,18 @@
               </summary>
               <ul>
                 {{#for item in group.children}}
-                  <li><a class="sidebar__link" href="{{item.url}}">{{item.title}}</a></li>
+                  <li><a class="sidebar__link" href="{{item.url}}" {{#if_eq route.url item.url}}aria-current="page"{{/if_eq}}>{{item.title}}</a></li>
                 {{/for}}
               </ul>
             </details>
           {{#else}}
-            <a class="sidebar__link sidebar__link--top" href="{{group.url}}">{{group.title}}</a>
+            <a class="sidebar__link sidebar__link--top" href="{{group.url}}" {{#if_eq route.url group.url}}aria-current="page"{{/if_eq}}>{{group.title}}</a>
           {{/if}}
         {{/for}}
       {{#else}}
         {{#if menus.primary.items}}
           {{#for item in menus.primary.items}}
-            <a class="sidebar__link sidebar__link--top" href="{{item.url}}">{{item.title}}</a>
+            <a class="sidebar__link sidebar__link--top" href="{{item.url}}" {{#if_eq route.url item.url}}aria-current="page"{{/if_eq}}>{{item.title}}</a>
           {{/for}}
         {{/if}}
       {{/if}}
