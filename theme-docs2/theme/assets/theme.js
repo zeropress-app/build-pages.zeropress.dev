@@ -4,7 +4,7 @@
   // ===== Theme toggle (three-state: light / dark / system) =====
   function getStoredTheme() {
     try {
-      var v = localStorage.getItem('loomis-theme');
+      var v = localStorage.getItem('zeropress-docs2-theme');
       return v === 'light' || v === 'dark' ? v : 'system';
     } catch (e) { return 'system'; }
   }
@@ -18,9 +18,9 @@
     root.classList.toggle('dark', resolved === 'dark');
     try {
       if (theme === 'system') {
-        localStorage.removeItem('loomis-theme');
+        localStorage.removeItem('zeropress-docs2-theme');
       } else {
-        localStorage.setItem('loomis-theme', theme);
+        localStorage.setItem('zeropress-docs2-theme', theme);
       }
     } catch (e) {}
   }
@@ -52,7 +52,7 @@
 
   // ===== Sidebar collapsible group persistence =====
   document.querySelectorAll('.sidebar__group[data-group]').forEach(function (group) {
-    var key = 'loomis-sidebar-' + group.dataset.group;
+    var key = 'zeropress-docs2-sidebar-' + group.dataset.group;
     try {
       var stored = localStorage.getItem(key);
       if (stored === 'closed') group.removeAttribute('open');
@@ -178,146 +178,6 @@
     headings.forEach(function (h) { observer.observe(h.el); });
   }
 
-  // ===== Pages index (used by search grouping, hover previews, 404 prefill) =====
-  var pagesIndexPromise;
-  function loadPagesIndex() {
-    if (!pagesIndexPromise) {
-      pagesIndexPromise = fetch('/_zeropress/pages-index.json', { credentials: 'same-origin' })
-        .then(function (r) { return r.ok ? r.json() : { pages: [] }; })
-        .then(function (data) {
-          var byUrl = new Map();
-          (data.pages || []).forEach(function (p) {
-            var key = normalizePath(p.url);
-            byUrl.set(key, p);
-          });
-          return { pages: data.pages || [], byUrl: byUrl };
-        })
-        .catch(function () { return { pages: [], byUrl: new Map() }; });
-    }
-    return pagesIndexPromise;
-  }
-  function normalizePath(u) {
-    if (!u) return '/';
-    var v = String(u).split('#')[0].split('?')[0];
-    if (!v.startsWith('/')) v = '/' + v;
-    if (v.length > 1 && v.endsWith('/')) v = v.slice(0, -1);
-    return v || '/';
-  }
-
-  // ===== Internal link hover previews =====
-  (function () {
-    if (!('IntersectionObserver' in window) || !window.matchMedia) return;
-    if (window.matchMedia('(hover: none)').matches) return;
-    if (!prose) return;
-
-    var card = null;
-    var hoverTimer = null;
-    var leaveTimer = null;
-    var currentLink = null;
-
-    function ensureCard() {
-      if (card) return card;
-      card = document.createElement('div');
-      card.className = 'link-preview';
-      card.setAttribute('role', 'tooltip');
-      card.hidden = true;
-      card.innerHTML = '<span class="link-preview__group" data-link-preview-group></span>' +
-        '<strong class="link-preview__title" data-link-preview-title></strong>' +
-        '<span class="link-preview__excerpt" data-link-preview-excerpt></span>';
-      document.body.appendChild(card);
-      card.addEventListener('mouseenter', function () { window.clearTimeout(leaveTimer); });
-      card.addEventListener('mouseleave', scheduleHide);
-      return card;
-    }
-
-    function position(target) {
-      var rect = target.getBoundingClientRect();
-      var width = Math.min(320, window.innerWidth - 32);
-      card.style.maxWidth = width + 'px';
-      var top = rect.bottom + 8;
-      var left = rect.left;
-      if (left + width > window.innerWidth - 16) left = window.innerWidth - width - 16;
-      if (left < 16) left = 16;
-      // Flip if it would overflow vertically
-      if (top + 140 > window.innerHeight && rect.top > 160) {
-        top = rect.top - 8 - card.offsetHeight;
-      }
-      card.style.top = top + window.scrollY + 'px';
-      card.style.left = left + window.scrollX + 'px';
-    }
-
-    function show(target, page) {
-      ensureCard();
-      var groupEl = card.querySelector('[data-link-preview-group]');
-      var titleEl = card.querySelector('[data-link-preview-title]');
-      var excerptEl = card.querySelector('[data-link-preview-excerpt]');
-      groupEl.textContent = page.group_label || page.category || '';
-      groupEl.hidden = !groupEl.textContent;
-      titleEl.textContent = page.title || target.textContent;
-      excerptEl.textContent = page.excerpt || '';
-      card.hidden = false;
-      card.classList.remove('is-visible');
-      // Force reflow then animate in.
-      card.offsetHeight;
-      position(target);
-      card.classList.add('is-visible');
-    }
-
-    function hide() {
-      if (!card) return;
-      card.classList.remove('is-visible');
-      card.hidden = true;
-      currentLink = null;
-    }
-
-    function scheduleHide() {
-      window.clearTimeout(leaveTimer);
-      leaveTimer = window.setTimeout(hide, 140);
-    }
-
-    function isInternalLink(a) {
-      var href = a.getAttribute('href') || '';
-      if (!href || href.startsWith('#')) return false;
-      try {
-        var u = new URL(href, window.location.origin);
-        if (u.origin !== window.location.origin) return false;
-        return u.pathname && u.pathname !== window.location.pathname.replace(/\/+$/, '');
-      } catch (e) { return false; }
-    }
-
-    function handleEnter(e) {
-      var a = e.target.closest('a[href]');
-      if (!a || !prose.contains(a)) return;
-      if (!isInternalLink(a)) return;
-      window.clearTimeout(hoverTimer);
-      window.clearTimeout(leaveTimer);
-      currentLink = a;
-      hoverTimer = window.setTimeout(function () {
-        if (currentLink !== a) return;
-        loadPagesIndex().then(function (idx) {
-          var u = new URL(a.getAttribute('href'), window.location.origin);
-          var page = idx.byUrl.get(normalizePath(u.pathname));
-          if (page && currentLink === a) show(a, page);
-        });
-      }, 220);
-    }
-
-    function handleLeave(e) {
-      var related = e.relatedTarget;
-      if (related && card && (card === related || card.contains(related))) return;
-      window.clearTimeout(hoverTimer);
-      scheduleHide();
-    }
-
-    prose.addEventListener('mouseenter', handleEnter, true);
-    prose.addEventListener('mouseleave', handleLeave, true);
-    prose.addEventListener('focusin', handleEnter);
-    prose.addEventListener('focusout', handleLeave);
-    window.addEventListener('scroll', function () {
-      if (currentLink && card && !card.hidden) position(currentLink);
-    }, { passive: true });
-  })();
-
   // ===== Command palette =====
   var palette = document.querySelector('[data-cmdk]');
   if (!palette) return;
@@ -381,57 +241,23 @@
 
   function renderResults(results, terms) {
     list.innerHTML = '';
-    var groups = new Map();
+    var first = null;
 
-    return loadPagesIndex().then(function (idx) {
-      results.forEach(function (entry) {
-        var groupKey = entry.page ? entry.page.group_key : null;
-        var groupLabel = entry.page ? entry.page.group_label : null;
-        var groupOrder = entry.page && typeof entry.page.group_order === 'number'
-          ? entry.page.group_order
-          : Number.MAX_SAFE_INTEGER;
-        if (!groupKey) {
-          groupKey = 'other';
-          groupLabel = 'Other';
-        }
-        if (!groups.has(groupKey)) groups.set(groupKey, { label: groupLabel || groupKey, order: groupOrder, items: [] });
-        var group = groups.get(groupKey);
-        group.order = Math.min(group.order, groupOrder);
-        group.items.push(entry);
-      });
-
-      var orderedKeys = Array.from(groups.keys()).sort(function (a, b) {
-        var ga = groups.get(a);
-        var gb = groups.get(b);
-        if (ga.order !== gb.order) return ga.order - gb.order;
-        return String(ga.label).localeCompare(String(gb.label));
-      });
-
-      var first = null;
-      orderedKeys.forEach(function (key) {
-        var group = groups.get(key);
-        var header = document.createElement('li');
-        header.className = 'cmdk__group';
-        header.textContent = group.label;
-        list.appendChild(header);
-
-        group.items.forEach(function (entry) {
-          var li = document.createElement('li');
-          var a = document.createElement('a');
-          a.href = entry.url;
-          a.className = 'cmdk__result';
-          var titleHtml = highlightMatches(entry.title, terms);
-          var excerptHtml = entry.excerpt ? highlightMatches(entry.excerpt, terms) : '';
-          a.innerHTML = '<span class="cmdk__result-title">' + titleHtml + '</span>' +
-            (excerptHtml ? '<span class="cmdk__result-excerpt">' + excerptHtml + '</span>' : '');
-          li.appendChild(a);
-          list.appendChild(li);
-          if (!first) first = a;
-        });
-      });
-
-      if (first) first.classList.add('is-active');
+    results.forEach(function (entry) {
+      var li = document.createElement('li');
+      var a = document.createElement('a');
+      a.href = entry.url;
+      a.className = 'cmdk__result';
+      var titleHtml = highlightMatches(entry.title, terms);
+      var excerptHtml = entry.excerpt ? highlightMatches(entry.excerpt, terms) : '';
+      a.innerHTML = '<span class="cmdk__result-title">' + titleHtml + '</span>' +
+        (excerptHtml ? '<span class="cmdk__result-excerpt">' + excerptHtml + '</span>' : '');
+      li.appendChild(a);
+      list.appendChild(li);
+      if (!first) first = a;
     });
+
+    if (first) first.classList.add('is-active');
   }
 
   function render(query) {
@@ -459,27 +285,20 @@
           setEmpty('No matches.');
           return;
         }
-        return Promise.all([
-          loadPagesIndex(),
-          Promise.all(rawResults.map(function (r) { return r.data(); })),
-        ]).then(function (resolved) {
+        return Promise.all(rawResults.map(function (r) { return r.data(); })).then(function (rows) {
           if (ticket !== renderTicket) return;
-          var idx = resolved[0];
-          var rows = resolved[1];
           var entries = rows.map(function (row) {
             var url = row.url || '#';
             var title = (row.meta && row.meta.title) || url;
             var excerpt = row.plain_excerpt || toPlainText(row.excerpt) || '';
-            var page = idx.byUrl.get(normalizePath(url));
             return {
               url: url,
               title: title,
-              excerpt: excerpt,
-              page: page || null,
+              excerpt: excerpt
             };
           });
           empty.hidden = true;
-          return renderResults(entries, terms);
+          renderResults(entries, terms);
         });
       })
       .catch(function () {
@@ -532,17 +351,4 @@
   });
 
   if (input) input.addEventListener('input', function () { render(input.value); });
-
-  // ===== 404 page: auto-open palette with URL slug as query =====
-  if (document.querySelector('[data-not-found]')) {
-    var slug = window.location.pathname
-      .replace(/^\/+|\/+$/g, '')
-      .replace(/\/+/g, ' ')
-      .replace(/[-_.]+/g, ' ')
-      .replace(/index$|\.html?$/i, '')
-      .trim();
-    if (slug.length >= 2) {
-      setTimeout(function () { open(slug); }, 250);
-    }
-  }
 })();

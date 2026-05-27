@@ -1,12 +1,12 @@
 {
   "$schema": "https://schemas.zeropress.dev/theme-runtime/v0.6/schema.json",
-  "name": "Loomis Editorial Docs",
+  "name": "ZeroPress Template Docs2",
   "namespace": "zeropress",
-  "slug": "docs3-editorial",
+  "slug": "docs2",
   "version": "0.6.0",
   "license": "MIT",
   "runtime": "0.6",
-  "description": "Editorial Mentor docs theme. Warm paper-and-ink palette, Lora display + Outfit body, grouped colored sidebar, command-palette search, deep-paper dark mode.",
+  "description": "General-purpose documentation theme for Markdown-source ZeroPress sites.",
   "features": {
     "post_index": false,
     "search": true
@@ -14,7 +14,7 @@
   "menu_slots": {
     "sidebar": {
       "title": "Sidebar",
-      "description": "Primary documentation sidebar. Top-level items become collapsible groups; child items become page links."
+      "description": "Primary documentation sidebar. Top-level items become collapsible groups; one child level is rendered as page links."
     },
     "legal": {
       "title": "Legal",

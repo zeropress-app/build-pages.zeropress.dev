@@ -1,7 +1,7 @@
 <script>
   (function () {
     try {
-      var stored = localStorage.getItem('loomis-theme'); // 'light' | 'dark' | null (= system)
+      var stored = localStorage.getItem('zeropress-docs2-theme'); // 'light' | 'dark' | null (= system)
       var theme = stored === 'light' || stored === 'dark' ? stored : 'system';
       var resolved = theme === 'system'
         ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')
