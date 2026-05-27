@@ -192,6 +192,7 @@ a { color: inherit; }
 .sidebar__title:hover .sidebar__chevron { opacity: 1; }
 .sidebar__group:not([open]) .sidebar__title { color: var(--ink-light); }
 .sidebar__accent { width: 0.25rem; height: 0.75rem; border-radius: 999px; display: inline-block; }
+.sidebar__group .sidebar__accent { background: var(--tab-terracotta); }
 .sidebar__group--terracotta .sidebar__accent { background: var(--tab-terracotta); }
 .sidebar__group--sage .sidebar__accent { background: var(--tab-sage); }
 .sidebar__group--ochre .sidebar__accent { background: var(--tab-ochre); }
@@ -200,6 +201,7 @@ a { color: inherit; }
   font-size: 0.875rem; color: var(--ink-base); text-decoration: none;
   transition: background 0.12s, color 0.12s;
 }
+.sidebar__link--top { font-weight: 600; }
 .sidebar__link:hover { background: hsl(28 9% 51% / 0.08); color: var(--ink-dark); }
 .sidebar__link[aria-current="page"], .sidebar__link.is-active {
   background: hsl(11 43% 58% / 0.1); color: var(--tab-terracotta); font-weight: 500;

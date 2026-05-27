@@ -25,82 +25,102 @@
     "file": "index.md"
   },
   "menus": {
-    "foundations": {
-      "name": "Foundations",
+    "sidebar": {
+      "name": "Sidebar",
       "items": [
         {
-          "title": "Home",
-          "url": "/"
+          "title": "Foundations",
+          "url": "/",
+          "meta": {
+            "group_id": "foundations",
+            "accent": "terracotta"
+          },
+          "children": [
+            {
+              "title": "Home",
+              "url": "/"
+            },
+            {
+              "title": "Getting Started",
+              "url": "/getting-started/"
+            },
+            {
+              "title": "Source Tree",
+              "url": "/source-tree/"
+            },
+            {
+              "title": "Markdown Pages",
+              "url": "/markdown/"
+            }
+          ]
         },
         {
-          "title": "Getting Started",
-          "url": "/getting-started/"
+          "title": "Guides",
+          "url": "/github-action/",
+          "meta": {
+            "group_id": "guides",
+            "accent": "sage"
+          },
+          "children": [
+            {
+              "title": "GitHub Action",
+              "url": "/github-action/"
+            },
+            {
+              "title": "CLI",
+              "url": "/cli/"
+            },
+            {
+              "title": "package.json",
+              "url": "/package-json/"
+            },
+            {
+              "title": "Deployment",
+              "url": "/deployment/"
+            },
+            {
+              "title": "Dogfooding",
+              "url": "/dogfooding/"
+            }
+          ]
         },
         {
-          "title": "Source Tree",
-          "url": "/source-tree/"
-        },
-        {
-          "title": "Markdown Pages",
-          "url": "/markdown/"
-        }
-      ]
-    },
-    "guides": {
-      "name": "Guides",
-      "items": [
-        {
-          "title": "GitHub Action",
-          "url": "/github-action/"
-        },
-        {
-          "title": "CLI",
-          "url": "/cli/"
-        },
-        {
-          "title": "package.json",
-          "url": "/package-json/"
-        },
-        {
-          "title": "Deployment",
-          "url": "/deployment/"
-        },
-        {
-          "title": "Dogfooding",
-          "url": "/dogfooding/"
-        }
-      ]
-    },
-    "reference": {
-      "name": "Reference",
-      "items": [
-        {
-          "title": "Reference Hub",
-          "url": "/reference/"
-        },
-        {
-          "title": "CLI Options",
-          "url": "/reference/cli/"
-        },
-        {
-          "title": "Action Inputs",
-          "url": "/reference/action-inputs/"
-        },
-        {
-          "title": "Config",
-          "url": "/reference/config/"
-        },
-        {
-          "title": "Generated Files",
-          "url": "/reference/generated-files/"
-        },
-        {
-          "title": "Static Search",
-          "url": "/static-search/"
-        },
-        {
-          "title": "Troubleshooting",
-          "url": "/troubleshooting/"
+          "title": "Reference",
+          "url": "/reference/",
+          "meta": {
+            "group_id": "reference",
+            "accent": "ochre"
+          },
+          "children": [
+            {
+              "title": "Reference Hub",
+              "url": "/reference/"
+            },
+            {
+              "title": "CLI Options",
+              "url": "/reference/cli/"
+            },
+            {
+              "title": "Action Inputs",
+              "url": "/reference/action-inputs/"
+            },
+            {
+              "title": "Config",
+              "url": "/reference/config/"
+            },
+            {
+              "title": "Generated Files",
+              "url": "/reference/generated-files/"
+            },
+            {
+              "title": "Static Search",
+              "url": "/static-search/"
+            },
+            {
+              "title": "Troubleshooting",
+              "url": "/troubleshooting/"
+            }
+          ]
         }
       ]
     },

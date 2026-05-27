@@ -414,24 +414,29 @@
   function renderResults(results, terms) {
     list.innerHTML = '';
     var groups = new Map();
-    var groupOrder = ['foundations', 'guides', 'reference', 'legal', 'home', null];
 
     return loadPagesIndex().then(function (idx) {
       results.forEach(function (entry) {
         var groupKey = entry.page ? entry.page.group_key : null;
         var groupLabel = entry.page ? entry.page.group_label : null;
+        var groupOrder = entry.page && typeof entry.page.group_order === 'number'
+          ? entry.page.group_order
+          : Number.MAX_SAFE_INTEGER;
         if (!groupKey) {
           groupKey = 'other';
           groupLabel = 'Other';
         }
-        if (!groups.has(groupKey)) groups.set(groupKey, { label: groupLabel || groupKey, items: [] });
-        groups.get(groupKey).items.push(entry);
+        if (!groups.has(groupKey)) groups.set(groupKey, { label: groupLabel || groupKey, order: groupOrder, items: [] });
+        var group = groups.get(groupKey);
+        group.order = Math.min(group.order, groupOrder);
+        group.items.push(entry);
       });
 
       var orderedKeys = Array.from(groups.keys()).sort(function (a, b) {
-        var ai = groupOrder.indexOf(a); if (ai === -1) ai = groupOrder.length;
-        var bi = groupOrder.indexOf(b); if (bi === -1) bi = groupOrder.length;
-        return ai - bi;
+        var ga = groups.get(a);
+        var gb = groups.get(b);
+        if (ga.order !== gb.order) return ga.order - gb.order;
+        return String(ga.label).localeCompare(String(gb.label));
       });
 
       var first = null;

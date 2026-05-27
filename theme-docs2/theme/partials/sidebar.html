@@ -21,49 +21,31 @@
     {{/if}}
 
     <nav class="sidebar__nav">
-      {{#if menus.foundations.items}}
-      <details class="sidebar__group sidebar__group--terracotta" data-group="foundations" open>
-        <summary class="sidebar__title">
-          <span class="sidebar__accent"></span>
-          <span class="sidebar__title-label">Foundations</span>
-          <svg class="sidebar__chevron" width="12" height="12" aria-hidden="true"><use href="#icon-chevron-right"/></svg>
-        </summary>
-        <ul>
-          {{#for item in menus.foundations.items}}
-            <li><a class="sidebar__link" href="{{item.url}}">{{item.title}}</a></li>
+      {{#if menus.sidebar.items}}
+        {{#for group in menus.sidebar.items}}
+          {{#if group.children}}
+            <details class="sidebar__group{{#if group.meta.accent}} sidebar__group--{{group.meta.accent}}{{/if}}" {{#if group.meta.group_id}}data-group="{{group.meta.group_id}}"{{/if}} open>
+              <summary class="sidebar__title">
+                <span class="sidebar__accent"></span>
+                <span class="sidebar__title-label">{{group.title}}</span>
+                <svg class="sidebar__chevron" width="12" height="12" aria-hidden="true"><use href="#icon-chevron-right"/></svg>
+              </summary>
+              <ul>
+                {{#for item in group.children}}
+                  <li><a class="sidebar__link" href="{{item.url}}">{{item.title}}</a></li>
+                {{/for}}
+              </ul>
+            </details>
+          {{#else}}
+            <a class="sidebar__link sidebar__link--top" href="{{group.url}}">{{group.title}}</a>
+          {{/if}}
+        {{/for}}
+      {{#else}}
+        {{#if menus.primary.items}}
+          {{#for item in menus.primary.items}}
+            <a class="sidebar__link sidebar__link--top" href="{{item.url}}">{{item.title}}</a>
           {{/for}}
-        </ul>
-      </details>
-      {{/if}}
-
-      {{#if menus.guides.items}}
-      <details class="sidebar__group sidebar__group--sage" data-group="guides" open>
-        <summary class="sidebar__title">
-          <span class="sidebar__accent"></span>
-          <span class="sidebar__title-label">Guides</span>
-          <svg class="sidebar__chevron" width="12" height="12" aria-hidden="true"><use href="#icon-chevron-right"/></svg>
-        </summary>
-        <ul>
-          {{#for item in menus.guides.items}}
-            <li><a class="sidebar__link" href="{{item.url}}">{{item.title}}</a></li>
-          {{/for}}
-        </ul>
-      </details>
-      {{/if}}
-
-      {{#if menus.reference.items}}
-      <details class="sidebar__group sidebar__group--ochre" data-group="reference" open>
-        <summary class="sidebar__title">
-          <span class="sidebar__accent"></span>
-          <span class="sidebar__title-label">Reference</span>
-          <svg class="sidebar__chevron" width="12" height="12" aria-hidden="true"><use href="#icon-chevron-right"/></svg>
-        </summary>
-        <ul>
-          {{#for item in menus.reference.items}}
-            <li><a class="sidebar__link" href="{{item.url}}">{{item.title}}</a></li>
-          {{/for}}
-        </ul>
-      </details>
+        {{/if}}
       {{/if}}
     </nav>
   </div>

@@ -12,17 +12,9 @@
     "search": true
   },
   "menu_slots": {
-    "foundations": {
-      "title": "Foundations",
-      "description": "First sidebar group, terracotta accent"
-    },
-    "guides": {
-      "title": "Guides",
-      "description": "Second sidebar group, sage accent"
-    },
-    "reference": {
-      "title": "Reference",
-      "description": "Third sidebar group, ochre accent"
+    "sidebar": {
+      "title": "Sidebar",
+      "description": "Primary documentation sidebar. Top-level items become collapsible groups; child items become page links."
     },
     "legal": {
       "title": "Legal",

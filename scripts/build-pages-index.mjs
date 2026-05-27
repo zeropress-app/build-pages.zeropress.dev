@@ -17,15 +17,50 @@ const menus = preview?.menus ?? {};
 
 // Build url -> group label map from menus.
 const urlToGroup = new Map();
-for (const [groupKey, group] of Object.entries(menus)) {
-  if (!group || !Array.isArray(group.items)) continue;
-  const label = group.name || groupKey;
-  for (const item of group.items) {
-    if (!item || !item.url) continue;
-    if (/^https?:/i.test(item.url)) continue;
-    const normalized = normalizeUrl(item.url);
-    if (!urlToGroup.has(normalized)) urlToGroup.set(normalized, { key: groupKey, label });
+let groupOrder = 0;
+
+for (const [menuKey, menu] of Object.entries(menus)) {
+  if (!menu || !Array.isArray(menu.items)) continue;
+  const menuLabel = menu.name || menuKey;
+
+  for (const item of menu.items) {
+    if (!item) continue;
+    if (Array.isArray(item.children) && item.children.length > 0) {
+      const key = item.meta?.group_id || slugify(item.title) || menuKey;
+      const label = item.title || menuLabel;
+      const order = groupOrder++;
+      mapItemUrl(item, { key, label, order });
+      for (const child of item.children) {
+        mapItemTree(child, { key, label, order });
+      }
+      continue;
+    }
+
+    mapItemUrl(item, { key: menuKey, label: menuLabel, order: groupOrder });
   }
+}
+
+function mapItemTree(item, group) {
+  if (!item) return;
+  mapItemUrl(item, group);
+  if (Array.isArray(item.children)) {
+    for (const child of item.children) mapItemTree(child, group);
+  }
+}
+
+function mapItemUrl(item, group) {
+  if (!item || !item.url) return;
+  if (/^https?:/i.test(item.url)) return;
+  const normalized = normalizeUrl(item.url);
+  if (!urlToGroup.has(normalized)) urlToGroup.set(normalized, group);
+}
+
+function slugify(value) {
+  return String(value || '')
+    .trim()
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
 }
 
 function normalizeUrl(u) {
@@ -70,6 +105,7 @@ const entries = pages
       chapter: p.meta?.chapter ?? null,
       group_key: group?.key ?? null,
       group_label: group?.label ?? p.meta?.category ?? null,
+      group_order: group?.order ?? null,
     };
   });
 
