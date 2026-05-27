@@ -1,3 +1,7 @@
+---
+last_updated: none
+---
+
 # ZeroPress Build Pages
 
 ZeroPress Build Pages turns a Markdown source directory, optional public assets, and a ZeroPress theme into static HTML output.

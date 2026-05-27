@@ -1,3 +1,7 @@
+---
+last_updated: none
+---
+
 # Reference Hub
 
 Use this section when you need exact Build Pages behavior.

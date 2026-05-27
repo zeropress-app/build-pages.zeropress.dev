@@ -33,7 +33,7 @@
             View as Markdown
           </a>
           {{/if}}
-          {{#if page.meta.last_updated}}<span class="page-meta__updated">Last updated <time datetime="{{page.meta.last_updated}}">{{page.meta.last_updated}}</time></span>{{/if}}
+          {{#if page.meta.last_updated_iso}}<span class="page-meta__updated">Last updated <time datetime="{{page.meta.last_updated_iso}}" data-zp-local-date>{{page.meta.last_updated}}</time></span>{{/if}}
         </div>
       </footer>
 

@@ -20,6 +20,9 @@
       "edit_url_base": "https://github.com/zeropress-app/build-pages.zeropress.dev/edit/main/documents"
     }
   },
+  "markdown": {
+    "last_updated": "git"
+  },
   "front_page": {
     "type": "markdown",
     "file": "index.md"

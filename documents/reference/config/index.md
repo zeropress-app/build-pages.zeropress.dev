@@ -47,6 +47,7 @@ The source config directory is user-authored. Build Pages generated working file
 - `$schema`: optional JSON Schema URI for editor support.
 - `version`: Build Pages config version. Current value: `0.1`.
 - `site`: user-facing site metadata.
+- `markdown`: Markdown source processing options.
 - `front_page`: source used for the site root.
 - `menus`: navigation data for the selected theme.
 - `collections`: group-level reading order generated from Markdown source paths.
@@ -93,6 +94,33 @@ Common fields:
 - `indexing`: controls fallback `robots.txt` when public `robots.txt` is not provided.
 - `footer`: footer text and visible ZeroPress attribution preference.
 - `meta`: scalar key-value data for the selected theme.
+
+## `markdown`
+
+```json
+{
+  "markdown": {
+    "last_updated": "git"
+  }
+}
+```
+
+`markdown.last_updated` controls optional page metadata generated from Markdown source files:
+
+- `none`: do not generate update metadata. This is the default.
+- `git`: read the latest Git commit date for each Markdown file.
+
+When enabled, Build Pages adds `page.meta.last_updated_iso` and `page.meta.last_updated` unless the page already defines either key in front matter `meta`.
+
+Use front matter to override one page:
+
+```md
+---
+last_updated: none
+---
+```
+
+For accurate file history in GitHub Actions, configure `actions/checkout` with `fetch-depth: 0`.
 
 ## `front_page`
 
