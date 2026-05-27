@@ -1,16 +1,3 @@
----
-title: package.json Script
-description: Use Build Pages as a project dependency and build script.
-status: published
-meta:
-  category: Guides
-  chapter: Package workflow
-  prev_url: /cli/
-  prev_label: CLI
-  next_url: /deployment/
-  next_label: Deployment
----
-
 # package.json Script
 
 Use a package script when your project already has a Node.js toolchain.

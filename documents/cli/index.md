@@ -1,16 +1,3 @@
----
-title: CLI
-description: Run Build Pages from npx or an installed package script.
-status: published
-meta:
-  category: Guides
-  chapter: Local build
-  prev_url: /github-action/
-  prev_label: GitHub Action
-  next_url: /package-json/
-  next_label: package.json
----
-
 # CLI
 
 Use the CLI directly when you want a local or provider-specific build command.

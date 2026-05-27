@@ -1,16 +1,3 @@
----
-title: Troubleshooting
-description: Common Build Pages errors and how to fix them.
-status: published
-meta:
-  category: Reference
-  chapter: Debugging
-  prev_url: /static-search/
-  prev_label: Static Search
-  next_url: /license/
-  next_label: License
----
-
 # Troubleshooting
 
 This page collects common Build Pages failure modes.

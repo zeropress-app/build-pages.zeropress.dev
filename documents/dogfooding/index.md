@@ -1,16 +1,3 @@
----
-title: Dogfooding
-description: See how this site uses Build Pages in practice.
-status: published
-meta:
-  category: Guides
-  chapter: Real project
-  prev_url: /deployment/
-  prev_label: Deployment
-  next_url: /reference/
-  next_label: Reference Hub
----
-
 # Dogfooding
 
 This site is itself a Build Pages project.

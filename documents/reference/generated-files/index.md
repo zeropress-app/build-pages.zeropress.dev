@@ -1,16 +1,3 @@
----
-title: Generated Files
-description: Understand Build Pages generated working files and static output.
-status: published
-meta:
-  category: Reference
-  chapter: Output
-  prev_url: /reference/config/
-  prev_label: Build Pages Config
-  next_url: /static-search/
-  next_label: Static Search
----
-
 # Generated Files
 
 Build Pages writes internal working files to:

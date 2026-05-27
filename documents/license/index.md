@@ -1,14 +1,3 @@
----
-title: License
-description: License summary for ZeroPress Build Pages.
-status: published
-meta:
-  category: Legal
-  chapter: License
-  prev_url: /troubleshooting/
-  prev_label: Troubleshooting
----
-
 # License
 
 `@zeropress/build-pages` is open source under the MIT license.

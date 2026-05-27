@@ -1,14 +1,3 @@
----
-title: ZeroPress Build Pages
-description: Build Markdown-source ZeroPress sites for static hosting.
-status: published
-meta:
-  category: Home
-  chapter: Overview
-  next_url: /getting-started/
-  next_label: Getting Started
----
-
 # ZeroPress Build Pages
 
 ZeroPress Build Pages turns a Markdown source directory, optional public assets, and a ZeroPress theme into static HTML output.

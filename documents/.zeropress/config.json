@@ -143,5 +143,38 @@
         }
       ]
     }
+  },
+  "collections": {
+    "foundations": {
+      "title": "Foundations",
+      "items": [
+        "index.md",
+        "getting-started/index.md",
+        "source-tree/index.md",
+        "markdown/index.md"
+      ]
+    },
+    "guides": {
+      "title": "Guides",
+      "items": [
+        "github-action/index.md",
+        "cli/index.md",
+        "package-json/index.md",
+        "deployment/index.md",
+        "dogfooding/index.md"
+      ]
+    },
+    "reference": {
+      "title": "Reference",
+      "items": [
+        "reference/index.md",
+        "reference/cli/index.md",
+        "reference/action-inputs/index.md",
+        "reference/config/index.md",
+        "reference/generated-files/index.md",
+        "static-search/index.md",
+        "troubleshooting/index.md"
+      ]
+    }
   }
 }

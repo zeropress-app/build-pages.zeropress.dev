@@ -1,16 +1,3 @@
----
-title: Build Pages Config
-description: Configure site metadata, menus, footer text, and custom HTML.
-status: published
-meta:
-  category: Reference
-  chapter: Configuration
-  prev_url: /reference/action-inputs/
-  prev_label: Action Inputs
-  next_url: /reference/generated-files/
-  next_label: Generated Files
----
-
 # Build Pages Config
 
 Build Pages config is optional. The default path is:
@@ -62,6 +49,7 @@ The source config directory is user-authored. Build Pages generated working file
 - `site`: user-facing site metadata.
 - `front_page`: source used for the site root.
 - `menus`: navigation data for the selected theme.
+- `collections`: group-level reading order generated from Markdown source paths.
 - `custom_html`: trusted HTML snippets inserted into generated pages.
 
 Unknown fields are rejected.
@@ -159,6 +147,36 @@ For raw HTML front pages:
 ```
 
 Menu item `meta` values are scalar values only. Themes can use them for icons, badges, accents, or other presentation hints.
+
+## `collections`
+
+```json
+{
+  "collections": {
+    "foundations": {
+      "title": "Foundations",
+      "items": [
+        "index.md",
+        "getting-started/index.md",
+        "source-tree/index.md",
+        "markdown/index.md"
+      ]
+    },
+    "guides": {
+      "title": "Guides",
+      "items": [
+        "github-action/index.md",
+        "cli/index.md",
+        "package-json/index.md"
+      ]
+    }
+  }
+}
+```
+
+Build Pages collection items are source-root relative Markdown paths. They are resolved into preview-data collection references such as `{ "type": "page", "slug": "getting-started" }`.
+
+Collections are independent reading groups. The last item in `collections.foundations` has no next cursor unless another item is listed in the same collection.
 
 ## `custom_html`
 

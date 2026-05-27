@@ -1,16 +1,3 @@
----
-title: Source Tree
-description: Understand how source, public, theme, and output directories fit together.
-status: published
-meta:
-  category: Foundations
-  chapter: Project layout
-  prev_url: /getting-started/
-  prev_label: Getting Started
-  next_url: /markdown/
-  next_label: Markdown Pages
----
-
 # Source Tree
 
 Build Pages separates authoring files from generated output.

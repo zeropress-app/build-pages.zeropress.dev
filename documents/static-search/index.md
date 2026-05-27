@@ -1,16 +1,3 @@
----
-title: Static Search
-description: Use native ZeroPress search or replace the adapter with Pagefind.
-status: published
-meta:
-  category: Reference
-  chapter: Search
-  prev_url: /reference/generated-files/
-  prev_label: Generated Files
-  next_url: /troubleshooting/
-  next_label: Troubleshooting
----
-
 # Static Search
 
 When the selected theme supports search and `site.search` is enabled, Build Pages output includes native search artifacts.

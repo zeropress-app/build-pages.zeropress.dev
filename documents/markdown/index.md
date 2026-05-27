@@ -1,16 +1,3 @@
----
-title: Markdown Pages
-description: Learn the Markdown authoring rules used by Build Pages.
-status: published
-meta:
-  category: Foundations
-  chapter: Authoring
-  prev_url: /source-tree/
-  prev_label: Source Tree
-  next_url: /github-action/
-  next_label: GitHub Action
----
-
 # Markdown Pages
 
 Build Pages discovers `*.md` files under the source directory and turns published Markdown pages into generated routes.

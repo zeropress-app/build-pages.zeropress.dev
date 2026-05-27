@@ -1,16 +1,3 @@
----
-title: Deployment
-description: Deploy generated Build Pages output to static hosting providers.
-status: published
-meta:
-  category: Guides
-  chapter: Hosting
-  prev_url: /package-json/
-  prev_label: package.json
-  next_url: /dogfooding/
-  next_label: Dogfooding
----
-
 # Deployment
 
 Build Pages writes plain static files to the destination directory. Deploy that directory with your hosting provider.

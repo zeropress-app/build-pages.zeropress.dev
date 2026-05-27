@@ -3,14 +3,11 @@
     <nav class="breadcrumbs" aria-label="Breadcrumb">
       <ol>
         <li><a href="/">Home</a></li>
-        {{#if page.meta.category}}<li aria-current="false">{{page.meta.category}}</li>{{/if}}
-        {{#if page.meta.chapter}}<li aria-current="false">{{page.meta.chapter}}</li>{{/if}}
+        {{#if page.collection_cursor.collection_title}}<li aria-current="false">{{page.collection_cursor.collection_title}}</li>{{/if}}
         <li aria-current="page">{{page.title}}</li>
       </ol>
     </nav>
-    <p class="eyebrow">{{#if page.meta.category}}{{page.meta.category}}{{#else}}Documentation{{/if}}{{#if page.meta.chapter}} &middot; {{page.meta.chapter}}{{/if}}</p>
-    <h1>{{page.title}}</h1>
-    {{#if page.excerpt}}<p class="lede">{{page.excerpt}}</p>{{/if}}
+    <p class="eyebrow">{{#if page.collection_cursor.collection_title}}{{page.collection_cursor.collection_title}}{{#else}}Documentation{{/if}}</p>
     <p class="page-stats" data-page-stats hidden>
       <span class="page-stats__item" data-page-stat-read-time></span>
       <span class="page-stats__sep" aria-hidden="true">&middot;</span>
@@ -40,25 +37,25 @@
         </div>
       </footer>
 
-      {{#if page.meta.prev_url}}
+      {{#if page.collection_cursor.prev}}
       <nav class="pager">
-        <a class="pager__prev" href="{{page.meta.prev_url}}">
+        <a class="pager__prev" href="{{page.collection_cursor.prev.url}}">
           <span class="pager__kicker">Previous</span>
-          <span class="pager__label">{{page.meta.prev_label}}</span>
+          <span class="pager__label">{{page.collection_cursor.prev.title}}</span>
         </a>
-        {{#if page.meta.next_url}}
-        <a class="pager__next" href="{{page.meta.next_url}}">
+        {{#if page.collection_cursor.next}}
+        <a class="pager__next" href="{{page.collection_cursor.next.url}}">
           <span class="pager__kicker">Next up</span>
-          <span class="pager__label">{{page.meta.next_label}}</span>
+          <span class="pager__label">{{page.collection_cursor.next.title}}</span>
         </a>
         {{/if}}
       </nav>
-      {{#else_if page.meta.next_url}}
+      {{#else_if page.collection_cursor.next}}
       <nav class="pager pager--next-only">
         <span></span>
-        <a class="pager__next" href="{{page.meta.next_url}}">
+        <a class="pager__next" href="{{page.collection_cursor.next.url}}">
           <span class="pager__kicker">Next up</span>
-          <span class="pager__label">{{page.meta.next_label}}</span>
+          <span class="pager__label">{{page.collection_cursor.next.title}}</span>
         </a>
       </nav>
       {{/if}}

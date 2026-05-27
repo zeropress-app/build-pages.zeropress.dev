@@ -1,16 +1,3 @@
----
-title: GitHub Action
-description: Build a ZeroPress site in GitHub Actions.
-status: published
-meta:
-  category: Guides
-  chapter: CI
-  prev_url: /markdown/
-  prev_label: Markdown Pages
-  next_url: /cli/
-  next_label: CLI
----
-
 # GitHub Action
 
 Use the GitHub Action when your site should build in a repository workflow.

@@ -1,16 +1,3 @@
----
-title: CLI Options
-description: Command-line options supported by zeropress-build-pages.
-status: published
-meta:
-  category: Reference
-  chapter: CLI
-  prev_url: /reference/
-  prev_label: Reference Hub
-  next_url: /reference/action-inputs/
-  next_label: Action Inputs
----
-
 # CLI Options
 
 ```bash

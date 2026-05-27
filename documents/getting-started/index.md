@@ -1,16 +1,3 @@
----
-title: Getting Started
-description: Build your first ZeroPress Build Pages site from Markdown.
-status: published
-meta:
-  category: Foundations
-  chapter: Start
-  prev_url: /
-  prev_label: Home
-  next_url: /source-tree/
-  next_label: Source Tree
----
-
 # Getting Started
 
 Create a Markdown source directory, run Build Pages, and deploy the generated static output.

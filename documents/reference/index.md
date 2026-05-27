@@ -1,16 +1,3 @@
----
-title: Reference Hub
-description: Quick links to Build Pages reference topics.
-status: published
-meta:
-  category: Reference
-  chapter: Hub
-  prev_url: /dogfooding/
-  prev_label: Dogfooding
-  next_url: /reference/cli/
-  next_label: CLI Options
----
-
 # Reference Hub
 
 Use this section when you need exact Build Pages behavior.

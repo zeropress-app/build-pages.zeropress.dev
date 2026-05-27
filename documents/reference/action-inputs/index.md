@@ -1,16 +1,3 @@
----
-title: Action Inputs
-description: GitHub Action inputs supported by zeropress-build-pages.
-status: published
-meta:
-  category: Reference
-  chapter: GitHub Action
-  prev_url: /reference/cli/
-  prev_label: CLI Options
-  next_url: /reference/config/
-  next_label: Build Pages Config
----
-
 # Action Inputs
 
 ```yaml
