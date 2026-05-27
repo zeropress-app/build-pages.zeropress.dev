@@ -104,28 +104,6 @@
     });
   }
 
-  // ===== Page stats (reading time + section count) =====
-  var statsEl = document.querySelector('[data-page-stats]');
-  if (statsEl && prose) {
-    var text = prose.innerText || prose.textContent || '';
-    var words = text.trim().split(/\s+/).filter(Boolean).length;
-    var minutes = Math.max(1, Math.round(words / 200));
-    var sections = prose.querySelectorAll('h2[id]').length;
-    var readEl = statsEl.querySelector('[data-page-stat-read-time]');
-    var sectionsEl = statsEl.querySelector('[data-page-stat-sections]');
-    if (readEl) readEl.textContent = minutes + ' min read';
-    if (sectionsEl) sectionsEl.textContent = sections === 1 ? '1 section' : sections + ' sections';
-    if (words > 30 && sections >= 1) {
-      statsEl.hidden = false;
-    } else if (words > 30) {
-      // No headings — still show reading time
-      if (sectionsEl) sectionsEl.remove();
-      var sep = statsEl.querySelector('.page-stats__sep');
-      if (sep) sep.remove();
-      statsEl.hidden = false;
-    }
-  }
-
   // ===== Code copy buttons + language labels =====
   document.querySelectorAll('pre > code, .code-block__code').forEach(function (code) {
     // Language label: read first hljs-style language-* class on <code>

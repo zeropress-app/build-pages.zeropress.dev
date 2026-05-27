@@ -1,18 +1,6 @@
 <article class="doc-article">
-  <header class="page-header">
-    <nav class="breadcrumbs" aria-label="Breadcrumb">
-      <ol>
-        <li><a href="/">Home</a></li>
-        {{#if page.collection_cursor.collection_title}}<li aria-current="false">{{page.collection_cursor.collection_title}}</li>{{/if}}
-        <li aria-current="page">{{page.title}}</li>
-      </ol>
-    </nav>
+  <header class="page-header page-header--compact">
     <p class="eyebrow">{{#if page.collection_cursor.collection_title}}{{page.collection_cursor.collection_title}}{{#else}}Documentation{{/if}}</p>
-    <p class="page-stats" data-page-stats hidden>
-      <span class="page-stats__item" data-page-stat-read-time></span>
-      <span class="page-stats__sep" aria-hidden="true">&middot;</span>
-      <span class="page-stats__item" data-page-stat-sections></span>
-    </p>
   </header>
 
   <div class="article-grid">
