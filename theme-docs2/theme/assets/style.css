@@ -299,7 +299,6 @@ html.dark .icon-moon { display: inline-block; }
 /* ===== Article ===== */
 .doc-article { max-width: 78rem; margin: 0 auto; }
 .page-header { margin-bottom: 3rem; }
-.page-header--compact { margin-bottom: 0.75rem; }
 
 .eyebrow {
   margin: 0 0 1rem; font-size: 0.8rem; font-weight: 500;
@@ -322,6 +321,7 @@ html.dark .icon-moon { display: inline-block; }
 @media (min-width: 1180px) {
   .article-grid { grid-template-columns: minmax(0, var(--content-w)) 14rem; }
 }
+.article-content { max-width: var(--content-w); min-width: 0; }
 
 /* ===== Prose ===== */
 .prose { max-width: var(--content-w); }
