@@ -41,7 +41,8 @@ jobs:
       - name: build preview index
         run: node ./scripts/build-pages-index.mjs
       - name: Build Pagefind index
-        run: npx --yes pagefind@latest --site ./_site --output-subdir _zeropress/pagefind
+        run: |
+          npx --yes pagefind@latest --site ./_site --output-subdir _zeropress/pagefind
           cp ./_site/_zeropress/search_pagefind.js ./_site/_zeropress/search.js
           rm ./_site/_zeropress/search.json
       - name: Upload artifact
