@@ -2,8 +2,14 @@
   <div class="sidebar__inner">
     <div class="sidebar__top">
       <a class="sidebar__brand" href="/">
-        <span class="sidebar__brand-mark"><span class="sidebar__brand-dot"></span></span>
-        {{#if site.meta.brand_word}}{{site.meta.brand_word}}{{#else}}{{site.title}}{{/if}}
+        {{#if site.logo.src}}
+        <img
+          class="sidebar__brand-mark"
+          src="{{site.logo.src}}"
+          alt="{{#if site.logo.alt}}{{site.logo.alt}}{{#else}}{{site.title}}{{/if}}"
+        >
+        {{/if}}
+        <span class="sidebar__brand-name">{{site.title}}</span>
       </a>
       <button type="button" class="icon-btn sidebar__theme-toggle theme-toggle" data-theme-toggle aria-label="Toggle theme" title="Toggle theme">
         <svg class="icon theme-toggle__icon theme-toggle__icon--sun" width="16" height="16" aria-hidden="true"><use href="#icon-sun"/></svg>

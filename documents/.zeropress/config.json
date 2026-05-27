@@ -12,11 +12,6 @@
     "footer": {
       "copyright_text": "ZeroPress Build Pages",
       "attribution": true
-    },
-    "meta": {
-      "brand_word": "Build Pages",
-      "version_label": "v0.6",
-      "github_url": "https://github.com/zeropress-app/zeropress-build-pages"
     }
   },
   "markdown": {

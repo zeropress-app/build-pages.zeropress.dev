@@ -3,11 +3,16 @@
     <svg class="icon" width="16" height="16" aria-hidden="true"><use href="#icon-menu"/></svg>
   </label>
   <a class="top-bar__brand" href="/">
-    {{#if site.meta.brand_word}}{{site.meta.brand_word}}{{#else}}{{site.title}}{{/if}}
-    {{#if site.meta.version_label}}<span class="top-bar__version">{{site.meta.version_label}}</span>{{/if}}
+    {{#if site.logo.src}}
+    <img
+      class="top-bar__brand-mark"
+      src="{{site.logo.src}}"
+      alt="{{#if site.logo.alt}}{{site.logo.alt}}{{#else}}{{site.title}}{{/if}}"
+    >
+    {{/if}}
+    <span>{{site.title}}</span>
   </a>
   <div class="top-bar__actions">
-    {{#if site.meta.github_url}}<a class="top-bar__link" href="{{site.meta.github_url}}" rel="noreferrer noopener" target="_blank">GitHub</a>{{/if}}
     {{#if site.search}}
     <button type="button" class="icon-btn" data-cmdk-open aria-label="Search docs">
       <svg class="icon" width="14" height="14" aria-hidden="true"><use href="#icon-search"/></svg>

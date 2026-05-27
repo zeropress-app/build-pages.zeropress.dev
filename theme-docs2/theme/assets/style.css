@@ -144,12 +144,14 @@ a { color: inherit; }
   min-width: 0; flex: 1;
 }
 .sidebar__brand-mark {
-  width: 1.5rem; height: 1.5rem; border-radius: 999px;
-  background: hsl(120 9% 52% / 0.2);
-  display: inline-flex; align-items: center; justify-content: center;
+  width: 1.75rem; height: 1.75rem;
+  object-fit: contain;
   flex: 0 0 auto;
 }
-.sidebar__brand-dot { width: 0.5rem; height: 0.5rem; border-radius: 999px; background: var(--tab-sage); }
+.sidebar__brand-name {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
 .sidebar__theme-toggle { flex: 0 0 auto; }
 
 .sidebar__search {
@@ -232,14 +234,13 @@ html.dark .top-bar { background: hsl(22 8% 12% / 0.85); }
   color: var(--ink-dark); text-decoration: none;
   display: none; align-items: center; gap: 0.5rem;
 }
-.top-bar__version {
-  font-family: 'JetBrains Mono', ui-monospace, monospace;
-  font-size: 0.7rem; color: var(--ink-light);
-  background: var(--chalk); padding: 0.125rem 0.4rem; border-radius: 0.25rem;
+.top-bar__brand-mark {
+  width: 1.25rem;
+  height: 1.25rem;
+  object-fit: contain;
+  flex: 0 0 auto;
 }
 .top-bar__actions { margin-left: auto; display: flex; align-items: center; gap: 0.5rem; }
-.top-bar__link { font-size: 0.85rem; color: var(--ink-light); text-decoration: none; }
-.top-bar__link:hover { color: var(--ink-dark); }
 .icon-btn {
   display: inline-flex; align-items: center; justify-content: center; gap: 0.4rem;
   height: 2.25rem; padding: 0 0.625rem; min-width: 2.25rem;
