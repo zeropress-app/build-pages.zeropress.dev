@@ -580,7 +580,6 @@ html.dark .icon-moon { display: inline-block; }
 }
 .page-meta__link svg { color: var(--ink-light); }
 .page-meta__link:hover svg { color: var(--tab-terracotta); }
-.page-meta__link--ghost { color: var(--ink-light); }
 .page-meta__updated { margin-left: auto; }
 
 /* Code block language label */

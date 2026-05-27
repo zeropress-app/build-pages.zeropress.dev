@@ -9,14 +9,8 @@
 
       <footer class="page-meta" aria-label="Page metadata">
         <div class="page-meta__row">
-          {{#if site.meta.edit_url_base}}{{#if page.meta.source_markdown_url}}
-          <a class="page-meta__link" href="{{site.meta.edit_url_base}}{{page.meta.source_markdown_url}}" rel="noreferrer noopener" target="_blank">
-            <svg class="icon" width="14" height="14" aria-hidden="true"><use href="#icon-edit"/></svg>
-            Improve this page on GitHub
-          </a>
-          {{/if}}{{/if}}
           {{#if page.meta.source_markdown_url}}
-          <a class="page-meta__link page-meta__link--ghost" href="{{page.meta.source_markdown_url}}">
+          <a class="page-meta__link" href="{{page.meta.source_markdown_url}}">
             <svg class="icon" width="14" height="14" aria-hidden="true"><use href="#icon-file"/></svg>
             View as Markdown
           </a>
