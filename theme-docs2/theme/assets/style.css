@@ -139,6 +139,12 @@ a { color: inherit; }
   box-shadow: inset 0 2px 4px hsl(0 0% 0% / 0.02);
 }
 .sidebar__search:hover { border-color: hsl(11 43% 58% / 0.4); color: var(--ink-base); }
+.sidebar__search:disabled,
+.sidebar__search:disabled:hover {
+  border-color: var(--border);
+  color: var(--ink-light);
+  cursor: not-allowed;
+}
 .sidebar__search svg { color: var(--ink-light); flex-shrink: 0; }
 .sidebar__search span { flex: 1; }
 .sidebar__search .kbd { margin-left: auto; }
@@ -226,6 +232,12 @@ html.dark .top-bar { background: hsl(22 8% 12% / 0.85); }
   transition: background 0.15s, color 0.15s, border-color 0.15s;
 }
 .icon-btn:hover { color: var(--tab-terracotta); border-color: hsl(11 43% 58% / 0.4); }
+.icon-btn:disabled,
+.icon-btn:disabled:hover {
+  color: var(--ink-base);
+  border-color: var(--border);
+  cursor: not-allowed;
+}
 .kbd {
   font-family: var(--font-mono); font-size: 0.65rem;
   color: var(--ink-light); background: var(--canvas);
@@ -639,6 +651,13 @@ html.dark .icon-moon { display: inline-block; }
 .button-link--ghost:hover {
   background: var(--chalk);
   color: var(--ink-dark);
+}
+.button-link:disabled,
+.button-link:disabled:hover {
+  cursor: not-allowed;
+  background: transparent;
+  color: var(--ink-base);
+  border-color: var(--border-strong);
 }
 
 /* Command palette */

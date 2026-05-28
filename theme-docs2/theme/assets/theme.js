@@ -1,6 +1,17 @@
 (function () {
   'use strict';
 
+  document.documentElement.classList.add('js');
+
+  function enableEnhancedControls() {
+    document.querySelectorAll('[data-theme-toggle], [data-cmdk-open]').forEach(function (control) {
+      control.disabled = false;
+      control.removeAttribute('aria-disabled');
+    });
+  }
+
+  enableEnhancedControls();
+
   // ===== Theme toggle (three-state: light / dark / system) =====
   function getStoredTheme() {
     try {
@@ -44,9 +55,28 @@
 
   // ===== Mobile nav close on link click =====
   var navToggle = document.getElementById('nav-toggle');
+  var navTrigger = document.querySelector('[data-nav-trigger]');
+  function syncNavState() {
+    if (!navToggle || !navTrigger) return;
+    navTrigger.setAttribute('aria-expanded', navToggle.checked ? 'true' : 'false');
+    navTrigger.setAttribute('aria-label', navToggle.checked ? 'Close navigation' : 'Open navigation');
+  }
   if (navToggle) {
+    navToggle.addEventListener('change', syncNavState);
+    syncNavState();
+    if (navTrigger) {
+      navTrigger.addEventListener('keydown', function (e) {
+        if (e.key !== 'Enter' && e.key !== ' ') return;
+        e.preventDefault();
+        navToggle.checked = !navToggle.checked;
+        navToggle.dispatchEvent(new Event('change', { bubbles: true }));
+      });
+    }
     document.querySelectorAll('.sidebar__link').forEach(function (a) {
-      a.addEventListener('click', function () { navToggle.checked = false; });
+      a.addEventListener('click', function () {
+        navToggle.checked = false;
+        syncNavState();
+      });
     });
   }
 

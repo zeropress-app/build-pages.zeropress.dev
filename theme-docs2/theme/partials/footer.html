@@ -8,7 +8,7 @@
     {{#if menus.legal.items}}
     <div class="site-footer__links">
       {{#for item in menus.legal.items}}
-        <a href="{{item.url}}">{{item.title}}</a>
+        <a href="{{item.url}}" {{#if item.target}}target="{{item.target}}"{{/if}} {{#if_eq item.target "_blank"}}rel="noopener noreferrer"{{/if_eq}}>{{item.title}}</a>
       {{/for}}
     </div>
     {{/if}}

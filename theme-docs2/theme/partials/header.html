@@ -1,5 +1,5 @@
 <header class="top-bar">
-  <label for="nav-toggle" class="icon-btn nav-trigger" aria-label="Open navigation">
+  <label for="nav-toggle" class="icon-btn nav-trigger" role="button" tabindex="0" aria-label="Open navigation" aria-controls="site-sidebar" aria-expanded="false" data-nav-trigger>
     <svg class="icon" width="16" height="16" aria-hidden="true"><use href="#icon-menu"/></svg>
   </label>
   <a class="top-bar__brand" href="/">
@@ -14,12 +14,12 @@
   </a>
   <div class="top-bar__actions">
     {{#if site.search}}
-    <button type="button" class="icon-btn" data-cmdk-open aria-label="Search docs">
+    <button type="button" class="icon-btn" data-cmdk-open aria-label="Search docs" disabled>
       <svg class="icon" width="14" height="14" aria-hidden="true"><use href="#icon-search"/></svg>
       <kbd class="kbd">⌘K</kbd>
     </button>
     {{/if}}
-    <button type="button" class="icon-btn theme-toggle" data-theme-toggle aria-label="Toggle theme" title="Toggle theme">
+    <button type="button" class="icon-btn theme-toggle" data-theme-toggle aria-label="Toggle theme" title="Toggle theme" disabled>
       <svg class="icon theme-toggle__icon theme-toggle__icon--sun" width="16" height="16" aria-hidden="true"><use href="#icon-sun"/></svg>
       <svg class="icon theme-toggle__icon theme-toggle__icon--moon" width="16" height="16" aria-hidden="true"><use href="#icon-moon"/></svg>
       <svg class="icon theme-toggle__icon theme-toggle__icon--system" width="16" height="16" aria-hidden="true"><use href="#icon-monitor"/></svg>

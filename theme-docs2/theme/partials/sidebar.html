@@ -1,4 +1,4 @@
-<aside class="sidebar" aria-label="Documentation navigation">
+<aside id="site-sidebar" class="sidebar" aria-label="Documentation navigation">
   <div class="sidebar__inner">
     <div class="sidebar__top">
       <a class="sidebar__brand" href="/">
@@ -11,7 +11,7 @@
         {{/if}}
         <span class="sidebar__brand-name">{{site.title}}</span>
       </a>
-      <button type="button" class="icon-btn sidebar__theme-toggle theme-toggle" data-theme-toggle aria-label="Toggle theme" title="Toggle theme">
+      <button type="button" class="icon-btn sidebar__theme-toggle theme-toggle" data-theme-toggle aria-label="Toggle theme" title="Toggle theme" disabled>
         <svg class="icon theme-toggle__icon theme-toggle__icon--sun" width="16" height="16" aria-hidden="true"><use href="#icon-sun"/></svg>
         <svg class="icon theme-toggle__icon theme-toggle__icon--moon" width="16" height="16" aria-hidden="true"><use href="#icon-moon"/></svg>
         <svg class="icon theme-toggle__icon theme-toggle__icon--system" width="16" height="16" aria-hidden="true"><use href="#icon-monitor"/></svg>
@@ -19,7 +19,7 @@
     </div>
 
     {{#if site.search}}
-    <button type="button" class="sidebar__search" data-cmdk-open>
+    <button type="button" class="sidebar__search" data-cmdk-open disabled>
       <svg class="icon" width="14" height="14" aria-hidden="true"><use href="#icon-search"/></svg>
       <span>Search the docs...</span>
       <kbd class="kbd">⌘K</kbd>
@@ -38,18 +38,18 @@
               </summary>
               <ul>
                 {{#for item in group.children}}
-                  <li><a class="sidebar__link" href="{{item.url}}" {{#if_eq route.url item.url}}aria-current="page"{{/if_eq}}>{{item.title}}</a></li>
+                  <li><a class="sidebar__link" href="{{item.url}}" {{#if item.target}}target="{{item.target}}"{{/if}} {{#if_eq item.target "_blank"}}rel="noopener noreferrer"{{/if_eq}} {{#if_eq route.url item.url}}aria-current="page"{{/if_eq}}>{{item.title}}</a></li>
                 {{/for}}
               </ul>
             </details>
           {{#else}}
-            <a class="sidebar__link sidebar__link--top" href="{{group.url}}" {{#if_eq route.url group.url}}aria-current="page"{{/if_eq}}>{{group.title}}</a>
+            <a class="sidebar__link sidebar__link--top" href="{{group.url}}" {{#if group.target}}target="{{group.target}}"{{/if}} {{#if_eq group.target "_blank"}}rel="noopener noreferrer"{{/if_eq}} {{#if_eq route.url group.url}}aria-current="page"{{/if_eq}}>{{group.title}}</a>
           {{/if}}
         {{/for}}
       {{#else}}
         {{#if menus.primary.items}}
           {{#for item in menus.primary.items}}
-            <a class="sidebar__link sidebar__link--top" href="{{item.url}}" {{#if_eq route.url item.url}}aria-current="page"{{/if_eq}}>{{item.title}}</a>
+            <a class="sidebar__link sidebar__link--top" href="{{item.url}}" {{#if item.target}}target="{{item.target}}"{{/if}} {{#if_eq item.target "_blank"}}rel="noopener noreferrer"{{/if_eq}} {{#if_eq route.url item.url}}aria-current="page"{{/if_eq}}>{{item.title}}</a>
           {{/for}}
         {{/if}}
       {{/if}}
