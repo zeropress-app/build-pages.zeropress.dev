@@ -1,36 +1,10 @@
 /* ZeroPress Template Docs2 */
 
-/* ===== Self-hosted fonts (latin subset) ===== */
-@font-face {
-  font-family: 'Lora';
-  font-style: normal;
-  font-weight: 400 600;
-  font-display: swap;
-  src: url('/fonts/lora-latin.woff2') format('woff2');
-}
-@font-face {
-  font-family: 'Lora';
-  font-style: italic;
-  font-weight: 400;
-  font-display: swap;
-  src: url('/fonts/lora-italic-latin.woff2') format('woff2');
-}
-@font-face {
-  font-family: 'Outfit';
-  font-style: normal;
-  font-weight: 300 600;
-  font-display: swap;
-  src: url('/fonts/outfit-latin.woff2') format('woff2');
-}
-@font-face {
-  font-family: 'JetBrains Mono';
-  font-style: normal;
-  font-weight: 400 500;
-  font-display: swap;
-  src: url('/fonts/jetbrains-mono-latin.woff2') format('woff2');
-}
-
 :root {
+  --font-sans: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-serif: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+
   --canvas: hsl(45 22% 93%);
   --page: hsl(40 22% 97%);
   --chalk: hsl(36 21% 94%);
@@ -91,7 +65,7 @@ html {
 body {
   background: var(--canvas);
   color: var(--ink-base);
-  font-family: 'Outfit', system-ui, sans-serif;
+  font-family: var(--font-sans);
   font-weight: 400;
   line-height: 1.65;
   -webkit-font-smoothing: antialiased;
@@ -141,7 +115,7 @@ a { color: inherit; }
 }
 .sidebar__brand {
   display: flex; align-items: center; gap: 0.75rem;
-  font-family: 'Lora', Georgia, serif; font-size: 1.25rem; font-weight: 500;
+  font-family: var(--font-serif); font-size: 1.25rem; font-weight: 500;
   color: var(--ink-dark); text-decoration: none; letter-spacing: -0.01em;
   min-width: 0; flex: 1;
 }
@@ -177,7 +151,7 @@ a { color: inherit; }
   margin: 0; padding: 0.25rem 0;
   font-size: 0.7rem; font-weight: 600;
   text-transform: uppercase; letter-spacing: 0.12em; color: var(--ink-light);
-  font-family: 'Outfit', sans-serif;
+  font-family: var(--font-sans);
   cursor: pointer;
   list-style: none;
   user-select: none;
@@ -232,7 +206,7 @@ a { color: inherit; }
 }
 html.dark .top-bar { background: hsl(22 8% 12% / 0.85); }
 .top-bar__brand {
-  font-family: 'Lora', Georgia, serif; font-size: 1rem; font-weight: 500;
+  font-family: var(--font-serif); font-size: 1rem; font-weight: 500;
   color: var(--ink-dark); text-decoration: none;
   display: none; align-items: center; gap: 0.5rem;
 }
@@ -253,7 +227,7 @@ html.dark .top-bar { background: hsl(22 8% 12% / 0.85); }
 }
 .icon-btn:hover { color: var(--tab-terracotta); border-color: hsl(11 43% 58% / 0.4); }
 .kbd {
-  font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 0.65rem;
+  font-family: var(--font-mono); font-size: 0.65rem;
   color: var(--ink-light); background: var(--canvas);
   border: 1px solid var(--border); padding: 0.05rem 0.35rem; border-radius: 0.25rem;
 }
@@ -308,7 +282,7 @@ html.dark .icon-moon { display: inline-block; }
 }
 .page-header h1 {
   margin: 0 0 1.25rem;
-  font-family: 'Lora', Georgia, serif;
+  font-family: var(--font-serif);
   font-size: 2.75rem; font-weight: 500;
   letter-spacing: -0.02em; line-height: 1.1;
   color: var(--ink-dark);
@@ -330,21 +304,21 @@ html.dark .icon-moon { display: inline-block; }
 .prose > * + * { margin-top: 1.25rem; }
 .prose h1 {
   margin: 0 0 1.25rem;
-  font-family: 'Lora', Georgia, serif;
+  font-family: var(--font-serif);
   font-size: 2.75rem; font-weight: 500;
   letter-spacing: -0.02em; line-height: 1.1;
   color: var(--ink-dark);
   text-wrap: balance;
 }
 .prose h2 {
-  font-family: 'Lora', Georgia, serif; font-weight: 500;
+  font-family: var(--font-serif); font-weight: 500;
   font-size: 1.65rem; letter-spacing: -0.01em;
   color: var(--ink-dark); margin-top: 3.5rem; margin-bottom: 1.25rem;
   scroll-margin-top: 5rem;
   position: relative;
 }
 .prose h3 {
-  font-family: 'Lora', Georgia, serif; font-weight: 500;
+  font-family: var(--font-serif); font-weight: 500;
   font-size: 1.3rem; color: var(--ink-dark);
   margin-top: 2.5rem; margin-bottom: 1rem; scroll-margin-top: 5rem;
   position: relative;
@@ -393,7 +367,7 @@ html.dark .icon-moon { display: inline-block; }
 .prose code:not(pre code) {
   background: var(--chalk); color: var(--tab-terracotta);
   padding: 0.125rem 0.4rem; border-radius: 0.25rem; font-size: 0.875em;
-  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-family: var(--font-mono);
 }
 
 /* Code block */
@@ -403,7 +377,7 @@ html.dark .icon-moon { display: inline-block; }
   border-radius: 0.75rem;
   padding: 1.25rem 1.5rem;
   overflow-x: auto;
-  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-family: var(--font-mono);
   font-size: 0.85rem; line-height: 1.7;
   color: hsl(40 22% 97% / 0.9);
   box-shadow: inset 0 2px 10px hsl(0 0% 0% / 0.2);
@@ -435,12 +409,12 @@ html.dark .icon-moon { display: inline-block; }
 .code-block__dots span { width: 0.55rem; height: 0.55rem; border-radius: 999px; background: hsl(0 0% 100% / 0.18); }
 .code-block__name {
   margin-left: 0.875rem; font-size: 0.7rem; letter-spacing: 0.08em;
-  color: hsl(0 0% 100% / 0.5); font-family: 'JetBrains Mono', monospace;
+  color: hsl(0 0% 100% / 0.5); font-family: var(--font-mono);
 }
 .code-block pre, .code-block__code {
   margin: 0; padding: 1.5rem;
   background: transparent; border-radius: 0; box-shadow: none;
-  font-family: 'JetBrains Mono', monospace; font-size: 0.85rem;
+  font-family: var(--font-mono); font-size: 0.85rem;
   color: hsl(40 22% 97% / 0.9); overflow-x: auto;
 }
 .copy-btn {
@@ -449,7 +423,7 @@ html.dark .icon-moon { display: inline-block; }
   background: hsl(0 0% 100% / 0.08); color: hsl(40 22% 97% / 0.7);
   border: 1px solid hsl(0 0% 100% / 0.12); border-radius: 0.35rem; cursor: pointer;
   opacity: 0; transition: opacity 0.15s;
-  font-family: 'Outfit', sans-serif;
+  font-family: var(--font-sans);
 }
 .prose pre:hover .copy-btn, .code-block:hover .copy-btn, .copy-btn:focus { opacity: 1; }
 
@@ -531,7 +505,7 @@ html.dark .icon-moon { display: inline-block; }
 .callout__icon {
   flex-shrink: 0; width: 2rem; height: 2rem; border-radius: 999px;
   display: inline-flex; align-items: center; justify-content: center;
-  font-family: 'Lora', serif; font-style: italic; font-weight: 500;
+  font-family: var(--font-serif); font-style: italic; font-weight: 500;
 }
 .callout__body h4 { margin: 0 0 0.25rem; font-size: 0.9rem; font-weight: 600; color: var(--ink-dark); }
 .callout__body p, .callout__body { font-size: 0.9rem; color: var(--ink-base); margin: 0; line-height: 1.6; }
@@ -603,7 +577,7 @@ html.dark .icon-moon { display: inline-block; }
   background: hsl(0 0% 100% / 0.06);
   border: 1px solid hsl(0 0% 100% / 0.1);
   color: hsl(40 22% 97% / 0.55);
-  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-family: var(--font-mono);
   font-size: 0.65rem;
   letter-spacing: 0.06em;
   text-transform: lowercase;
@@ -625,7 +599,7 @@ html.dark .icon-moon { display: inline-block; }
   font-size: 0.7rem; font-weight: 600; text-transform: uppercase;
   letter-spacing: 0.14em; color: var(--ink-light);
 }
-.pager__label { font-family: 'Lora', Georgia, serif; font-size: 1.15rem; color: var(--ink-dark); }
+.pager__label { font-family: var(--font-serif); font-size: 1.15rem; color: var(--ink-dark); }
 .pager a:hover .pager__label { color: var(--tab-terracotta); }
 
 /* Footer */
