@@ -428,7 +428,26 @@ html.dark .icon-moon { display: inline-block; }
 .prose .task-list-item-checkbox {
   flex: 0 0 auto;
   margin-top: 0.4rem;
-  accent-color: var(--tab-terracotta);
+  width: 1rem;
+  height: 1rem;
+  appearance: none;
+  border: 2px solid var(--ink-light);
+  border-radius: 0.25rem;
+  background: var(--page);
+  display: inline-grid;
+  place-content: center;
+}
+.prose .task-list-item-checkbox:checked {
+  border-color: var(--tab-sage);
+  background: var(--tab-sage);
+}
+.prose .task-list-item-checkbox:checked::after {
+  content: "";
+  width: 0.35rem;
+  height: 0.6rem;
+  border: solid var(--page);
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg) translateY(-0.05rem);
 }
 .prose img {
   max-width: 100%;
@@ -452,24 +471,61 @@ html.dark .icon-moon { display: inline-block; }
   text-align: center;
 }
 .zp-alert {
+  --alert-color: var(--tab-terracotta);
   margin: 1.5rem 0;
   padding: 1rem 1.1rem;
   border: 1px solid var(--border);
   border-left-width: 4px;
+  border-left-color: var(--alert-color);
   border-radius: var(--radius);
   background: var(--chalk);
 }
 .zp-alert__title {
   margin: 0 0 0.35rem;
-  color: var(--ink-dark);
+  color: var(--alert-color);
   font-weight: 700;
 }
 .zp-alert > *:last-child { margin-bottom: 0; }
-.zp-alert--note { border-left-color: var(--tab-ochre); }
-.zp-alert--tip { border-left-color: var(--tab-sage); }
-.zp-alert--important,
-.zp-alert--warning,
-.zp-alert--caution { border-left-color: var(--tab-terracotta); }
+.zp-alert--note {
+  --alert-color: hsl(212 72% 50%);
+  background: hsl(212 72% 50% / 0.08);
+}
+.zp-alert--tip {
+  --alert-color: hsl(145 45% 40%);
+  background: hsl(145 45% 40% / 0.08);
+}
+.zp-alert--important {
+  --alert-color: hsl(262 54% 58%);
+  background: hsl(262 54% 58% / 0.08);
+}
+.zp-alert--warning {
+  --alert-color: hsl(36 88% 43%);
+  background: hsl(36 88% 43% / 0.1);
+}
+.zp-alert--caution {
+  --alert-color: hsl(358 64% 54%);
+  background: hsl(358 64% 54% / 0.08);
+}
+html.dark .zp-alert--note {
+  --alert-color: hsl(212 82% 68%);
+  background: hsl(212 82% 68% / 0.1);
+}
+html.dark .zp-alert--tip {
+  --alert-color: hsl(145 48% 64%);
+  background: hsl(145 48% 64% / 0.1);
+}
+html.dark .zp-alert--important {
+  --alert-color: hsl(262 66% 74%);
+  background: hsl(262 66% 74% / 0.1);
+}
+html.dark .zp-alert--warning {
+  --alert-color: hsl(39 92% 66%);
+  background: hsl(39 92% 66% / 0.11);
+}
+html.dark .zp-alert--caution {
+  --alert-color: hsl(358 78% 70%);
+  background: hsl(358 78% 70% / 0.1);
+}
 
 /* Code block */
 .prose pre, .code-block {

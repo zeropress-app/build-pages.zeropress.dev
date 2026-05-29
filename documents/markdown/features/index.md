@@ -95,7 +95,7 @@ Tables are useful for compact comparisons.
 | Route | Source path or front matter `path` | HTML route |
 | Source copy | `copy-markdown-source` | Public `.md` link |
 
-Alignment markers are also supported.
+Pipe table separator rows are supported. Alignment markers can be written in source for compatibility, but the current renderer does not emit alignment metadata; this theme displays table cells with its default alignment.
 
 | Left | Center | Right |
 | :--- | :---: | ---: |
@@ -163,12 +163,12 @@ flowchart LR
 
 Markdown images use normal image syntax.
 
-![ZeroPress favicon](/favicon.svg)
+![ZeroPress favicon](/favicon.png)
 
 Raw HTML image structures can be useful when a document needs captions or responsive media markup.
 
 <figure>
-  <img src="/favicon.png" alt="ZeroPress square favicon" width="96" height="96">
+  <img src="/favicon.svg" alt="ZeroPress square favicon" width="96" height="96">
   <figcaption>A public asset rendered from Markdown raw HTML.</figcaption>
 </figure>
 
