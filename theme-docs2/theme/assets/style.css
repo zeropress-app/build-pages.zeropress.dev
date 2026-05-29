@@ -415,6 +415,12 @@ html.dark .icon-moon { display: inline-block; }
   font-weight: 600;
   background: var(--chalk);
 }
+.prose th.zp-align-left,
+.prose td.zp-align-left { text-align: left; }
+.prose th.zp-align-center,
+.prose td.zp-align-center { text-align: center; }
+.prose th.zp-align-right,
+.prose td.zp-align-right { text-align: right; }
 .prose tr:last-child td { border-bottom-color: var(--border-strong); }
 .prose .contains-task-list {
   list-style: none;
@@ -525,6 +531,19 @@ html.dark .zp-alert--warning {
 html.dark .zp-alert--caution {
   --alert-color: hsl(358 78% 70%);
   background: hsl(358 78% 70% / 0.1);
+}
+.zp-mermaid {
+  margin: 1.5rem 0;
+  overflow-x: auto;
+  text-align: center;
+}
+.zp-mermaid svg {
+  max-width: 100%;
+  height: auto;
+}
+.zp-mermaid-error {
+  text-align: left;
+  white-space: pre-wrap;
 }
 
 /* Code block */

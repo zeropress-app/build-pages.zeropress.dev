@@ -124,6 +124,55 @@
     });
   }
 
+  // ===== Mermaid progressive enhancement =====
+  function mermaidTheme() {
+    var resolved = document.documentElement.dataset.themeResolved;
+    if (!resolved && window.matchMedia) {
+      resolved = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    }
+    return resolved === 'dark' ? 'dark' : 'default';
+  }
+
+  function prepareMermaidBlocks() {
+    return Array.prototype.slice.call(document.querySelectorAll('pre > code.language-mermaid, pre > code.lang-mermaid')).map(function (code, index) {
+      var pre = code.parentElement;
+      var container = document.createElement('div');
+      container.className = 'mermaid zp-mermaid';
+      container.dataset.mermaidIndex = String(index + 1);
+      container.textContent = code.textContent || '';
+      pre.replaceWith(container);
+      return { pre: pre, container: container };
+    });
+  }
+
+  function renderMermaidBlocks() {
+    var mermaid = window.mermaid;
+    if (!mermaid) return;
+
+    var entries = prepareMermaidBlocks();
+    if (!entries.length) return;
+
+    mermaid.initialize({
+      startOnLoad: false,
+      securityLevel: 'strict',
+      theme: mermaidTheme(),
+    });
+
+    Promise.resolve(mermaid.run({
+      nodes: entries.map(function (entry) { return entry.container; }),
+    })).catch(function (error) {
+      entries.forEach(function (entry) {
+        if (entry.container.isConnected) {
+          entry.pre.classList.add('zp-mermaid-error');
+          entry.container.replaceWith(entry.pre);
+        }
+      });
+      console.warn('[zeropress] Mermaid rendering failed.', error);
+    });
+  }
+
+  renderMermaidBlocks();
+
   // ===== Code copy buttons + language labels =====
   document.querySelectorAll('pre > code, .code-block__code').forEach(function (code) {
     // Language label: read first hljs-style language-* class on <code>

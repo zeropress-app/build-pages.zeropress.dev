@@ -95,7 +95,7 @@ Tables are useful for compact comparisons.
 | Route | Source path or front matter `path` | HTML route |
 | Source copy | `copy-markdown-source` | Public `.md` link |
 
-Pipe table separator rows are supported. Alignment markers can be written in source for compatibility, but the current renderer does not emit alignment metadata; this theme displays table cells with its default alignment.
+Pipe table separator rows and alignment markers are supported.
 
 | Left | Center | Right |
 | :--- | :---: | ---: |
@@ -150,7 +150,7 @@ public/
 
 ## Mermaid Fence
 
-Mermaid fences are preserved with the `language-mermaid` class. A site can progressively enhance them with Mermaid client JavaScript when it wants rendered diagrams.
+Mermaid fences remain readable source without JavaScript. This theme progressively enhances them into diagrams when JavaScript is available.
 
 ```mermaid
 flowchart LR
