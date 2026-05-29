@@ -49,3 +49,5 @@ If `status` is omitted, the page is treated as `published`.
 ## Markdown Features
 
 Build Pages supports common GitHub-flavored Markdown features such as tables, task lists, strikethrough, fenced code language classes, Mermaid fences, and GitHub-style alerts.
+
+See [Markdown Feature Examples](features/index.md) for a rendered sample page that uses these features together.

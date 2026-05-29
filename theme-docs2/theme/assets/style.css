@@ -376,11 +376,100 @@ html.dark .icon-moon { display: inline-block; }
 .prose ul, .prose ol { padding-left: 1.5rem; color: var(--ink-base); }
 .prose li + li { margin-top: 0.4rem; }
 .prose a { color: var(--tab-terracotta); text-decoration: underline; text-underline-offset: 3px; }
+.prose hr {
+  border: 0;
+  border-top: 1px solid var(--border);
+  margin: 2.75rem 0;
+}
+.prose blockquote {
+  margin: 2rem 0;
+  padding: 0.25rem 0 0.25rem 1.25rem;
+  border-left: 3px solid var(--tab-terracotta);
+  color: var(--ink-base);
+}
+.prose blockquote > *:first-child { margin-top: 0; }
+.prose blockquote > *:last-child { margin-bottom: 0; }
 .prose code:not(pre code) {
   background: var(--chalk); color: var(--tab-terracotta);
   padding: 0.125rem 0.4rem; border-radius: 0.25rem; font-size: 0.875em;
   font-family: var(--font-mono);
 }
+.prose table {
+  display: block;
+  width: 100%;
+  overflow-x: auto;
+  border-collapse: collapse;
+  border-spacing: 0;
+  font-size: 0.92rem;
+}
+.prose th,
+.prose td {
+  padding: 0.65rem 0.75rem;
+  border-bottom: 1px solid var(--border);
+  text-align: left;
+  vertical-align: top;
+  white-space: nowrap;
+}
+.prose th {
+  color: var(--ink-dark);
+  font-weight: 600;
+  background: var(--chalk);
+}
+.prose tr:last-child td { border-bottom-color: var(--border-strong); }
+.prose .contains-task-list {
+  list-style: none;
+  padding-left: 0;
+}
+.prose .task-list-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.55rem;
+}
+.prose .task-list-item-checkbox {
+  flex: 0 0 auto;
+  margin-top: 0.4rem;
+  accent-color: var(--tab-terracotta);
+}
+.prose img {
+  max-width: 100%;
+  height: auto;
+}
+.prose figure {
+  margin: 2rem 0;
+  padding: 1rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--chalk);
+}
+.prose figure img {
+  display: block;
+  margin: 0 auto;
+}
+.prose figcaption {
+  margin-top: 0.75rem;
+  color: var(--ink-light);
+  font-size: 0.85rem;
+  text-align: center;
+}
+.zp-alert {
+  margin: 1.5rem 0;
+  padding: 1rem 1.1rem;
+  border: 1px solid var(--border);
+  border-left-width: 4px;
+  border-radius: var(--radius);
+  background: var(--chalk);
+}
+.zp-alert__title {
+  margin: 0 0 0.35rem;
+  color: var(--ink-dark);
+  font-weight: 700;
+}
+.zp-alert > *:last-child { margin-bottom: 0; }
+.zp-alert--note { border-left-color: var(--tab-ochre); }
+.zp-alert--tip { border-left-color: var(--tab-sage); }
+.zp-alert--important,
+.zp-alert--warning,
+.zp-alert--caution { border-left-color: var(--tab-terracotta); }
 
 /* Code block */
 .prose pre, .code-block {
