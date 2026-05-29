@@ -277,9 +277,8 @@ html.dark .icon-moon { display: inline-block; }
   outline: none;
 }
 .cmdk__field:focus-within {
-  outline: 2px solid var(--tab-terracotta);
-  outline-offset: -1px;
-  border-radius: 0;
+  outline: none;
+  border-bottom-color: var(--tab-terracotta);
 }
 
 .nav-trigger { display: none; }
@@ -834,9 +833,14 @@ html.dark .zp-alert--caution {
   border-radius: 0.85rem; box-shadow: 0 24px 60px hsl(0 0% 0% / 0.2);
   overflow: hidden;
 }
+.cmdk__panel:focus-within {
+  border-color: var(--tab-terracotta);
+  box-shadow: 0 24px 60px hsl(0 0% 0% / 0.2), 0 0 0 1px hsl(11 43% 58% / 0.35);
+}
 .cmdk__field {
   display: flex; align-items: center; gap: 0.6rem;
   padding: 0.85rem 1rem; border-bottom: 1px solid var(--border);
+  border-radius: calc(0.85rem - 1px) calc(0.85rem - 1px) 0 0;
   color: var(--ink-light);
 }
 .cmdk__field input {
