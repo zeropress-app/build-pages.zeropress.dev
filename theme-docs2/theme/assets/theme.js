@@ -249,10 +249,15 @@
   renderMermaidBlocks();
 
   // ===== Code copy buttons + language labels =====
-  document.querySelectorAll('pre > code, .code-block__code').forEach(function (code) {
-    // Language label: read first hljs-style language-* class on <code>
+  var copyIcon = '<svg class="icon" width="14" height="14" aria-hidden="true"><use href="#icon-copy"/></svg>';
+  var copyCheckIcon = '<svg class="icon" width="14" height="14" aria-hidden="true"><use href="#icon-check"/></svg>';
+
+  document.querySelectorAll('pre > code').forEach(function (code) {
     var pre = code.closest('pre');
-    if (pre && !pre.dataset.language) {
+    if (!pre) return;
+
+    // Language label: read first hljs-style language-* class on <code>
+    if (!pre.dataset.language) {
       var match = (code.className || '').match(/(?:language|lang)-([\w-]+)/);
       if (match) {
         var lang = match[1].toLowerCase();
@@ -261,24 +266,45 @@
       }
     }
 
-    var host = code.closest('.code-block') || pre;
-    if (!host || host.querySelector(':scope > .copy-btn')) return;
+    // Make horizontally scrollable code reachable by keyboard.
+    if (!pre.hasAttribute('tabindex')) {
+      pre.setAttribute('tabindex', '0');
+      pre.setAttribute('role', 'region');
+      if (!pre.hasAttribute('aria-label')) {
+        pre.setAttribute('aria-label', pre.dataset.language ? pre.dataset.language + ' code sample' : 'Code sample');
+      }
+    }
+
+    if (pre.querySelector(':scope > .copy-btn')) return;
     var btn = document.createElement('button');
-    btn.type = 'button'; btn.className = 'copy-btn'; btn.textContent = 'Copy';
+    btn.type = 'button';
+    btn.className = 'copy-btn';
+    btn.setAttribute('aria-label', 'Copy code');
+    btn.innerHTML = copyIcon + '<span class="copy-btn__label">Copy</span>';
+    var label = btn.querySelector('.copy-btn__label');
+    var resetTimer;
+
     btn.addEventListener('click', function () {
       var text = code.innerText;
       if (!navigator.clipboard) {
-        btn.textContent = 'Unavailable';
+        label.textContent = 'Unavailable';
         announce('Copy unavailable.');
         return;
       }
       navigator.clipboard.writeText(text).then(function () {
-        btn.textContent = 'Copied';
+        window.clearTimeout(resetTimer);
+        btn.classList.add('is-copied');
+        btn.querySelector('.icon use').setAttribute('href', '#icon-check');
+        label.textContent = 'Copied';
         announce('Code copied.');
-        setTimeout(function () { btn.textContent = 'Copy'; }, 1500);
+        resetTimer = window.setTimeout(function () {
+          btn.classList.remove('is-copied');
+          btn.querySelector('.icon use').setAttribute('href', '#icon-copy');
+          label.textContent = 'Copy';
+        }, 1500);
       });
     });
-    host.appendChild(btn);
+    pre.appendChild(btn);
   });
 
   // ===== HTML document TOC progressive enhancement =====
