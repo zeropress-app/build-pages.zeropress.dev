@@ -26,7 +26,7 @@
       "name": "Primary",
       "items": [
         {
-          "title": "Foundations",
+          "title": "FOUNDATIONS",
           "url": "/",
           "meta": {
             "group_id": "foundations",
@@ -52,7 +52,7 @@
           ]
         },
         {
-          "title": "Guides",
+          "title": "GUIDES",
           "url": "/github-action/",
           "meta": {
             "group_id": "guides",
@@ -82,7 +82,7 @@
           ]
         },
         {
-          "title": "Reference",
+          "title": "REFERENCE",
           "url": "/reference/",
           "meta": {
             "group_id": "reference",
