@@ -17,6 +17,9 @@
   --tab-terracotta: hsl(11 43% 58%);
   --tab-sage: hsl(120 9% 52%);
   --tab-ochre: hsl(30 47% 66%);
+  --tab-blue: hsl(209 46% 55%);
+  --tab-violet: hsl(265 34% 60%);
+  --tab-rose: hsl(342 44% 60%);
 
   --border: hsl(28 9% 51% / 0.2);
   --border-strong: hsl(28 9% 51% / 0.32);
@@ -44,6 +47,9 @@ html.dark {
   --tab-terracotta: hsl(12 55% 65%);
   --tab-sage: hsl(120 14% 62%);
   --tab-ochre: hsl(32 50% 70%);
+  --tab-blue: hsl(209 58% 68%);
+  --tab-violet: hsl(265 45% 72%);
+  --tab-rose: hsl(342 56% 70%);
 
   --border: hsl(30 9% 58% / 0.18);
   --border-strong: hsl(30 9% 58% / 0.3);
@@ -176,10 +182,20 @@ a { color: inherit; }
 .sidebar__title:hover .sidebar__chevron { opacity: 1; }
 .sidebar__group:not([open]) .sidebar__title { color: var(--ink-light); }
 .sidebar__accent { width: 0.25rem; height: 0.75rem; border-radius: 999px; display: inline-block; }
-.sidebar__group .sidebar__accent { background: var(--tab-terracotta); }
-.sidebar__group--terracotta .sidebar__accent { background: var(--tab-terracotta); }
-.sidebar__group--sage .sidebar__accent { background: var(--tab-sage); }
-.sidebar__group--ochre .sidebar__accent { background: var(--tab-ochre); }
+.sidebar__group { --group-accent: var(--tab-terracotta); }
+.sidebar__group:nth-of-type(6n + 1) { --group-accent: var(--tab-terracotta); }
+.sidebar__group:nth-of-type(6n + 2) { --group-accent: var(--tab-sage); }
+.sidebar__group:nth-of-type(6n + 3) { --group-accent: var(--tab-ochre); }
+.sidebar__group:nth-of-type(6n + 4) { --group-accent: var(--tab-blue); }
+.sidebar__group:nth-of-type(6n + 5) { --group-accent: var(--tab-violet); }
+.sidebar__group:nth-of-type(6n + 6) { --group-accent: var(--tab-rose); }
+.sidebar__group--terracotta { --group-accent: var(--tab-terracotta); }
+.sidebar__group--sage { --group-accent: var(--tab-sage); }
+.sidebar__group--ochre { --group-accent: var(--tab-ochre); }
+.sidebar__group--blue { --group-accent: var(--tab-blue); }
+.sidebar__group--violet { --group-accent: var(--tab-violet); }
+.sidebar__group--rose { --group-accent: var(--tab-rose); }
+.sidebar__group .sidebar__accent { background: var(--group-accent); }
 .sidebar__link {
   display: block; padding: 0.375rem 0.625rem; border-radius: 0.375rem;
   font-size: 0.875rem; color: var(--ink-base); text-decoration: none;
