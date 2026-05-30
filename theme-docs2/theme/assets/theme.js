@@ -251,7 +251,17 @@
       }
     }
 
-    var host = code.closest('.code-block') || code.parentElement;
+    var host = code.closest('.code-block');
+    if (!host && pre) {
+      host = pre.parentElement && pre.parentElement.classList.contains('code-scroll')
+        ? pre.parentElement
+        : document.createElement('div');
+      if (!host.classList.contains('code-scroll')) {
+        host.className = 'code-scroll';
+        pre.replaceWith(host);
+        host.appendChild(pre);
+      }
+    }
     if (!host || host.querySelector(':scope > .copy-btn')) return;
     var btn = document.createElement('button');
     btn.type = 'button'; btn.className = 'copy-btn'; btn.textContent = 'Copy';
@@ -262,8 +272,13 @@
         btn.textContent = 'Copied'; setTimeout(function () { btn.textContent = 'Copy'; }, 1500);
       });
     });
-    host.style.position = host.style.position || 'relative';
     host.appendChild(btn);
+    if (host.classList.contains('code-scroll') && pre && pre.dataset.language && !host.querySelector(':scope > .code-label')) {
+      var label = document.createElement('span');
+      label.className = 'code-label';
+      label.textContent = pre.dataset.language;
+      host.appendChild(label);
+    }
   });
 
   // ===== HTML document TOC progressive enhancement =====
