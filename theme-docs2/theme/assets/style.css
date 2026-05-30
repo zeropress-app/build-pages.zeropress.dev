@@ -117,25 +117,6 @@ a { color: inherit; }
 .sidebar::-webkit-scrollbar-corner { background: var(--canvas); }
 .sidebar__inner { padding: 2rem 1.75rem; }
 
-.sidebar__search {
-  position: relative; display: flex; align-items: center; gap: 0.5rem;
-  width: 100%; padding: 0.5rem 0.75rem; margin-bottom: 2rem;
-  background: var(--page); border: 1px solid var(--border); border-radius: 0.5rem;
-  color: var(--ink-light); font: inherit; font-size: 0.875rem; cursor: pointer;
-  text-align: left; transition: border-color 0.15s, color 0.15s;
-  box-shadow: inset 0 2px 4px hsl(0 0% 0% / 0.02);
-}
-.sidebar__search:hover { border-color: hsl(11 43% 58% / 0.4); color: var(--ink-base); }
-.sidebar__search:disabled,
-.sidebar__search:disabled:hover {
-  border-color: var(--border);
-  color: var(--ink-light);
-  cursor: not-allowed;
-}
-.sidebar__search svg { color: var(--ink-light); flex-shrink: 0; }
-.sidebar__search span { flex: 1; }
-.sidebar__search .kbd { margin-left: auto; }
-
 .sidebar__nav { display: flex; flex-direction: column; gap: 1.75rem; }
 .sidebar__group { padding: 0; margin: 0; }
 .sidebar__group ul { list-style: none; padding: 0 0 0 0.75rem; margin: 0.85rem 0 0; display: flex; flex-direction: column; gap: 0.125rem; }
@@ -260,7 +241,6 @@ html.dark .icon-moon { display: inline-block; }
   border-radius: 0.35rem;
 }
 .icon-btn:focus-visible,
-.sidebar__search:focus-visible,
 .button-link:focus-visible,
 .cmdk__list a:focus-visible,
 .cmdk__list button:focus-visible {
@@ -981,7 +961,6 @@ html.dark .cmdk__list mark {
   .heading-anchor,
   .site-footer__attribution,
   .sidebar__theme-toggle,
-  .sidebar__search,
   .theme-toggle {
     display: none !important;
   }
