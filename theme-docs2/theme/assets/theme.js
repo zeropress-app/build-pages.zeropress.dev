@@ -125,6 +125,9 @@
   }
 
   // ===== Mermaid progressive enhancement =====
+  var MERMAID_RUNTIME_URL = 'https://cdn.jsdelivr.net/npm/mermaid@11.15.0/dist/mermaid.min.js';
+  var mermaidRuntimePromise = null;
+
   function mermaidTheme() {
     var resolved = document.documentElement.dataset.themeResolved;
     if (!resolved && window.matchMedia) {
@@ -133,8 +136,47 @@
     return resolved === 'dark' ? 'dark' : 'default';
   }
 
-  function prepareMermaidBlocks() {
-    return Array.prototype.slice.call(document.querySelectorAll('pre > code.language-mermaid, pre > code.lang-mermaid')).map(function (code, index) {
+  function getMermaidCodeBlocks() {
+    return Array.prototype.slice.call(document.querySelectorAll('pre > code.language-mermaid, pre > code.lang-mermaid'));
+  }
+
+  function loadMermaidRuntime() {
+    if (window.mermaid) return Promise.resolve(window.mermaid);
+    if (mermaidRuntimePromise) return mermaidRuntimePromise;
+
+    mermaidRuntimePromise = new Promise(function (resolve, reject) {
+      var existing = document.querySelector('script[data-zp-mermaid-runtime]');
+      if (existing) {
+        existing.addEventListener('load', function () {
+          if (window.mermaid) resolve(window.mermaid);
+          else reject(new Error('Mermaid runtime loaded without exposing window.mermaid.'));
+        }, { once: true });
+        existing.addEventListener('error', function () {
+          reject(new Error('Failed to load Mermaid runtime.'));
+        }, { once: true });
+        return;
+      }
+
+      var script = document.createElement('script');
+      script.src = MERMAID_RUNTIME_URL;
+      script.async = true;
+      script.crossOrigin = 'anonymous';
+      script.dataset.zpMermaidRuntime = 'mermaid@11.15.0';
+      script.addEventListener('load', function () {
+        if (window.mermaid) resolve(window.mermaid);
+        else reject(new Error('Mermaid runtime loaded without exposing window.mermaid.'));
+      }, { once: true });
+      script.addEventListener('error', function () {
+        reject(new Error('Failed to load Mermaid runtime.'));
+      }, { once: true });
+      document.head.appendChild(script);
+    });
+
+    return mermaidRuntimePromise;
+  }
+
+  function prepareMermaidBlocks(blocks) {
+    return blocks.map(function (code, index) {
       var pre = code.parentElement;
       var container = document.createElement('div');
       container.className = 'mermaid zp-mermaid';
@@ -146,28 +188,32 @@
   }
 
   function renderMermaidBlocks() {
-    var mermaid = window.mermaid;
-    if (!mermaid) return;
+    var blocks = getMermaidCodeBlocks();
+    if (!blocks.length) return;
 
-    var entries = prepareMermaidBlocks();
-    if (!entries.length) return;
+    loadMermaidRuntime().then(function (mermaid) {
+      var entries = prepareMermaidBlocks(blocks);
+      if (!entries.length) return;
 
-    mermaid.initialize({
-      startOnLoad: false,
-      securityLevel: 'strict',
-      theme: mermaidTheme(),
-    });
-
-    Promise.resolve(mermaid.run({
-      nodes: entries.map(function (entry) { return entry.container; }),
-    })).catch(function (error) {
-      entries.forEach(function (entry) {
-        if (entry.container.isConnected) {
-          entry.pre.classList.add('zp-mermaid-error');
-          entry.container.replaceWith(entry.pre);
-        }
+      mermaid.initialize({
+        startOnLoad: false,
+        securityLevel: 'strict',
+        theme: mermaidTheme(),
       });
-      console.warn('[zeropress] Mermaid rendering failed.', error);
+
+      return Promise.resolve(mermaid.run({
+        nodes: entries.map(function (entry) { return entry.container; }),
+      })).catch(function (error) {
+        entries.forEach(function (entry) {
+          if (entry.container.isConnected) {
+            entry.pre.classList.add('zp-mermaid-error');
+            entry.container.replaceWith(entry.pre);
+          }
+        });
+        console.warn('[zeropress] Mermaid rendering failed.', error);
+      });
+    }).catch(function (error) {
+      console.warn('[zeropress] Mermaid runtime was not loaded; leaving code blocks unchanged.', error);
     });
   }
 
