@@ -1,8 +1,8 @@
 <article class="doc-article">
   <div class="article-grid">
     <div class="article-content">
+      <p class="eyebrow">{{#if page.collection_cursor.collection_title}}{{page.collection_cursor.collection_title}}{{#else}}Documentation{{/if}}</p>
       <div class="prose" {{#if site.search}}{{#if_neq page.discoverability "delist"}}data-pagefind-body{{/if_neq}}{{/if}}>
-        <p class="eyebrow">{{#if page.collection_cursor.collection_title}}{{page.collection_cursor.collection_title}}{{#else}}Documentation{{/if}}</p>
         {{page.html}}
       </div>
       <footer class="page-meta" aria-label="Page metadata">
