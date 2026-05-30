@@ -2,12 +2,12 @@
   (function () {
     try {
       var stored = localStorage.getItem('zeropress-docs2-theme'); // 'light' | 'dark' | null (= system)
-      var theme = stored === 'light' || stored === 'dark' ? stored : 'system';
-      var resolved = theme === 'system'
-        ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')
-        : theme;
+      var systemTheme = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      var resolved = stored === 'light' || stored === 'dark'
+        ? stored
+        : systemTheme;
       var root = document.documentElement;
-      root.dataset.theme = theme;
+      root.dataset.theme = resolved;
       root.dataset.themeResolved = resolved;
       if (resolved === 'dark') root.classList.add('dark');
     } catch (e) {}

@@ -248,13 +248,11 @@ html.dark .top-bar { background: hsl(22 8% 12% / 0.85); }
 html.dark .icon-sun { display: none; }
 html.dark .icon-moon { display: inline-block; }
 
-/* Three-state theme toggle icons (light / dark / system) */
+/* Theme toggle icons */
 .theme-toggle .theme-toggle__icon { display: none; }
 [data-theme="light"] .theme-toggle .theme-toggle__icon--sun { display: inline-block; }
 [data-theme="dark"] .theme-toggle .theme-toggle__icon--moon { display: inline-block; }
-[data-theme="system"] .theme-toggle .theme-toggle__icon--system { display: inline-block; }
-/* Fallback when data-theme is missing */
-:root:not([data-theme]) .theme-toggle .theme-toggle__icon--system { display: inline-block; }
+:root:not([data-theme]) .theme-toggle .theme-toggle__icon--sun { display: inline-block; }
 
 /* Focus rings — uniform terracotta accent */
 :focus-visible {

@@ -12,43 +12,62 @@
 
   enableEnhancedControls();
 
-  // ===== Theme toggle (three-state: light / dark / system) =====
+  // ===== Theme toggle (initial system, then light / dark) =====
   function getStoredTheme() {
     try {
       var v = localStorage.getItem('zeropress-docs2-theme');
-      return v === 'light' || v === 'dark' ? v : 'system';
-    } catch (e) { return 'system'; }
+      return v === 'light' || v === 'dark' ? v : null;
+    } catch (e) { return null; }
   }
-  function applyTheme(theme) {
+
+  function getSystemTheme() {
+    return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  }
+
+  function getResolvedTheme() {
+    return getStoredTheme() || getSystemTheme();
+  }
+
+  function updateThemeControls(resolved) {
+    var currentLabel = resolved === 'dark' ? 'Dark theme' : 'Light theme';
+    var nextLabel = resolved === 'dark' ? 'light theme' : 'dark theme';
+    document.querySelectorAll('[data-theme-toggle]').forEach(function (btn) {
+      btn.setAttribute('aria-label', currentLabel + ' (click to switch to ' + nextLabel + ')');
+      btn.setAttribute('title', 'Switch to ' + nextLabel);
+    });
+  }
+
+  function setThemeAttributes(resolved) {
     var root = document.documentElement;
-    var resolved = theme === 'system'
-      ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')
-      : theme;
-    root.dataset.theme = theme;
+    root.dataset.theme = resolved;
     root.dataset.themeResolved = resolved;
     root.classList.toggle('dark', resolved === 'dark');
-    try {
-      if (theme === 'system') {
-        localStorage.removeItem('zeropress-docs2-theme');
-      } else {
-        localStorage.setItem('zeropress-docs2-theme', theme);
-      }
-    } catch (e) {}
+    updateThemeControls(resolved);
   }
+
+  function applyTheme(theme) {
+    var resolved = theme === 'dark' ? 'dark' : 'light';
+    try {
+      localStorage.setItem('zeropress-docs2-theme', resolved);
+    } catch (e) {}
+    setThemeAttributes(resolved);
+  }
+
+  setThemeAttributes(getResolvedTheme());
+
   document.querySelectorAll('[data-theme-toggle]').forEach(function (btn) {
     btn.addEventListener('click', function () {
-      var current = getStoredTheme();
-      var next = current === 'light' ? 'dark' : current === 'dark' ? 'system' : 'light';
+      var current = document.documentElement.dataset.themeResolved || getResolvedTheme();
+      var next = current === 'dark' ? 'light' : 'dark';
       applyTheme(next);
-      var label = next === 'system' ? 'System theme' : next === 'dark' ? 'Dark theme' : 'Light theme';
-      btn.setAttribute('aria-label', label + ' (click to cycle)');
-      btn.setAttribute('title', label);
     });
   });
-  // Re-resolve on system change while in 'system' mode
+  // Re-resolve on system change only until the user chooses light or dark.
   if (window.matchMedia) {
     var mql = window.matchMedia('(prefers-color-scheme: dark)');
-    var onChange = function () { if (getStoredTheme() === 'system') applyTheme('system'); };
+    var onChange = function () {
+      if (!getStoredTheme()) setThemeAttributes(getSystemTheme());
+    };
     if (mql.addEventListener) mql.addEventListener('change', onChange);
     else if (mql.addListener) mql.addListener(onChange);
   }
