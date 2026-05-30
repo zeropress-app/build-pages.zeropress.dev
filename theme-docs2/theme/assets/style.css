@@ -954,6 +954,68 @@ html.dark .cmdk__list mark {
   margin-top: 0;
 }
 
+/* ===== Back to top / reading progress ===== */
+.back-to-top {
+  --scroll-progress-angle: 0deg;
+  position: fixed;
+  right: max(1.1rem, env(safe-area-inset-right));
+  bottom: max(1.1rem, env(safe-area-inset-bottom));
+  z-index: 35;
+  width: 3.1rem;
+  height: 3.1rem;
+  padding: 0;
+  border: 0;
+  border-radius: 0.85rem;
+  background:
+    conic-gradient(
+      var(--tab-terracotta) var(--scroll-progress-angle),
+      hsl(28 9% 51% / 0.24) 0
+    );
+  color: var(--tab-terracotta);
+  cursor: pointer;
+  box-shadow: 0 0.7rem 1.7rem hsl(18 8% 21% / 0.16);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(0.5rem) scale(0.96);
+  transition:
+    opacity 0.16s ease,
+    transform 0.16s ease,
+    box-shadow 0.16s ease;
+}
+.back-to-top[hidden] {
+  display: none;
+}
+.back-to-top.is-visible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0) scale(1);
+}
+.back-to-top__inner {
+  position: absolute;
+  inset: 0.25rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--border);
+  border-radius: 0.67rem;
+  background: var(--page);
+  color: var(--tab-terracotta);
+  transition:
+    background 0.16s ease,
+    color 0.16s ease,
+    border-color 0.16s ease;
+}
+.back-to-top:hover,
+.back-to-top:focus-visible {
+  box-shadow: 0 0.85rem 2rem hsl(18 8% 21% / 0.22);
+}
+.back-to-top:hover .back-to-top__inner,
+.back-to-top:focus-visible .back-to-top__inner {
+  border-color: var(--tab-terracotta);
+  background: var(--tab-terracotta);
+  color: var(--page);
+}
+
 /* Mobile */
 @media (max-width: 1023px) {
   .sidebar { transform: translateX(-100%); }
@@ -966,11 +1028,18 @@ html.dark .cmdk__list mark {
   .page-header h1,
   .prose h1 { font-size: 2.1rem; }
   .lede { font-size: 1.1rem; }
+  .back-to-top {
+    right: max(0.9rem, env(safe-area-inset-right));
+    bottom: max(0.9rem, env(safe-area-inset-bottom));
+    width: 2.9rem;
+    height: 2.9rem;
+  }
 }
 /* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .sidebar { transition: none; }
+  .back-to-top { transition: none; }
 }
 
 /* ===== Print stylesheet ===== */
@@ -999,6 +1068,7 @@ html.dark .cmdk__list mark {
   .skip-link,
   .heading-anchor,
   .site-footer__attribution,
+  .back-to-top,
   .theme-toggle {
     display: none !important;
   }

@@ -24,6 +24,17 @@
       </main>
       {{partial:footer}}
     </div>
+    <button
+      type="button"
+      class="back-to-top"
+      data-back-to-top
+      aria-label="Back to top"
+      hidden
+    >
+      <span class="back-to-top__inner" aria-hidden="true">
+        <svg class="icon" width="18" height="18" aria-hidden="true"><use href="#icon-chevrons-up"/></svg>
+      </span>
+    </button>
     {{#if site.search}}{{partial:command-palette}}{{/if}}
     {{partial:content-enhancements}}
   </body>

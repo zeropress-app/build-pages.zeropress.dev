@@ -353,6 +353,42 @@
     headings.forEach(function (h) { observer.observe(h.el); });
   }
 
+  // ===== Back to top / reading progress =====
+  var backToTop = document.querySelector('[data-back-to-top]');
+  if (backToTop) {
+    var backToTopTicking = false;
+    var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    function updateBackToTop() {
+      var doc = document.documentElement;
+      var scrollTop = window.pageYOffset || doc.scrollTop || document.body.scrollTop || 0;
+      var maxScroll = Math.max(1, doc.scrollHeight - window.innerHeight);
+      var progress = Math.min(1, Math.max(0, scrollTop / maxScroll));
+      var shouldShow = scrollTop > Math.min(420, window.innerHeight * 0.55) && maxScroll > 160;
+
+      backToTop.style.setProperty('--scroll-progress-angle', (progress * 360).toFixed(1) + 'deg');
+      backToTop.hidden = !shouldShow;
+      backToTop.classList.toggle('is-visible', shouldShow);
+      backToTopTicking = false;
+    }
+
+    function requestBackToTopUpdate() {
+      if (backToTopTicking) return;
+      backToTopTicking = true;
+      window.requestAnimationFrame(updateBackToTop);
+    }
+
+    backToTop.addEventListener('click', function () {
+      window.scrollTo({
+        top: 0,
+        behavior: reduceMotion ? 'auto' : 'smooth'
+      });
+    });
+    window.addEventListener('scroll', requestBackToTopUpdate, { passive: true });
+    window.addEventListener('resize', requestBackToTopUpdate);
+    updateBackToTop();
+  }
+
   // ===== Command palette =====
   var palette = document.querySelector('[data-cmdk]');
   if (!palette) return;
