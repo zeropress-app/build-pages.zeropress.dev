@@ -261,7 +261,7 @@
       }
     }
 
-    var host = code.closest('.code-block');
+    var host = code.closest('.code-block') || pre;
     if (!host || host.querySelector(':scope > .copy-btn')) return;
     var btn = document.createElement('button');
     btn.type = 'button'; btn.className = 'copy-btn'; btn.textContent = 'Copy';

@@ -637,7 +637,7 @@ html.dark .zp-alert--caution {
   opacity: 0; transition: opacity 0.15s;
   font-family: var(--font-sans);
 }
-.code-block:hover .copy-btn, .copy-btn:focus { opacity: 1; }
+.prose pre:hover .copy-btn, .code-block:hover .copy-btn, .copy-btn:focus { opacity: 1; }
 
 /* highlight.js output from ZeroPress Markdown rendering */
 .hljs-keyword,
