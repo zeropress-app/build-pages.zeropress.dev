@@ -15,9 +15,9 @@
     <a class="skip-link" href="#content">Skip to content</a>
     <input type="checkbox" id="nav-toggle" class="nav-toggle" tabindex="-1" aria-label="Navigation menu">
     <label for="nav-toggle" class="nav-overlay" aria-hidden="true"></label>
+    {{partial:header}}
     {{partial:sidebar}}
     <div class="page-shell">
-      {{partial:header}}
       <main id="content" class="doc-main">
         {{slot:content}}
       </main>

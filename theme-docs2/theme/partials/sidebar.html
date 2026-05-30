@@ -1,22 +1,5 @@
 <aside id="site-sidebar" class="sidebar" aria-label="Documentation navigation">
   <div class="sidebar__inner">
-    <div class="sidebar__top">
-      <a class="sidebar__brand" href="/">
-        {{#if site.logo.src}}
-        <img
-          class="sidebar__brand-mark"
-          src="{{site.logo.src}}"
-          alt="{{#if site.logo.alt}}{{site.logo.alt}}{{#else}}{{site.title}}{{/if}}"
-        >
-        {{/if}}
-        <span class="sidebar__brand-name">{{site.title}}</span>
-      </a>
-      <button type="button" class="icon-btn sidebar__theme-toggle theme-toggle" data-theme-toggle aria-label="Toggle theme" title="Toggle theme" disabled>
-        <svg class="icon theme-toggle__icon theme-toggle__icon--sun" width="16" height="16" aria-hidden="true"><use href="#icon-sun"/></svg>
-        <svg class="icon theme-toggle__icon theme-toggle__icon--moon" width="16" height="16" aria-hidden="true"><use href="#icon-moon"/></svg>
-      </button>
-    </div>
-
     {{#if site.search}}
     <button type="button" class="sidebar__search" data-cmdk-open disabled>
       <svg class="icon" width="14" height="14" aria-hidden="true"><use href="#icon-search"/></svg>

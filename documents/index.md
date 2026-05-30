@@ -2,11 +2,11 @@
 last_updated: none
 ---
 
-# ZeroPress Build Pages
+# Build Markdown docs into static sites
 
 ZeroPress Build Pages turns a Markdown source directory, optional public assets, and a ZeroPress theme into static HTML output.
 
-It is designed for documentation sites, project guides, and lightweight content sites that should deploy cleanly to GitHub Pages, Cloudflare Pages, Netlify, Vercel, or any static host.
+Use it for documentation sites, project guides, and lightweight content sites that should deploy cleanly to GitHub Pages, Cloudflare Pages, Netlify, Vercel, or any static host.
 
 ## Start Here
 
