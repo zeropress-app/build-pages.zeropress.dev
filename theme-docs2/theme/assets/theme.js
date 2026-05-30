@@ -3,6 +3,15 @@
 
   document.documentElement.classList.add('js');
 
+  var liveRegion = document.querySelector('[data-zp-status]');
+  function announce(message) {
+    if (!liveRegion) return;
+    liveRegion.textContent = '';
+    window.setTimeout(function () {
+      liveRegion.textContent = message;
+    }, 20);
+  }
+
   function enableEnhancedControls() {
     document.querySelectorAll('[data-theme-toggle], [data-cmdk-open]').forEach(function (control) {
       control.disabled = false;
@@ -132,6 +141,7 @@
             a.classList.add('is-copied');
             a.innerHTML = anchorCheck;
             history.replaceState(null, '', '#' + heading.id);
+            announce('Link copied.');
             setTimeout(function () {
               a.classList.remove('is-copied');
               a.innerHTML = anchorIcon;
@@ -267,9 +277,15 @@
     btn.type = 'button'; btn.className = 'copy-btn'; btn.textContent = 'Copy';
     btn.addEventListener('click', function () {
       var text = code.innerText;
-      if (!navigator.clipboard) { btn.textContent = 'Unavailable'; return; }
+      if (!navigator.clipboard) {
+        btn.textContent = 'Unavailable';
+        announce('Copy unavailable.');
+        return;
+      }
       navigator.clipboard.writeText(text).then(function () {
-        btn.textContent = 'Copied'; setTimeout(function () { btn.textContent = 'Copy'; }, 1500);
+        btn.textContent = 'Copied';
+        announce('Code copied.');
+        setTimeout(function () { btn.textContent = 'Copy'; }, 1500);
       });
     });
     host.appendChild(btn);
@@ -345,6 +361,36 @@
   var empty = palette.querySelector('[data-cmdk-empty]');
   var searchApiPromise;
   var renderTicket = 0;
+  var previousFocus = null;
+
+  function getPaletteFocusable() {
+    return Array.prototype.slice.call(palette.querySelectorAll([
+      'a[href]',
+      'button:not([disabled])',
+      'input:not([disabled])',
+      'select:not([disabled])',
+      'textarea:not([disabled])',
+      '[tabindex]:not([tabindex="-1"])'
+    ].join(','))).filter(function (el) {
+      return el.offsetParent !== null || el === input;
+    });
+  }
+
+  function trapPaletteFocus(e) {
+    var focusable = getPaletteFocusable();
+    if (!focusable.length) return;
+    var first = focusable[0];
+    var last = focusable[focusable.length - 1];
+    var active = document.activeElement;
+
+    if (e.shiftKey && (active === first || !palette.contains(active))) {
+      e.preventDefault();
+      last.focus();
+    } else if (!e.shiftKey && active === last) {
+      e.preventDefault();
+      first.focus();
+    }
+  }
 
   function loadSearchApi() {
     if (!searchApiPromise) {
@@ -468,6 +514,7 @@
   }
 
   function open(prefill) {
+    if (palette.hidden) previousFocus = document.activeElement;
     palette.hidden = false;
     if (input) {
       input.value = prefill || '';
@@ -475,7 +522,13 @@
     }
     render(prefill || '');
   }
-  function close() { palette.hidden = true; }
+  function close() {
+    palette.hidden = true;
+    if (previousFocus && previousFocus.isConnected && typeof previousFocus.focus === 'function') {
+      try { previousFocus.focus({ preventScroll: true }); } catch (e) { previousFocus.focus(); }
+    }
+    previousFocus = null;
+  }
 
   document.querySelectorAll('[data-cmdk-open]').forEach(function (btn) {
     btn.addEventListener('click', function () { open(); });
@@ -488,6 +541,8 @@
     if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
       e.preventDefault();
       palette.hidden ? open() : close();
+    } else if (!palette.hidden && e.key === 'Tab') {
+      trapPaletteFocus(e);
     } else if (e.key === 'Escape' && !palette.hidden) {
       close();
     } else if (!palette.hidden && (e.key === 'ArrowDown' || e.key === 'ArrowUp')) {
