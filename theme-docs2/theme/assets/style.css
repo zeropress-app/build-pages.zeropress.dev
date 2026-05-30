@@ -164,7 +164,7 @@ a { color: inherit; }
   display: flex; align-items: center; gap: 0.5rem;
   margin: 0; padding: 0.25rem 0;
   font-size: 0.7rem; font-weight: 600;
-  text-transform: uppercase; letter-spacing: 0.12em; color: var(--ink-light);
+  letter-spacing: 0.08em; color: var(--ink-light);
   font-family: var(--font-sans);
   cursor: pointer;
   list-style: none;
@@ -706,7 +706,7 @@ html.dark .zp-alert--caution {
 }
 .toc__title {
   margin: 0 0 0.75rem; font-size: 0.7rem; font-weight: 600;
-  text-transform: uppercase; letter-spacing: 0.12em; color: var(--ink-light);
+  letter-spacing: 0.08em; color: var(--ink-light);
 }
 .toc ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.4rem; border-left: 1px solid var(--border); }
 .toc__item a {
@@ -763,7 +763,6 @@ html.dark .zp-alert--caution {
   font-family: var(--font-mono);
   font-size: 0.65rem;
   letter-spacing: 0.06em;
-  text-transform: lowercase;
   pointer-events: none;
 }
 /* Pager */
@@ -774,8 +773,8 @@ html.dark .zp-alert--caution {
 .pager a { display: flex; flex-direction: column; gap: 0.25rem; text-decoration: none; }
 .pager__next { margin-left: auto; text-align: right; }
 .pager__kicker {
-  font-size: 0.7rem; font-weight: 600; text-transform: uppercase;
-  letter-spacing: 0.14em; color: var(--ink-light);
+  font-size: 0.7rem; font-weight: 600;
+  letter-spacing: 0.08em; color: var(--ink-light);
 }
 .pager__label { font-family: var(--font-serif); font-size: 1.15rem; color: var(--ink-dark); }
 .pager a:hover .pager__label { color: var(--tab-terracotta); }
