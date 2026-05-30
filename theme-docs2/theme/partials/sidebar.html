@@ -38,18 +38,56 @@
               </summary>
               <ul>
                 {{#for item in group.children}}
-                  <li><a class="sidebar__link" href="{{item.url}}" {{#if item.target}}target="{{item.target}}"{{/if}} {{#if_eq item.target "_blank"}}rel="noopener noreferrer"{{/if_eq}} {{#if_eq item.url "/"}}{{#if_eq route.url item.url}}aria-current="page"{{/if_eq}}{{#else}}{{#if_starts_with route.url item.url}}aria-current="page"{{/if_starts_with}}{{/if_eq}}>{{item.title}}</a></li>
+                  <li>
+                    <a
+                      class="sidebar__link"
+                      href="{{item.url}}"
+                      {{#if item.target}}target="{{item.target}}"{{/if}}
+                      {{#if_eq item.target "_blank"}}rel="noopener noreferrer"{{/if}}
+                      {{#if_eq item.url "/"}}
+                        {{#if_eq route.url item.url}}aria-current="page"{{/if}}
+                      {{#else_if_starts_with route.url item.url}}
+                        aria-current="page"
+                      {{/if}}
+                    >
+                      {{item.title}}
+                    </a>
+                  </li>
                 {{/for}}
               </ul>
             </details>
           {{#else}}
-            <a class="sidebar__link sidebar__link--top" href="{{group.url}}" {{#if group.target}}target="{{group.target}}"{{/if}} {{#if_eq group.target "_blank"}}rel="noopener noreferrer"{{/if_eq}} {{#if_eq group.url "/"}}{{#if_eq route.url group.url}}aria-current="page"{{/if_eq}}{{#else}}{{#if_starts_with route.url group.url}}aria-current="page"{{/if_starts_with}}{{/if_eq}}>{{group.title}}</a>
+            <a
+              class="sidebar__link sidebar__link--top"
+              href="{{group.url}}"
+              {{#if group.target}}target="{{group.target}}"{{/if}}
+              {{#if_eq group.target "_blank"}}rel="noopener noreferrer"{{/if}}
+              {{#if_eq group.url "/"}}
+                {{#if_eq route.url group.url}}aria-current="page"{{/if}}
+              {{#else_if_starts_with route.url group.url}}
+                aria-current="page"
+              {{/if}}
+            >
+              {{group.title}}
+            </a>
           {{/if}}
         {{/for}}
       {{#else}}
         {{#if menus.primary.items}}
           {{#for item in menus.primary.items}}
-            <a class="sidebar__link sidebar__link--top" href="{{item.url}}" {{#if item.target}}target="{{item.target}}"{{/if}} {{#if_eq item.target "_blank"}}rel="noopener noreferrer"{{/if_eq}} {{#if_eq item.url "/"}}{{#if_eq route.url item.url}}aria-current="page"{{/if_eq}}{{#else}}{{#if_starts_with route.url item.url}}aria-current="page"{{/if_starts_with}}{{/if_eq}}>{{item.title}}</a>
+            <a
+              class="sidebar__link sidebar__link--top"
+              href="{{item.url}}"
+              {{#if item.target}}target="{{item.target}}"{{/if}}
+              {{#if_eq item.target "_blank"}}rel="noopener noreferrer"{{/if}}
+              {{#if_eq item.url "/"}}
+                {{#if_eq route.url item.url}}aria-current="page"{{/if}}
+              {{#else_if_starts_with route.url item.url}}
+                aria-current="page"
+              {{/if}}
+            >
+              {{item.title}}
+            </a>
           {{/for}}
         {{/if}}
       {{/if}}
