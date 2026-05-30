@@ -1,8 +1,8 @@
 <aside id="site-sidebar" class="sidebar" aria-label="Documentation navigation">
   <div class="sidebar__inner">
     <nav class="sidebar__nav">
-      {{#if menus.sidebar.items}}
-        {{#for group in menus.sidebar.items}}
+      {{#if menus.primary.items}}
+        {{#for group in menus.primary.items}}
           {{#if group.children}}
             <details class="sidebar__group{{#if group.meta.accent}} sidebar__group--{{group.meta.accent}}{{/if}}" {{#if group.meta.group_id}}data-group="{{group.meta.group_id}}"{{/if}} open>
               <summary class="sidebar__title">
@@ -46,24 +46,6 @@
             </a>
           {{/if}}
         {{/for}}
-      {{#else}}
-        {{#if menus.primary.items}}
-          {{#for item in menus.primary.items}}
-            <a
-              class="sidebar__link sidebar__link--top"
-              href="{{item.url}}"
-              {{#if item.target}}target="{{item.target}}"{{/if}}
-              {{#if_eq item.target "_blank"}}rel="noopener noreferrer"{{/if}}
-              {{#if_eq item.url "/"}}
-                {{#if_eq route.url item.url}}aria-current="page"{{/if}}
-              {{#else_if_starts_with route.url item.url}}
-                aria-current="page"
-              {{/if}}
-            >
-              {{item.title}}
-            </a>
-          {{/for}}
-        {{/if}}
       {{/if}}
     </nav>
   </div>

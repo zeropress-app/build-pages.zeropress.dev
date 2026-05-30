@@ -22,8 +22,8 @@
     "file": "index.md"
   },
   "menus": {
-    "sidebar": {
-      "name": "Sidebar",
+    "primary": {
+      "name": "Primary",
       "items": [
         {
           "title": "Foundations",

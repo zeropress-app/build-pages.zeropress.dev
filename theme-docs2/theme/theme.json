@@ -12,9 +12,9 @@
     "search": true
   },
   "menu_slots": {
-    "sidebar": {
-      "title": "Sidebar",
-      "description": "Primary documentation sidebar. Top-level items become collapsible groups; one child level is rendered as page links."
+    "primary": {
+      "title": "Primary",
+      "description": "Primary documentation navigation rendered as a sidebar. Top-level items become collapsible groups; one child level is rendered as page links."
     },
     "legal": {
       "title": "Legal",
