@@ -90,10 +90,6 @@
           },
           "children": [
             {
-              "title": "Reference Hub",
-              "url": "/reference/"
-            },
-            {
               "title": "CLI Options",
               "url": "/reference/cli/"
             },
@@ -164,7 +160,6 @@
     "reference": {
       "title": "Reference",
       "items": [
-        "reference/index.md",
         "reference/cli/index.md",
         "reference/action-inputs/index.md",
         "reference/config/index.md",
