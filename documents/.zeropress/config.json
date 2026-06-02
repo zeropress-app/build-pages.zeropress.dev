@@ -1,0 +1,175 @@
+{
+  "$schema": "https://schemas.zeropress.dev/build-pages-config/v0.1/schema.json",
+  "version": "0.1",
+  "site": {
+    "title": "ZeroPress Build Pages",
+    "description": "Build Markdown-source ZeroPress sites for static hosting.",
+    "url": "https://build-pages.zeropress.dev",
+    "locale": "en-US",
+    "search": true,
+    "expose_generator": true,
+    "indexing": true,
+    "footer": {
+      "copyright_text": "ZeroPress Build Pages",
+      "attribution": true
+    }
+  },
+  "markdown": {
+    "updated_at": "git"
+  },
+  "front_page": {
+    "type": "markdown",
+    "file": "index.md"
+  },
+  "menus": {
+    "primary": {
+      "name": "Primary",
+      "items": [
+        {
+          "title": "FOUNDATIONS",
+          "url": "/",
+          "meta": {
+            "accent": "terracotta"
+          },
+          "children": [
+            {
+              "title": "Home",
+              "url": "/"
+            },
+            {
+              "title": "Getting Started",
+              "url": "/getting-started/"
+            },
+            {
+              "title": "Source Tree",
+              "url": "/source-tree/"
+            },
+            {
+              "title": "Markdown Pages",
+              "url": "/markdown/",
+              "children": [
+                {
+                  "title": "Feature Examples",
+                  "url": "/markdown/features/"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "GUIDES",
+          "url": "/github-action/",
+          "meta": {
+            "accent": "sage"
+          },
+          "children": [
+            {
+              "title": "GitHub Action",
+              "url": "/github-action/"
+            },
+            {
+              "title": "CLI",
+              "url": "/cli/"
+            },
+            {
+              "title": "package.json",
+              "url": "/package-json/"
+            },
+            {
+              "title": "Deployment",
+              "url": "/deployment/"
+            },
+            {
+              "title": "Dogfooding",
+              "url": "/dogfooding/"
+            }
+          ]
+        },
+        {
+          "title": "REFERENCE",
+          "url": "/reference/",
+          "meta": {
+            "accent": "ochre"
+          },
+          "children": [
+            {
+              "title": "CLI Options",
+              "url": "/reference/cli/"
+            },
+            {
+              "title": "Action Inputs",
+              "url": "/reference/action-inputs/"
+            },
+            {
+              "title": "Config",
+              "url": "/reference/config/"
+            },
+            {
+              "title": "Generated Files",
+              "url": "/reference/generated-files/"
+            },
+            {
+              "title": "Static Search",
+              "url": "/static-search/"
+            },
+            {
+              "title": "Troubleshooting",
+              "url": "/troubleshooting/"
+            }
+          ]
+        }
+      ]
+    },
+    "legal": {
+      "name": "Legal",
+      "items": [
+        {
+          "title": "License",
+          "url": "/license/"
+        },
+        {
+          "title": "GitHub",
+          "url": "https://github.com/zeropress-app/zeropress-build-pages",
+          "target": "_blank"
+        },
+        {
+          "title": "npm",
+          "url": "https://www.npmjs.com/package/@zeropress/build-pages",
+          "target": "_blank"
+        }
+      ]
+    }
+  },
+  "collections": {
+    "foundations": {
+      "title": "Foundations",
+      "items": [
+        "index.md",
+        "getting-started/index.md",
+        "source-tree/index.md",
+        "markdown/index.md"
+      ]
+    },
+    "guides": {
+      "title": "Guides",
+      "items": [
+        "github-action/index.md",
+        "cli/index.md",
+        "package-json/index.md",
+        "deployment/index.md",
+        "dogfooding/index.md"
+      ]
+    },
+    "reference": {
+      "title": "Reference",
+      "items": [
+        "reference/cli/index.md",
+        "reference/action-inputs/index.md",
+        "reference/config/index.md",
+        "reference/generated-files/index.md",
+        "static-search/index.md",
+        "troubleshooting/index.md"
+      ]
+    }
+  }
+}
