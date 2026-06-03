@@ -87,7 +87,7 @@
         },
         {
           "title": "REFERENCE",
-          "url": "/reference/",
+          "url": "/reference/cli/",
           "meta": {
             "accent": "ochre"
           },
@@ -120,8 +120,8 @@
         }
       ]
     },
-    "legal": {
-      "name": "Legal",
+    "footer": {
+      "name": "Footer",
       "items": [
         {
           "title": "License",
