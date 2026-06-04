@@ -19,7 +19,7 @@ The script runs Build Pages with pinned package versions, then builds the Pagefi
 
 ## GitHub Pages
 
-Use the [GitHub Action](/github-action/) and upload `_site` with `actions/upload-pages-artifact`.
+Use the [GitHub Action](../github-action/index.md) and upload `_site` with `actions/upload-pages-artifact`.
 
 ```yaml
 - name: Build ZeroPress Pages

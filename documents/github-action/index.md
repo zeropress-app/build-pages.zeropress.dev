@@ -101,7 +101,7 @@ Use `theme-path` for a local ZeroPress theme.
 - `theme`: bundled theme name. Default: `docs`.
 - `theme-path`: custom local theme directory.
 
-See [Action Inputs](/reference/action-inputs/) for the full list.
+See [Action Inputs](../reference/action-inputs/index.md) for the full list.
 
 ## Post-build Steps
 

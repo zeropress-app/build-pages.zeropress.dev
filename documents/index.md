@@ -10,11 +10,11 @@ Use it for documentation sites, project guides, and lightweight content sites th
 
 ## Start Here
 
-- [Getting Started](/getting-started/): build your first Markdown-source site.
-- [Source Tree](/source-tree/): understand the source, public, theme, and output directories.
-- [Markdown Pages](/markdown/): learn how Markdown files become generated routes.
-- [GitHub Action](/github-action/): use the hosted action in CI.
-- [CLI](/cli/): run the package directly with `npx` or a local dependency.
+- [Getting Started](getting-started/index.md): build your first Markdown-source site.
+- [Source Tree](source-tree/index.md): understand the source, public, theme, and output directories.
+- [Markdown Pages](markdown/index.md): learn how Markdown files become generated routes.
+- [GitHub Action](github-action/index.md): use the hosted action in CI.
+- [CLI](cli/index.md): run the package directly with `npx` or a local dependency.
 
 ## Common Workflows
 
@@ -34,9 +34,9 @@ npx @zeropress/build-pages --source ./docs --destination ./_site
 
 ## Reference
 
-- [CLI Options](/reference/cli/)
-- [Action Inputs](/reference/action-inputs/)
-- [Build Pages Config](/reference/config/)
-- [Generated Files](/reference/generated-files/)
-- [Static Search](/static-search/)
-- [Troubleshooting](/troubleshooting/)
+- [CLI Options](reference/cli/index.md)
+- [Action Inputs](reference/action-inputs/index.md)
+- [Build Pages Config](reference/config/index.md)
+- [Generated Files](reference/generated-files/index.md)
+- [Static Search](static-search/index.md)
+- [Troubleshooting](troubleshooting/index.md)

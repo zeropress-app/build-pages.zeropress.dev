@@ -56,4 +56,4 @@ For a local preview, use any static file server:
 npx serve ./_site
 ```
 
-See [CLI Options](/reference/cli/) for the full command reference.
+See [CLI Options](../reference/cli/index.md) for the full command reference.

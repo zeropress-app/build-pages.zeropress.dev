@@ -96,10 +96,10 @@ npx @zeropress/build-pages \
 
 Deploy `_site/` with your host.
 
-- GitHub Pages: use the [GitHub Action](/github-action/).
+- GitHub Pages: use the [GitHub Action](../github-action/index.md).
 - Vercel, Cloudflare Pages, Netlify: set the build command and output directory in project settings.
-- Local package workflow: use a [package.json script](/package-json/).
+- Local package workflow: use a [package.json script](../package-json/index.md).
 
 ## Next Step
 
-Read [Source Tree](/source-tree/) before adding assets, themes, or deployment settings.
+Read [Source Tree](../source-tree/index.md) before adding assets, themes, or deployment settings.

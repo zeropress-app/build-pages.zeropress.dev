@@ -83,4 +83,4 @@ Output directory: _site
 
 Use a tracked `build.sh` when the repository does not need a `package.json`, or when you want Vercel, Cloudflare Pages, Netlify, and local builds to share one shell command.
 
-See [Deployment](/deployment/) for the script-based provider setup used by this site.
+See [Deployment](../deployment/index.md) for the script-based provider setup used by this site.
