@@ -45,6 +45,26 @@ For a project that does not use a script file, the equivalent direct command is:
 npx --yes @zeropress/build-pages@0.6.3 --source ./docs --public-dir ./public --destination ./_site
 ```
 
+Vercel does not resolve every extensionless HTML path the same way as GitHub Pages, Cloudflare Pages, or Netlify. The first recommendation is to enable Vercel clean URLs:
+
+```json
+{
+  "cleanUrls": true
+}
+```
+
+If you want provider-independent explicit HTML links instead, set Build Pages config:
+
+```json
+{
+  "markdown": {
+    "link_output": "html"
+  }
+}
+```
+
+This only changes rewritten Markdown links. It does not change generated output file paths.
+
 ## Cloudflare Pages
 
 Use the same shape in Cloudflare Pages project settings.
@@ -111,5 +131,6 @@ Use a separate maintainer-only script if you need to test unpublished local pack
 
 - The deployed directory is the Build Pages destination.
 - The destination contains `index.html`.
+- GitHub Pages, Cloudflare Pages, and Netlify work with the default `markdown.link_output: "clean"` links.
 - `sitemap.xml` and fallback `robots.txt` are generated unless public files override them.
 - If Pagefind is used, run Pagefind before uploading the final output.

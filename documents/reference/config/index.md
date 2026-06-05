@@ -100,7 +100,8 @@ Common fields:
 ```json
 {
   "markdown": {
-    "updated_at": "git"
+    "updated_at": "git",
+    "link_output": "clean"
   }
 }
 ```
@@ -123,6 +124,21 @@ updated_at: none
 Front matter `updated_at` also accepts `git` or a valid ISO datetime string. Invalid strings are ignored for that page with a warning.
 
 For accurate file history in GitHub Actions, configure `actions/checkout` with `fetch-depth: 0`.
+
+`markdown.link_output` controls how Build Pages rewrites source-relative links to discovered Markdown files:
+
+- `clean`: use generated clean URLs. This is the default.
+- `html`: use explicit HTML file URLs.
+
+Examples:
+
+| Source link | `clean` output | `html` output |
+| --- | --- | --- |
+| `../guide/index.md` | `/guide/` | `/guide/index.html` |
+| `../spec/foo.md` | `/spec/foo` | `/spec/foo.html` |
+| `../spec/foo.md#bar` | `/spec/foo#bar` | `/spec/foo.html#bar` |
+
+Only source-relative `.md` links are rewritten. External URLs, root-relative URLs, anchors, and non-Markdown asset links are left unchanged.
 
 ## `front_page`
 
