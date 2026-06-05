@@ -63,7 +63,7 @@ If you want provider-independent explicit HTML links instead, set Build Pages co
 }
 ```
 
-This only changes rewritten Markdown links. It does not change generated output file paths.
+This only changes rewritten `.md` page links. It does not change generated output file paths or public asset URLs.
 
 ## Cloudflare Pages
 

@@ -138,7 +138,16 @@ Examples:
 | `../spec/foo.md` | `/spec/foo` | `/spec/foo.html` |
 | `../spec/foo.md#bar` | `/spec/foo#bar` | `/spec/foo.html#bar` |
 
-Only source-relative `.md` links are rewritten. External URLs, root-relative URLs, anchors, and non-Markdown asset links are left unchanged.
+`markdown.link_output` only controls source-relative `.md` page links. External URLs, root-relative URLs, and anchors are not rewritten by this setting.
+
+Source-relative links to existing files under `public-dir` are handled separately and rewritten to output-root public URLs:
+
+| Source link | Output |
+| --- | --- |
+| `../../../public/favicon.png` | `/favicon.png` |
+| `../../../public/icons.svg#mark` | `/icons.svg#mark` |
+
+Missing public files and files outside `public-dir` are left unchanged.
 
 ## `front_page`
 

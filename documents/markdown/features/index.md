@@ -163,12 +163,12 @@ flowchart LR
 
 Markdown images use normal image syntax.
 
-![ZeroPress favicon](/favicon.png)
+![ZeroPress favicon](../../../public/favicon.png)
 
 Raw HTML image structures can be useful when a document needs captions or responsive media markup.
 
 <figure>
-  <img src="/favicon.svg" alt="ZeroPress square favicon" width="96" height="96">
+  <img src="../../../public/favicon.svg" alt="ZeroPress square favicon" width="96" height="96">
   <figcaption>A public asset rendered from Markdown raw HTML.</figcaption>
 </figure>
 

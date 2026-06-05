@@ -62,7 +62,23 @@ Config `markdown.link_output` controls the generated link shape:
 - `clean`: `../reference/cli/index.md` -> `/reference/cli/`
 - `html`: `../reference/cli/index.md` -> `/reference/cli/index.html`
 
-External URLs, root-relative URLs, anchors, and non-Markdown assets are not rewritten.
+`markdown.link_output` only controls source-relative `.md` page links. External URLs, root-relative URLs, and anchors are not rewritten.
+
+## Public Asset Links
+
+When Markdown links to an existing file inside `public-dir`, Build Pages rewrites the source-relative file path to the deployed public URL.
+
+```md
+![ZeroPress favicon](../../../public/favicon.png)
+```
+
+If `public-dir` is `./public` and `public/favicon.png` exists, the generated page uses:
+
+```html
+<img src="/favicon.png" alt="ZeroPress favicon">
+```
+
+This keeps image and asset paths understandable in GitHub or an editor while still publishing from the output root. The same rule applies to raw HTML attributes such as `src`, `href`, `poster`, and `srcset`. Missing files and files outside `public-dir` are left unchanged.
 
 ## Markdown Features
 
