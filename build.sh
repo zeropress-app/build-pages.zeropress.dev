@@ -9,11 +9,13 @@ set -eu
 SCRIPT_DIR=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
 SITE_DIR="$SCRIPT_DIR/_site"
 
-npx --yes @zeropress/build-pages@0.6.6 \
+npx --yes @zeropress/build-pages@latest \
   --source "$SCRIPT_DIR/documents" \
   --destination "$SITE_DIR" \
   --public-dir "$SCRIPT_DIR/public" \
   --theme "docs2"
+
+npx --yes prettier@3.8.3 --ignore-path /dev/null --write "$SITE_DIR/**/*.html"
 
 npx --yes pagefind@1.5.2 \
   --site "$SITE_DIR" \

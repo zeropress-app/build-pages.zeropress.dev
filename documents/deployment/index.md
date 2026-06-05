@@ -6,16 +6,14 @@ Build Pages writes plain static files to the destination directory. Deploy that 
 
 Most providers need two values:
 
-- Build command: `bash ./build.sh`
+- Build command: `npx --yes @zeropress/build-pages --source ./docs --public-dir ./public --destination ./_site`
 - Output directory: `_site`
 
-This site uses a tracked `build.sh` so local builds and provider builds use the same command.
-
 ```bash
-bash ./build.sh
+npx --yes @zeropress/build-pages --source ./docs --public-dir ./public --destination ./_site
 ```
 
-The script runs Build Pages with pinned package versions, then builds the Pagefind index and swaps the search adapter before deployment.
+Adjust `--source` and `--public-dir` to match your repository. If public assets live inside the source directory, omit `--public-dir`.
 
 ## GitHub Pages
 
@@ -29,23 +27,32 @@ Use the [GitHub Action](../github-action/index.md) and upload `_site` with `acti
     destination: ./_site
 ```
 
+The bundled Action is the recommended GitHub Pages path. If you prefer a plain npm command inside your own workflow, run Build Pages directly:
+
+```yaml
+- name: Build ZeroPress Pages
+  run: npx --yes @zeropress/build-pages --source ./docs --public-dir ./public --destination ./_site
+```
+
+See [GitHub Action](../github-action/index.md) for full workflow examples.
+
 ## Vercel
 
 Use the `Other` framework preset.
 
 | Setting | Value |
 | --- | --- |
-| Framework Preset | `Other` |
-| Build Command | `bash ./build.sh` |
+| Application Preset (Framework Preset) | `Other` |
+| Build Command | `npx --yes @zeropress/build-pages --source ./docs --public-dir ./public --destination ./_site` |
 | Output Directory | `_site` |
 
-For a project that does not use a script file, the equivalent direct command is:
+If your project does not have a separate public asset directory, use:
 
 ```bash
-npx --yes @zeropress/build-pages@0.6.3 --source ./docs --public-dir ./public --destination ./_site
+npx --yes @zeropress/build-pages --source ./docs --destination ./_site
 ```
 
-Vercel does not resolve every extensionless HTML path the same way as GitHub Pages, Cloudflare Pages, or Netlify. The first recommendation is to enable Vercel clean URLs:
+Vercel does not resolve every extensionless HTML path the same way as GitHub Pages, Cloudflare Pages, or Netlify. Add a `vercel.json` file at the Vercel project root and commit it:
 
 ```json
 {
@@ -53,7 +60,9 @@ Vercel does not resolve every extensionless HTML path the same way as GitHub Pag
 }
 ```
 
-If you want provider-independent explicit HTML links instead, set Build Pages config:
+This tells Vercel to serve generated files such as `foo/bar.html` when a visitor opens `/foo/bar`. See the [`zeropress.dev` vercel.json](https://github.com/zeropress-app/zeropress.dev/blob/main/vercel.json) for a minimal working example.
+
+If you do not want to add provider config, use explicit HTML links instead. Set this in your Build Pages source config at `<source>/.zeropress/config.json`:
 
 ```json
 {
@@ -63,7 +72,7 @@ If you want provider-independent explicit HTML links instead, set Build Pages co
 }
 ```
 
-This only changes rewritten `.md` page links. It does not change generated output file paths or public asset URLs.
+This changes rewritten source-relative `.md` links from clean URLs to explicit `.html` URLs. It does not change generated output file paths, root-relative links, external links, or public asset URLs. See [Build Pages Config: Markdown](../reference/config/index.md#markdown) for the detailed `link_output` rules.
 
 ## Cloudflare Pages
 
@@ -71,61 +80,32 @@ Use the same shape in Cloudflare Pages project settings.
 
 | Setting | Value |
 | --- | --- |
-| Build command | `bash ./build.sh` |
+| Framework preset | `None` |
+| Build command | `npx --yes @zeropress/build-pages --source ./docs --public-dir ./public --destination ./_site` |
 | Build output directory | `_site` |
-| Root directory | repository root, unless your site lives in a subdirectory |
-
-For projects with `package.json`, set the build command to:
-
-```bash
-npm run build
-```
-
-and put the Build Pages command in the package script.
 
 ## Netlify
 
-Use `_site` as the publish directory.
-
-```toml
-[build]
-  command = "bash ./build.sh"
-  publish = "_site"
-```
-
-Equivalent UI settings:
+Build settings:
 
 | Setting | Value |
 | --- | --- |
-| Build command | `bash ./build.sh` |
+| Build command | `npx --yes @zeropress/build-pages --source ./docs --public-dir ./public --destination ./_site` |
 | Publish directory | `_site` |
 
-## Script Contents
+## Optional Postbuild Steps
 
-A provider-friendly build script should stay independent from local package paths:
+Build Pages writes static files first. Optional tools can run after the Build Pages command and before the final upload.
 
-```sh
-#!/usr/bin/env sh
-set -eu
+If you want to use Pagefind instead of native ZeroPress search, run Pagefind after the Build Pages command. See [Static Search](../static-search/index.md) for the adapter and copy commands.
 
-SCRIPT_DIR=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
-SITE_DIR="$SCRIPT_DIR/_site"
+If you want to format generated HTML before deployment, run Prettier after the Build Pages command:
 
-npx --yes @zeropress/build-pages@0.6.3 \
-  --source "$SCRIPT_DIR/documents" \
-  --destination "$SITE_DIR" \
-  --public-dir "$SCRIPT_DIR/public" \
-  --theme-path "$SCRIPT_DIR/theme-docs2/theme"
-
-npx --yes pagefind@1.4.0 \
-  --site "$SITE_DIR" \
-  --output-subdir _zeropress/pagefind
-
-cp "$SITE_DIR/_zeropress/search_pagefind.js" "$SITE_DIR/_zeropress/search.js"
-rm "$SITE_DIR/_zeropress/search.json"
+```bash
+npx --yes prettier@3.8.3 --write "./_site/**/*.html"
 ```
 
-Use a separate maintainer-only script if you need to test unpublished local packages.
+For deployment convenience, you can also keep the Build Pages command in a tracked shell script such as [`build.sh`](https://github.com/zeropress-app/build-pages.zeropress.dev/blob/main/build.sh), then use the same script locally and in provider build settings.
 
 ## Static Host Checklist
 
@@ -133,4 +113,4 @@ Use a separate maintainer-only script if you need to test unpublished local pack
 - The destination contains `index.html`.
 - GitHub Pages, Cloudflare Pages, and Netlify work with the default `markdown.link_output: "clean"` links.
 - `sitemap.xml` and fallback `robots.txt` are generated unless public files override them.
-- If Pagefind is used, run Pagefind before uploading the final output.
+- If postbuild tools are used, run them before uploading the final output.

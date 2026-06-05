@@ -93,6 +93,55 @@ Use `theme-path` for a local ZeroPress theme.
 
 `theme-path` takes precedence over the bundled `theme` input.
 
+## Plain npm Command
+
+The bundled Action is the recommended GitHub Pages path. If you prefer to keep the workflow as ordinary shell commands, run the npm package directly and upload the same `_site` directory.
+
+```yaml
+name: Build and Deploy Docs to GitHub Pages
+
+on:
+  push:
+    branches: ["main"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v6
+
+      - name: Build ZeroPress Pages
+        run: npx --yes @zeropress/build-pages --source ./docs --public-dir ./public --destination ./_site
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v5
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v5
+```
+
 ## Common Inputs
 
 - `source`: Markdown source directory. Default: `./docs`.

@@ -39,7 +39,7 @@ jobs:
           public-dir: ./public
           theme: docs2
       - name: Format generated HTML
-        run: npx --yes prettier@3.8.3 --config ./.prettierrc.json --ignore-path /dev/null --write "./_site/**/*.html"
+        run: npx --yes prettier@3.8.3 --ignore-path /dev/null --write "./_site/**/*.html"
       - name: Build Pagefind index
         run: |
           npx --yes pagefind@1.5.2 --site ./_site --output-subdir _zeropress/pagefind
