@@ -78,10 +78,6 @@
             {
               "title": "Deployment",
               "url": "/deployment/"
-            },
-            {
-              "title": "Dogfooding",
-              "url": "/dogfooding/"
             }
           ]
         },
@@ -156,8 +152,7 @@
         "github-action/index.md",
         "cli/index.md",
         "package-json/index.md",
-        "deployment/index.md",
-        "dogfooding/index.md"
+        "deployment/index.md"
       ]
     },
     "reference": {

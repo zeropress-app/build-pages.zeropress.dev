@@ -8,21 +8,17 @@ ZeroPress Build Pages turns a Markdown source directory, optional public assets,
 
 Use it for documentation sites, project guides, and lightweight content sites that should deploy cleanly to GitHub Pages, Cloudflare Pages, Netlify, Vercel, or any static host.
 
-## Start Here
-
-- [Getting Started](getting-started/index.md): build your first Markdown-source site.
-- [Source Tree](source-tree/index.md): understand the source, public, theme, and output directories.
-- [Markdown Pages](markdown/index.md): learn how Markdown files become generated routes.
-- [GitHub Action](github-action/index.md): use the hosted action in CI.
-- [CLI](cli/index.md): run the package directly with `npx` or a local dependency.
-
 ## Common Workflows
 
 Most projects use one of these entry points:
 
+Use the direct `npx` command when you want the shortest local build or provider build command:
+
 ```bash
-npx @zeropress/build-pages --source ./docs --destination ./_site
+npx --yes @zeropress/build-pages --source ./docs --destination ./_site
 ```
+
+Use the hosted GitHub Action when GitHub Pages should build and deploy the site from CI:
 
 ```yaml
 - name: Build ZeroPress Pages
@@ -32,11 +28,24 @@ npx @zeropress/build-pages --source ./docs --destination ./_site
     destination: ./_site
 ```
 
-## Reference
+Use a Node project when you want the Build Pages package recorded in `package-lock.json` and reused through `npm run build`:
 
-- [CLI Options](reference/cli/index.md)
-- [Action Inputs](reference/action-inputs/index.md)
-- [Build Pages Config](reference/config/index.md)
-- [Generated Files](reference/generated-files/index.md)
-- [Static Search](static-search/index.md)
-- [Troubleshooting](troubleshooting/index.md)
+```bash
+npm install --save-dev @zeropress/build-pages
+```
+
+```json
+{
+  "scripts": {
+    "build": "zeropress-build-pages --source ./docs --destination ./_site"
+  }
+}
+```
+
+Then run:
+
+```bash
+npm run build
+```
+
+See [package.json Script](package-json/index.md) for public assets, custom themes, and Pagefind postbuild examples.
