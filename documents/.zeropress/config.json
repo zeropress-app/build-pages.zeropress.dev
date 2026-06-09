@@ -39,78 +39,84 @@
             {
               "title": "Getting Started",
               "url": "/getting-started/"
-            },
-            {
-              "title": "Source Tree",
-              "url": "/source-tree/"
-            },
-            {
-              "title": "Markdown Pages",
-              "url": "/markdown/",
-              "children": [
-                {
-                  "title": "Feature Examples",
-                  "url": "/markdown/features/"
-                }
-              ]
             }
           ]
         },
         {
           "title": "GUIDES",
-          "url": "/github-action/",
+          "url": "/guides/",
           "meta": {
             "accent": "sage"
           },
           "children": [
             {
-              "title": "GitHub Action",
-              "url": "/github-action/"
-            },
-            {
-              "title": "CLI",
-              "url": "/cli/"
-            },
-            {
-              "title": "package.json",
-              "url": "/package-json/"
-            },
-            {
               "title": "Deployment",
-              "url": "/deployment/"
+              "url": "/guides/deployment"
+            },
+            {
+              "title": "Themes",
+              "url": "/guides/themes"
+            },
+            {
+              "title": "Markdown",
+              "url": "/guides/markdown/",
+              "children": [
+                {
+                  "title": "Examples",
+                  "url": "/guides/markdown/examples"
+                }
+              ]
+            },
+            {
+              "title": "Static Search",
+              "url": "/guides/static-search"
             }
           ]
         },
         {
           "title": "REFERENCE",
-          "url": "/reference/cli/",
+          "url": "/reference/",
           "meta": {
             "accent": "ochre"
           },
           "children": [
             {
-              "title": "CLI Options",
-              "url": "/reference/cli/"
-            },
-            {
-              "title": "Action Inputs",
-              "url": "/reference/action-inputs/"
-            },
-            {
-              "title": "Config",
+              "title": "Configuration",
               "url": "/reference/config/"
             },
             {
-              "title": "Generated Files",
-              "url": "/reference/generated-files/"
+              "title": "CLI",
+              "url": "/reference/cli/",
+              "children": [
+                {
+                  "title": "Options",
+                  "url": "/reference/cli/cli-options"
+                }
+              ]
             },
             {
-              "title": "Static Search",
-              "url": "/static-search/"
+              "title": "GitHub Action",
+              "url": "/reference/github-action/",
+              "children": [
+                {
+                  "title": "Inputs",
+                  "url": "/reference/github-action/action-inputs"
+                }
+              ]
             },
             {
-              "title": "Troubleshooting",
-              "url": "/troubleshooting/"
+              "title": "Package Manifest",
+              "url": "/reference/package-manifest/"
+            },
+            {
+              "title": "Project Structure",
+              "url": "/reference/project-structure/",
+              "children": [
+                {
+                  "title": "Build Output",
+                  "url": "/reference/project-structure/build-output"
+                }
+              ]
             }
           ]
         }
@@ -141,29 +147,30 @@
       "title": "Foundations",
       "items": [
         "index.md",
-        "getting-started/index.md",
-        "source-tree/index.md",
-        "markdown/index.md"
+        "getting-started/index.md"
       ]
     },
     "guides": {
       "title": "Guides",
       "items": [
-        "github-action/index.md",
-        "cli/index.md",
-        "package-json/index.md",
-        "deployment/index.md"
+        "guides/deployment.md",
+        "guides/themes.md",
+        "guides/markdown/index.md",
+        "guides/markdown/examples.md",
+        "guides/static-search.md"
       ]
     },
     "reference": {
       "title": "Reference",
       "items": [
-        "reference/cli/index.md",
-        "reference/action-inputs/index.md",
         "reference/config/index.md",
-        "reference/generated-files/index.md",
-        "static-search/index.md",
-        "troubleshooting/index.md"
+        "reference/cli/index.md",
+        "reference/cli/cli-options.md",
+        "reference/github-action/index.md",
+        "reference/github-action/action-inputs.md",
+        "reference/package-manifest/index.md",
+        "reference/project-structure/index.md",
+        "reference/project-structure/build-output.md"
       ]
     }
   }

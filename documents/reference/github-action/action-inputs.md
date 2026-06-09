@@ -1,5 +1,8 @@
 # Action Inputs
 
+Action inputs configure the `zeropress-app/zeropress-build-pages@v0` GitHub Action.
+Use them to select the Markdown source directory, public asset directory, output directory, theme, and optional build behavior in workflow YAML.
+
 ```yaml
 - name: Build ZeroPress Pages
   uses: zeropress-app/zeropress-build-pages@v0
@@ -60,7 +63,13 @@ Default:
 docs
 ```
 
-`docs1` is an alias for `docs`.
+Available bundled theme values:
+
+| Value | Meaning |
+| --- | --- |
+| `docs` | Default bundled documentation theme. Alias for `docs1`. |
+| `docs1` | Top-navigation theme for small docs sites, package manuals, and compact reference pages. |
+| `docs2` | Sidebar theme for larger docs sites with command palette search, page TOC, and collection-based previous/next navigation. |
 
 ### `theme-path`
 
@@ -71,7 +80,7 @@ with:
   theme-path: ./theme-docs
 ```
 
-`theme-path` takes precedence over `theme`.
+`theme-path` takes precedence over `theme`. Custom themes must follow the ZeroPress theme contract; see [Theme Authoring](https://zeropress.dev/theme-authoring/).
 
 ### `config`
 

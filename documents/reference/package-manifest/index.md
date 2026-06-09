@@ -1,4 +1,4 @@
-# package.json Script
+# Package Manifest
 
 Use a package script when your project already has a Node.js toolchain.
 
@@ -54,7 +54,11 @@ The source directory contains Markdown pages and optional `.zeropress/config.jso
 
 ## Add Post-build Search
 
-For Pagefind, keep the ZeroPress build as the first step and run Pagefind afterward.
+For Pagefind, install it as a dev dependency, keep the ZeroPress build as the first step, and run Pagefind afterward.
+
+```bash
+npm install --save-dev pagefind
+```
 
 ```json
 {

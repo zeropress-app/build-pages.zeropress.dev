@@ -78,10 +78,12 @@ If `public-dir` is `./public` and `public/favicon.png` exists, the generated pag
 <img src="/favicon.png" alt="ZeroPress favicon">
 ```
 
+The number of `../` segments depends on where the Markdown file lives in the source tree, not on a fixed value. Write the link as the real relative path from the current file to the public asset; Build Pages resolves it against `public-dir` and rewrites it to the output-root URL.
+
 This keeps image and asset paths understandable in GitHub or an editor while still publishing from the output root. The same rule applies to raw HTML attributes such as `src`, `href`, `poster`, and `srcset`. Missing files and files outside `public-dir` are left unchanged.
 
 ## Markdown Features
 
 Build Pages supports common GitHub-flavored Markdown features such as tables, task lists, strikethrough, fenced code language classes, Mermaid fences, and GitHub-style alerts.
 
-See [Markdown Feature Examples](features/index.md) for a rendered sample page that uses these features together.
+See [Markdown Feature Examples](./examples.md) for a rendered sample page that uses these features together.

@@ -1,4 +1,4 @@
-# Generated Files
+# Build Output
 
 Build Pages writes internal working files to:
 
@@ -32,9 +32,8 @@ _site/
   index.html
   assets/
   _zeropress/
-  sitemap.xml
+  sitemap.xml          when site.url is configured
   robots.txt
-  feed.xml
 ```
 
 Common output:
@@ -42,9 +41,8 @@ Common output:
 - HTML pages generated from Markdown.
 - Hashed theme assets such as `assets/style.<hash>.css`.
 - `/_zeropress/search.js`, `/_zeropress/search.json`, and `/_zeropress/search_pagefind.js` when search is enabled.
-- `sitemap.xml`.
+- `sitemap.xml`, when `site.url` is configured.
 - fallback `robots.txt`, unless public `robots.txt` exists.
-- `feed.xml`.
 - copied public files.
 - copied Markdown source files, unless `--no-copy-markdown-source` is used.
 
@@ -65,8 +63,8 @@ Public files come from `--public-dir`, or from `--source` when `--public-dir` is
 Public root files can override or influence generated special files:
 
 - `robots.txt`: copied as-is and prevents fallback robots generation.
-- `favicon.ico`, `favicon.svg`, `favicon.png`, `apple-touch-icon.png`: copied and linked from generated HTML.
-- `sitemap.xsl`: copied and referenced from generated `sitemap.xml`.
+- `favicon.ico`, `favicon.svg`, `favicon.png`, `apple-touch-icon.png`: copied to the destination and auto-injected into generated HTML `<head>` output.
+- `sitemap.xsl`: copied to the destination. When ZeroPress generates `sitemap.xml`, it auto-discovers that file and adds an XML stylesheet processing instruction for `/sitemap.xsl`.
 
 ## Markdown Source Copy
 

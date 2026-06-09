@@ -1,118 +1,78 @@
-# CLI Options
+# CLI
+
+Use the CLI directly when you want a local or provider-specific build command.
+
+## npx
 
 ```bash
-zeropress-build-pages --source ./docs --destination ./_site
+npx @zeropress/build-pages --source ./docs --destination ./_site
 ```
 
-`--source` and `--destination` are required for CLI usage. Environment variables are not the public interface for Build Pages.
+Use `npx` when the project does not need a `package.json`.
 
-## Core Options
+## Separate Public Directory
 
-### `--source <dir>`
-
-Dedicated source directory. This directory contains Markdown pages and optional source config files.
-
-Default for GitHub Action usage is `./docs`; CLI users should pass it explicitly.
+For separated assets:
 
 ```bash
-zeropress-build-pages --source ./docs --destination ./_site
+npx @zeropress/build-pages \
+  --source ./docs \
+  --public-dir ./public \
+  --destination ./_site
 ```
 
-The repository root is not accepted as `source`.
+The source directory is for Markdown and Build Pages config. The public directory is copied to the output root.
 
-### `--public-dir <dir>`
-
-Public passthrough directory. Files from this directory are copied to the output root.
+## Custom Theme
 
 ```bash
-zeropress-build-pages --source ./docs --public-dir ./public --destination ./_site
+npx @zeropress/build-pages \
+  --source ./docs \
+  --destination ./_site \
+  --theme-path ./theme-docs
 ```
 
-If omitted, `public-dir` defaults to `source`.
+`--theme-path` takes precedence over bundled themes. Custom themes must follow the ZeroPress theme contract; see [Theme Authoring](https://zeropress.dev/theme-authoring/).
 
-When set explicitly, `public-dir` must exist and must be a directory. It cannot be a file, symlink, current working directory, destination directory, selected theme directory, or Build Pages internal working directory.
+## Bundled Themes
 
-### `--destination <dir>`
+Use `--theme` when you want one of the bundled documentation themes.
 
-Generated static output directory.
+| Value | Meaning |
+| --- | --- |
+| `docs` | Default bundled documentation theme. Alias for `docs1`. |
+| `docs1` | Top-navigation theme for small docs sites, package manuals, and compact reference pages. |
+| `docs2` | Sidebar theme for larger docs sites with command palette search, page TOC, and collection-based previous/next navigation. |
 
 ```bash
-zeropress-build-pages --source ./docs --destination ./_site
+npx @zeropress/build-pages \
+  --source ./docs \
+  --destination ./_site \
+  --theme docs2
 ```
 
-The destination is created when missing. If it already exists as a directory, Build Pages writes the generated output there. If it exists as a file, the build fails.
+## Required Paths
 
-### `--theme <name>`
+`--source` must point to a directory. If `--public-dir` is provided, it must also point to an existing directory.
 
-Bundled theme name.
+`--destination` is created or overwritten by the build. If the destination path is a file, the command fails.
+
+## Useful Local Checks
+
+Run a build, then inspect the generated output:
 
 ```bash
-zeropress-build-pages --source ./docs --destination ./_site --theme docs
+npx @zeropress/build-pages --source ./docs --destination ./_site
 ```
-
-The default bundled theme is `docs`. `docs1` is an alias for `docs`.
-
-### `--theme-path <dir>`
-
-Custom local ZeroPress theme directory.
 
 ```bash
-zeropress-build-pages --source ./docs --destination ./_site --theme-path ./theme-docs
+find ./_site -maxdepth 2 -type f
 ```
 
-`--theme-path` takes precedence over `--theme`.
-
-### `--config <path>`
-
-Build Pages config file path.
+For a local preview, use any static file server:
 
 ```bash
-zeropress-build-pages --source ./docs --destination ./_site --config ./docs/.zeropress/config.json
+npx serve ./_site
 ```
 
-Default:
-
-```txt
-<source>/.zeropress/config.json
-```
-
-Missing config falls back to defaults. Malformed config fails with a friendly error.
-
-### `--site-url <url>`
-
-Canonical site URL override.
-
-```bash
-zeropress-build-pages --source ./docs --destination ./_site --site-url https://example.com
-```
-
-This overrides `site.url` from config for generated canonical URLs, sitemap URLs, and related metadata.
-
-## Behavior Options
-
-### `--skip-untitled-markdown`
-
-Skip Markdown files that cannot produce a page title.
-
-Without this option, a Markdown file without front matter `title`, ATX H1, or Setext H1 fails the build.
-
-### `--skip-link-check`
-
-Skip post-build internal link checking.
-
-By default, Build Pages checks generated HTML for broken internal links after build. Broken links are reported as warnings and do not fail the build.
-
-### `--no-copy-markdown-source`
-
-Do not copy original Markdown files to the generated output.
-
-Default behavior copies original Markdown files and exposes source Markdown links when the theme renders them.
-
-When disabled:
-
-- generated HTML pages still exist
-- source `.md` files are not copied to output
-- public passthrough `.md` files are also skipped
-- bundled docs theme hides `View this page as Markdown` links
-
-Run `zeropress-build-pages --help` for the current command help.
+See [CLI Options](./cli-options.md) for the full command reference.

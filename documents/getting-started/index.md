@@ -2,7 +2,7 @@
 
 Create a Markdown source directory, run Build Pages, and deploy the generated static output.
 
-Build Pages does not require a framework project. A repository can start with only Markdown files.
+Build Pages does not require a framework project. You can start with a directory of Markdown files and add config, public assets, or a custom theme only when you need them.
 
 ## 1. Create A Source Directory
 
@@ -35,6 +35,14 @@ The command:
 
 The generated `_site/` directory is the directory you deploy.
 
+Preview the generated site locally with `serve`:
+
+```bash
+npx serve _site
+```
+
+Open the local URL printed by `serve` to inspect the generated HTML before deploying.
+
 ## 3. Add Site Config
 
 Optional site configuration lives under the source directory.
@@ -57,7 +65,7 @@ Example `docs/.zeropress/config.json`:
     "description": "Project documentation.",
     "url": "https://example.com",
     "footer": {
-      "copyright_text": "My Docs",
+      "copyright_text": "© 2026 My Company",
       "attribution": true
     }
   },
@@ -68,7 +76,7 @@ Example `docs/.zeropress/config.json`:
 }
 ```
 
-Use config when you want to set site metadata, menus, footer text, search behavior, or a custom front page source.
+Use config when you want to set site metadata, menus, footer text, search behavior, or a custom front page source. See [Configuration](../reference/config/index.md) for the full config reference.
 
 ## 4. Add Public Files
 
@@ -80,26 +88,19 @@ docs/
 public/
   favicon.svg
   robots.txt
+  sitemap.xsl
   images/
 ```
 
 ```bash
-npx @zeropress/build-pages \
-  --source ./docs \
-  --public-dir ./public \
-  --destination ./_site
+npx @zeropress/build-pages --source ./docs --public-dir ./public --destination ./_site
 ```
 
-`favicon.*`, `robots.txt`, and `sitemap.xsl` are discovered from the public directory.
+See [Generated Files: Public Files](../reference/project-structure/build-output.md#public-files) for public directory behavior and ignored paths.
 
 ## 5. Deploy
 
-Deploy `_site/` with your host.
+Deploy the generated `_site/` directory with your static hosting provider.
 
-- GitHub Pages: use the [GitHub Action](../github-action/index.md).
-- Vercel, Cloudflare Pages, Netlify: set the build command and output directory in project settings.
-- Local package workflow: use a [package.json script](../package-json/index.md).
-
-## Next Step
-
-Read [Source Tree](../source-tree/index.md) before adding assets, themes, or deployment settings.
+- For GitHub Pages, Vercel, Cloudflare Pages, Netlify, and provider settings, read [Deployment](../guides/deployment.md).
+- For a Node project with `npm install` and `npm run build`, read [Package Manifest](../reference/package-manifest/index.md).

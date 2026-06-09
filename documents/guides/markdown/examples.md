@@ -8,7 +8,7 @@ Use it when evaluating typography, spacing, code highlighting, alerts, tables, l
 
 Markdown paragraphs are converted into readable document prose. Inline emphasis such as **strong text**, _emphasized text_, ~~struck text~~, and `inline code` should remain easy to scan in the middle of a sentence.
 
-Links use normal Markdown syntax. For example, the [Build Pages package](https://www.npmjs.com/package/@zeropress/build-pages) points to npm, and [the source tree guide](../../source-tree/index.md) points to another local Markdown page.
+Links use normal Markdown syntax. For example, the [Build Pages package](https://www.npmjs.com/package/@zeropress/build-pages) points to npm, and [the source tree guide](../../reference/project-structure/index.md) points to another local Markdown page.
 
 ## Heading Hierarchy
 

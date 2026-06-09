@@ -150,7 +150,7 @@ jobs:
 - `theme`: bundled theme name. Default: `docs`.
 - `theme-path`: custom local theme directory.
 
-See [Action Inputs](../reference/action-inputs/index.md) for the full list.
+See [Action Inputs](./action-inputs.md) for the full list.
 
 ## Post-build Steps
 
@@ -158,13 +158,11 @@ Because Build Pages only writes static files, extra steps can run after the buil
 
 ```yaml
 - name: Format generated HTML
-  run: npx --yes prettier@3.8.3 --write "./_site/**/*.html"
+  run: npx --yes prettier@3.8.3 --ignore-path /dev/null --write "./_site/**/*.html"
 
 - name: Build Pagefind index
   run: |
-    npx --yes pagefind@1.4.0 \
-      --site ./_site \
-      --output-subdir _zeropress/pagefind
+    npx --yes pagefind@1.5.2 --site ./_site --output-subdir _zeropress/pagefind
     cp ./_site/_zeropress/search_pagefind.js ./_site/_zeropress/search.js
     rm ./_site/_zeropress/search.json
 ```

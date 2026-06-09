@@ -17,7 +17,7 @@ Adjust `--source` and `--public-dir` to match your repository. If public assets 
 
 ## GitHub Pages
 
-Use the [GitHub Action](../github-action/index.md) and upload `_site` with `actions/upload-pages-artifact`.
+Use the [GitHub Action](../reference/github-action/index.md) and upload `_site` with `actions/upload-pages-artifact`.
 
 ```yaml
 - name: Build ZeroPress Pages
@@ -34,7 +34,7 @@ The bundled Action is the recommended GitHub Pages path. If you prefer a plain n
   run: npx --yes @zeropress/build-pages --source ./docs --public-dir ./public --destination ./_site
 ```
 
-See [GitHub Action](../github-action/index.md) for full workflow examples.
+See [GitHub Action](../reference/github-action/index.md) for full workflow examples.
 
 ## Vercel
 
@@ -72,7 +72,7 @@ If you do not want to add provider config, use explicit HTML links instead. Set 
 }
 ```
 
-This changes rewritten source-relative `.md` links from clean URLs to explicit `.html` URLs. It does not change generated output file paths, root-relative links, external links, or public asset URLs. See [Build Pages Config: Markdown](../reference/config/index.md#markdown) for the detailed `link_output` rules.
+This changes rewritten source-relative `.md` links from clean URLs to explicit `.html` URLs. It does not change generated output file paths, root-relative links, external links, or public asset URLs. See [Configuration: Markdown](../reference/config/index.md#markdown) for the detailed `link_output` rules.
 
 ## Cloudflare Pages
 
@@ -97,12 +97,12 @@ Build settings:
 
 Build Pages writes static files first. Optional tools can run after the Build Pages command and before the final upload.
 
-If you want to use Pagefind instead of native ZeroPress search, run Pagefind after the Build Pages command. See [Static Search](../static-search/index.md) for the adapter and copy commands.
+If you want to use Pagefind instead of native ZeroPress search, run Pagefind after the Build Pages command. See [Static Search](../guides/static-search.md) for the adapter and copy commands.
 
 If you want to format generated HTML before deployment, run Prettier after the Build Pages command:
 
 ```bash
-npx --yes prettier@3.8.3 --write "./_site/**/*.html"
+npx --yes prettier@3.8.3 --ignore-path /dev/null --write "./_site/**/*.html"
 ```
 
 For deployment convenience, you can also keep the Build Pages command in a tracked shell script such as [`build.sh`](https://github.com/zeropress-app/build-pages.zeropress.dev/blob/main/build.sh), then use the same script locally and in provider build settings.
@@ -111,6 +111,6 @@ For deployment convenience, you can also keep the Build Pages command in a track
 
 - The deployed directory is the Build Pages destination.
 - The destination contains `index.html`.
-- GitHub Pages, Cloudflare Pages, and Netlify work with the default `markdown.link_output: "clean"` links.
-- `sitemap.xml` and fallback `robots.txt` are generated unless public files override them.
+- `sitemap.xml` is generated when `site.url` is configured.
+- fallback `robots.txt` is generated unless a public `robots.txt` overrides it.
 - If postbuild tools are used, run them before uploading the final output.
