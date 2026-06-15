@@ -2,13 +2,17 @@
 
 This page is written as ordinary Markdown and rendered by Build Pages. It is a practical sample for checking how common Markdown features appear in the bundled docs theme.
 
-Use it when evaluating typography, spacing, code highlighting, alerts, tables, lists, images, and Mermaid-style diagram fences.
+Use it when evaluating typography, spacing, code highlighting, alerts, tables, lists, images, embedded media, and Mermaid-style diagram fences.
 
 ## Paragraphs, Emphasis, And Links
 
 Markdown paragraphs are converted into readable document prose. Inline emphasis such as **strong text**, _emphasized text_, ~~struck text~~, and `inline code` should remain easy to scan in the middle of a sentence.
 
 Links use normal Markdown syntax. For example, the [Build Pages package](https://www.npmjs.com/package/@zeropress/build-pages) points to npm, and [the source tree guide](../../reference/project-structure/index.md) points to another local Markdown page.
+
+Raw HTML links can opt into a new tab with `target="_blank"`. Build Pages keeps `_blank` and adds the safe `rel` values during Markdown rendering:
+
+<a href="https://zeropress.dev/theme-authoring/" target="_blank">Open the ZeroPress Theme Authoring Guide</a>
 
 ## Heading Hierarchy
 
@@ -172,21 +176,38 @@ Raw HTML image structures can be useful when a document needs captions or respon
   <figcaption>A public asset rendered from Markdown raw HTML.</figcaption>
 </figure>
 
-Raw HTML links can opt into a new tab with `target="_blank"`. Build Pages keeps `_blank` and adds the safe `rel` values during Markdown rendering:
+## External Embeds
 
-<a href="https://zeropress.dev/theme-authoring/" target="_blank">Open the ZeroPress Theme Authoring Guide</a>
+Safe iframe embeds are useful when source Markdown already contains provider embed code. The iframe should include a meaningful `title`.
+
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/UYmvFzDuO5k" title="YouTube video player sample" allowfullscreen>
+</iframe>
+
+The theme should keep iframe embeds responsive on narrow screens.
 
 ## Native Media
 
 Raw HTML media elements can embed site-owned video and audio files. Build Pages rewrites source-relative public asset paths to output-root URLs:
 
-```html
-<video controls muted playsinline poster="../../../public/zeropress-media-samples/zeropress-sample-poster.jpg" width="640">
-  <source src="../../../public/zeropress-media-samples/zeropress-sample-video.mp4" type="video/mp4">
+<video controls muted playsinline poster="../../../public/media/video-poster.jpg" width="640">
+  <source src="../../../public/media/video.mp4" type="video/mp4">
+  <track src="../../../public/media/captions-en.vtt" kind="captions" srclang="en" label="English">
 </video>
 
-<audio controls preload="metadata">
-  <source src="../../../public/zeropress-media-samples/zeropress-sample-audio.mp3" type="audio/mpeg">
+<audio controls controlsList="nodownload" preload="metadata">
+  <source src="../../../public/media/audio.mp3" type="audio/mpeg">
+</audio>
+
+The source Markdown can use GitHub-friendly relative public asset paths:
+
+```html
+<video controls muted playsinline poster="../../../public/media/video-poster.jpg" width="640">
+  <source src="../../../public/media/video.mp4" type="video/mp4">
+  <track src="../../../public/media/captions-en.vtt" kind="captions" srclang="en" label="English">
+</video>
+
+<audio controls controlsList="nodownload" preload="metadata">
+  <source src="../../../public/media/audio.mp3" type="audio/mpeg">
 </audio>
 ```
 
