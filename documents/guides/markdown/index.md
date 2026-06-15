@@ -84,6 +84,8 @@ This keeps image and asset paths understandable in GitHub or an editor while sti
 
 Markdown raw HTML may use safe native media elements such as `video`, `audio`, `source`, and `track`. Use source-relative public asset paths for site-owned media files.
 
+Raw HTML links may use `target="_blank"` for new-window links. Build Pages keeps `_blank`, removes other `target` values, and ensures `_blank` links include `rel="noopener noreferrer"`. Safe `rel` tokens such as `nofollow`, `ugc`, `sponsored`, and `external` are preserved.
+
 ## Markdown Features
 
 Build Pages supports common GitHub-flavored Markdown features such as tables, task lists, strikethrough, fenced code language classes, Mermaid fences, GitHub-style alerts, and safe raw HTML media blocks.

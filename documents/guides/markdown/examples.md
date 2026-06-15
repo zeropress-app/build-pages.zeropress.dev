@@ -172,6 +172,10 @@ Raw HTML image structures can be useful when a document needs captions or respon
   <figcaption>A public asset rendered from Markdown raw HTML.</figcaption>
 </figure>
 
+Raw HTML links can opt into a new tab with `target="_blank"`. Build Pages keeps `_blank` and adds the safe `rel` values during Markdown rendering:
+
+<a href="https://zeropress.dev/theme-authoring/" target="_blank">Open the ZeroPress Theme Authoring Guide</a>
+
 ## Native Media
 
 Raw HTML media elements can embed site-owned video and audio files. Build Pages rewrites source-relative public asset paths to output-root URLs:
