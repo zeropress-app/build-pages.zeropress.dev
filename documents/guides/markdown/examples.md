@@ -172,6 +172,20 @@ Raw HTML image structures can be useful when a document needs captions or respon
   <figcaption>A public asset rendered from Markdown raw HTML.</figcaption>
 </figure>
 
+## Native Media
+
+Raw HTML media elements can embed site-owned video and audio files. Build Pages rewrites source-relative public asset paths to output-root URLs:
+
+```html
+<video controls muted playsinline poster="../../../public/zeropress-media-samples/zeropress-sample-poster.jpg" width="640">
+  <source src="../../../public/zeropress-media-samples/zeropress-sample-video.mp4" type="video/mp4">
+</video>
+
+<audio controls preload="metadata">
+  <source src="../../../public/zeropress-media-samples/zeropress-sample-audio.mp3" type="audio/mpeg">
+</audio>
+```
+
 ## Horizontal Rule
 
 Horizontal rules are useful for separating examples from reference text.

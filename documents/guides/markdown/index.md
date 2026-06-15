@@ -82,8 +82,10 @@ The number of `../` segments depends on where the Markdown file lives in the sou
 
 This keeps image and asset paths understandable in GitHub or an editor while still publishing from the output root. The same rule applies to raw HTML attributes such as `src`, `href`, `poster`, and `srcset`. Missing files and files outside `public-dir` are left unchanged.
 
+Markdown raw HTML may use safe native media elements such as `video`, `audio`, `source`, and `track`. Use source-relative public asset paths for site-owned media files.
+
 ## Markdown Features
 
-Build Pages supports common GitHub-flavored Markdown features such as tables, task lists, strikethrough, fenced code language classes, Mermaid fences, and GitHub-style alerts.
+Build Pages supports common GitHub-flavored Markdown features such as tables, task lists, strikethrough, fenced code language classes, Mermaid fences, GitHub-style alerts, and safe raw HTML media blocks.
 
 See [Markdown Feature Examples](./examples.md) for a rendered sample page that uses these features together.
