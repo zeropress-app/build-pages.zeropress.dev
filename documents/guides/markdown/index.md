@@ -44,6 +44,8 @@ data:
 ---
 ```
 
+Front matter must use plain YAML with `---` delimiters. JavaScript front matter, language-specific delimiters, YAML custom tags, anchors, aliases, and block scalars are not supported.
+
 If `status` is omitted, the page is treated as `published`.
 
 ## Internal Links

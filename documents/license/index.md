@@ -13,12 +13,11 @@ Check each repository's `LICENSE` file for the exact terms that apply to that pa
 
 ## Direct Runtime Dependencies
 
-`@zeropress/build-pages` depends on a small set of direct runtime packages:
+`@zeropress/build-pages` depends on one direct runtime package:
 
 | Package | Role | License |
 | --- | --- | --- |
 | [`@zeropress/build`](https://www.npmjs.com/package/@zeropress/build) | Builds the generated ZeroPress preview data and theme into static HTML output. | MIT |
-| [`gray-matter`](https://www.npmjs.com/package/gray-matter) | Reads Markdown front matter from source documents. | MIT |
 
 Transitive dependencies are governed by their own package licenses.
 

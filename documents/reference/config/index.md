@@ -120,6 +120,8 @@ updated_at: none
 ---
 ```
 
+Build Pages reads plain YAML front matter delimited by `---`. JavaScript front matter, language-specific delimiters, YAML custom tags, anchors, aliases, and block scalars are not supported.
+
 Front matter `updated_at` also accepts `git` or a valid ISO datetime string. Invalid strings are ignored for that page with a warning.
 
 Recommended ISO datetime values include an explicit timezone:
