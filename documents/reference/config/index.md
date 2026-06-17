@@ -84,7 +84,7 @@ Unknown fields are rejected.
 Common fields:
 
 - `title`: site name.
-- `description`: site description used by generated metadata.
+- `description`: optional site description used by front page title text.
 - `url`: canonical site URL. If omitted, Build Pages does not generate `sitemap.xml`.
 - `locale`: generated document locale.
 - `logo`: optional theme-facing site logo.
@@ -145,6 +145,16 @@ Date-only values such as `2026-06-09` are not accepted for `updated_at`.
 For working examples, see this site's [home page source](https://github.com/zeropress-app/build-pages.zeropress.dev/blob/main/documents/index.md?plain=1) and [license page source](https://github.com/zeropress-app/build-pages.zeropress.dev/blob/main/documents/license/index.md?plain=1).
 
 For accurate file history in GitHub Actions, configure `actions/checkout` with `fetch-depth: 0`.
+
+Front matter `featured_image` provides optional share-image metadata for a page:
+
+```md
+---
+featured_image: /images/share.png
+---
+```
+
+Absolute `https://` or `http://` URLs are passed through. Root-relative public URLs and source-relative paths to existing files inside `public-dir` are converted to absolute URLs with `site.url`. If Build Pages cannot safely resolve the value, it prints a warning and omits `featured_image` for that page.
 
 `markdown.link_output` controls how Build Pages rewrites source-relative links to discovered Markdown files:
 

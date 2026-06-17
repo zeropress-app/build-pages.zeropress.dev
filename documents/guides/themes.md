@@ -20,13 +20,15 @@ npx --yes @zeropress/build-pages \
   --theme docs2
 ```
 
-Available bundled values:
+Allowed bundled theme values:
 
-| Value | Meaning | Preview |
-| --- | --- | --- |
-| `docs` | Default bundled documentation theme. Alias for `docs1`. | - |
-| `docs1` | Top-navigation documentation theme for small docs sites, package manuals, short guides, and compact reference pages. | [zeropress.dev](https://zeropress.dev/) |
-| `docs2` | Sidebar documentation theme for larger docs sites with multiple sections, command palette search, page TOC, and collection-based previous/next navigation. | [build-pages.zeropress.dev](https://build-pages.zeropress.dev/) |
+- `docs`
+- `docs1`
+- `docs2`
+
+`docs` is the default bundled value and currently aliases `docs1`.
+
+For rendered previews, example repositories, and theme source links, see <a href="https://zeropress.page/" target="_blank">zeropress.page</a>.
 
 Bundled theme source files are published in the [`themes` directory](https://github.com/zeropress-app/zeropress-build-pages/tree/main/themes).
 

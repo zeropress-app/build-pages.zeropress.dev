@@ -35,6 +35,8 @@ description: Build static docs from Markdown.
 path: guides/install
 status: published
 discoverability: default
+updated_at: none
+featured_image: /images/share.png
 meta:
   category: Guides
 data:
@@ -46,7 +48,35 @@ data:
 
 Front matter must use plain YAML with `---` delimiters. JavaScript front matter, language-specific delimiters, YAML custom tags, anchors, aliases, and block scalars are not supported.
 
-If `status` is omitted, the page is treated as `published`.
+Supported fields:
+
+| Field | Purpose |
+| --- | --- |
+| `title` | Page title. Takes priority over the first Markdown H1. |
+| `description` | Page excerpt and generated description metadata. |
+| `path` | Generated route path. Example: `guides/install` becomes `/guides/install`. |
+| `status` | Publishing state. Allowed values: `published`, `draft`. |
+| `discoverability` | Automatic exposure policy. Allowed values: `default`, `noindex`, `delist`. |
+| `updated_at` | Page update timestamp policy or value. Allowed values: `none`, `git`, or an ISO datetime string. |
+| `featured_image` | Optional share image for generated Open Graph metadata. |
+| `meta` | Optional scalar/null metadata copied to the generated page. |
+| `data` | Optional structured JSON-style data for theme-facing lists, facts, galleries, timelines, or swatches. |
+
+If `title` is omitted, Build Pages uses the first Markdown H1. Without a title from either source, the build fails unless `--skip-untitled-markdown` is enabled.
+
+If `path` is omitted, Build Pages derives the route from the source file path. For example, `guides/install.md` becomes `/guides/install`, and `guides/install/index.md` becomes `/guides/install/`. A custom `path` must be a safe generated route path without a leading slash, trailing slash, query, hash, or `..` segment.
+
+If `status` is omitted, the page is treated as `published`. `status: draft` skips the page and no HTML route is generated.
+
+`discoverability` applies after a page route is generated:
+
+- `default`: no special handling.
+- `noindex`: generate the page and add HTML robots `noindex`.
+- `delist`: generate the page, add HTML robots `noindex`, and exclude it from automatic discovery outputs such as sitemap and native search.
+
+`updated_at` overrides config `markdown.updated_at` for a single page. Invalid strings warn and are ignored for that page.
+
+`featured_image` is optional share-image metadata for generated Open Graph output. It accepts an absolute `https://` or `http://` URL, a root-relative public URL such as `/images/share.png`, or a source-relative path to an existing file inside `public-dir`. Root-relative and source-relative values require `site.url` so Build Pages can generate an absolute image URL. Invalid values warn and are omitted for that page.
 
 ## Internal Links
 
