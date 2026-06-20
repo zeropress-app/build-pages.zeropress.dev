@@ -62,6 +62,8 @@ Vercel does not resolve every extensionless HTML path the same way as GitHub Pag
 
 This tells Vercel to serve generated files such as `foo/bar.html` when a visitor opens `/foo/bar`. See the [`zeropress.dev` vercel.json](https://github.com/zeropress-app/zeropress.dev/blob/main/vercel.json) for a minimal working example.
 
+For a production-style preview site that also sets the build command, output directory, ignored rebuild rule, and `cleanUrls`, see the [`plain.zeropress.page` vercel.json](https://github.com/zeropress-app/zeropress.page/blob/main/preview/plain.zeropress.page/vercel.json).
+
 If you do not want to add provider config, use explicit HTML links instead. Set this in your Build Pages source config at `<source>/.zeropress/config.json`:
 
 ```json
