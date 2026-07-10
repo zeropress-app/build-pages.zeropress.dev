@@ -51,7 +51,7 @@ Default:
 ./_site
 ```
 
-For GitHub Pages, this directory is passed to `actions/upload-pages-artifact`.
+For a supported origin-root GitHub Pages site, this directory is passed to `actions/upload-pages-artifact`.
 
 ### `theme`
 
@@ -94,9 +94,9 @@ Default:
 
 ### `site-url`
 
-Canonical site URL override.
+Origin-root canonical HTTP(S) URL override.
 
-Use this when the deployment URL should override the config file.
+Use this when the deployment URL should override the config file. The URL must not contain a path, query, or fragment. Omit this input when the deployment URL is not known. Base paths and subdirectory hosting are not supported.
 
 ### `skip-untitled-markdown`
 

@@ -16,6 +16,8 @@ The action builds static files only. Uploading and deploying are handled by your
 
 ## Full GitHub Pages Workflow
 
+This workflow is for an origin-root Pages site, such as a user or organization site or a site with a custom domain. GitHub Project Pages served from `https://<owner>.github.io/<repository>/` are not supported without a custom domain that maps the site to the origin root.
+
 ```yaml
 name: Build and Deploy Docs to GitHub Pages
 
@@ -95,7 +97,7 @@ Use `theme-path` for a local ZeroPress theme.
 
 ## Plain npm Command
 
-The bundled Action is the recommended GitHub Pages path. If you prefer to keep the workflow as ordinary shell commands, run the npm package directly and upload the same `_site` directory.
+The bundled Action is the recommended path for a supported origin-root GitHub Pages site. If you prefer to keep the workflow as ordinary shell commands, run the npm package directly and upload the same `_site` directory.
 
 ```yaml
 name: Build and Deploy Docs to GitHub Pages

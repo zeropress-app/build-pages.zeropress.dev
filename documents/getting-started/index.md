@@ -100,7 +100,7 @@ See [Generated Files: Public Files](../reference/project-structure/build-output.
 
 ## 5. Deploy
 
-Deploy the generated `_site/` directory with your static hosting provider.
+Deploy the generated `_site/` directory at the origin root with your static hosting provider. Build Pages does not support a base path or subdirectory mount path.
 
-- For GitHub Pages, Vercel, Cloudflare Pages, Netlify, and provider settings, read [Deployment](../guides/deployment.md).
+- For supported origin-root GitHub Pages deployments, Vercel, Cloudflare Pages, Netlify, and provider settings, read [Deployment](../guides/deployment.md).
 - For a Node project with `npm install` and `npm run build`, read [Package Manifest](../reference/package-manifest/index.md).

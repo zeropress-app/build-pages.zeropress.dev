@@ -85,7 +85,7 @@ Common fields:
 
 - `title`: site name.
 - `description`: optional site description used by front page title text.
-- `url`: canonical site URL. If omitted, Build Pages does not generate `sitemap.xml`.
+- `url`: optional canonical HTTP(S) site URL at the origin root, such as `https://example.com`. Paths, queries, fragments, and subdirectory hosting are not supported. Omit it or use an empty string while the deployment URL is unknown; without it, Build Pages does not generate `sitemap.xml`.
 - `locale`: generated document locale.
 - `logo`: optional theme-facing site logo.
 - `search`: enables ZeroPress search artifacts when the theme supports search.

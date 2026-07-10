@@ -91,13 +91,13 @@ Missing config falls back to defaults. Malformed config fails with a friendly er
 
 ### `--site-url <url>`
 
-Canonical site URL override.
+Origin-root canonical HTTP(S) URL override.
 
 ```bash
 zeropress-build-pages --source ./docs --destination ./_site --site-url https://example.com
 ```
 
-This overrides `site.url` from config for generated canonical URLs, sitemap URLs, and related metadata.
+This overrides `site.url` from config for generated canonical URLs, sitemap URLs, and related metadata. The URL must not contain a path, query, or fragment. Omit this option when the deployment URL is not known. Base paths and subdirectory hosting are not supported.
 
 ## Behavior Options
 

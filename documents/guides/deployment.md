@@ -1,6 +1,6 @@
 # Deployment
 
-Build Pages writes plain static files to the destination directory. Deploy that directory with your hosting provider.
+Build Pages writes plain static files to the destination directory. Deploy that directory at the origin root with your hosting provider. Root-relative page, asset, search, and public-file URLs are intentional; base paths and subdirectory mount paths are not supported.
 
 ## Provider Shape
 
@@ -17,7 +17,7 @@ Adjust `--source` and `--public-dir` to match your repository. If public assets 
 
 ## GitHub Pages
 
-Use the [GitHub Action](../reference/github-action/index.md) and upload `_site` with `actions/upload-pages-artifact`.
+Use the [GitHub Action](../reference/github-action/index.md) and upload `_site` with `actions/upload-pages-artifact` for an origin-root Pages site. Supported deployments use a custom domain or a user or organization Pages site. GitHub Project Pages served from `https://<owner>.github.io/<repository>/` are not supported without a custom domain that maps the site to the origin root.
 
 ```yaml
 - name: Build ZeroPress Pages
@@ -112,6 +112,7 @@ For deployment convenience, you can also keep the Build Pages command in a track
 ## Static Host Checklist
 
 - The deployed directory is the Build Pages destination.
+- The provider serves the destination at the origin root, not below a mount path.
 - The destination contains `index.html`.
 - `sitemap.xml` is generated when `site.url` is configured.
 - fallback `robots.txt` is generated unless a public `robots.txt` overrides it.

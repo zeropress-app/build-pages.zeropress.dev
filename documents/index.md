@@ -6,7 +6,7 @@ updated_at: none
 
 ZeroPress Build Pages turns a Markdown source directory, optional public assets, and a ZeroPress theme into static HTML output.
 
-Use it for documentation sites, project guides, and lightweight content sites that should deploy cleanly to GitHub Pages, Cloudflare Pages, Netlify, Vercel, or any static host.
+Use it for documentation sites, project guides, and lightweight content sites deployed at the origin root on GitHub Pages, Cloudflare Pages, Netlify, Vercel, or another static host. Subdirectory mount paths are not supported.
 
 ## How It Fits Together
 
@@ -33,7 +33,7 @@ npx --yes @zeropress/build-pages --source ./docs --destination ./_site
 
 ### GitHub Action
 
-Use this when GitHub Pages should build and deploy the site from CI.
+Use this when an origin-root GitHub Pages site should build and deploy from CI. Supported Pages deployments use a custom domain or a user or organization site; Project Pages under `/<repository>/` are not supported.
 
 ```yaml
 - name: Build ZeroPress Pages
