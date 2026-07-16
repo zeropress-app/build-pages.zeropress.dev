@@ -1,11 +1,11 @@
 # Action Inputs
 
-Action inputs configure the `zeropress-app/zeropress-build-pages@v0` GitHub Action.
+Action inputs configure the `zeropress-app/zeropress-build-pages@v1` GitHub Action.
 Use them to select the Markdown source directory, public asset directory, output directory, theme, and optional build behavior in workflow YAML.
 
 ```yaml
 - name: Build ZeroPress Pages
-  uses: zeropress-app/zeropress-build-pages@v0
+  uses: zeropress-app/zeropress-build-pages@v1
   with:
     source: ./docs
     public-dir: ./public
@@ -80,7 +80,7 @@ with:
   theme-path: ./theme-docs
 ```
 
-`theme-path` takes precedence over `theme`. Custom themes must follow the ZeroPress theme contract; see [Theme Authoring](https://zeropress.dev/theme-authoring/).
+`theme-path` takes precedence over `theme`. Custom themes must follow the ZeroPress theme contract and fixed package resource limits; see [Theme Authoring](https://zeropress.dev/guides/theme-authoring/) and [Theme Package Limits](https://zeropress.dev/reference/theme-runtime/package-limits/).
 
 ### `config`
 

@@ -12,7 +12,7 @@ Links use normal Markdown syntax. For example, the [Build Pages package](https:/
 
 Raw HTML links can opt into a new tab with `target="_blank"`. Build Pages keeps `_blank` and adds the safe `rel` values during Markdown rendering:
 
-<a href="https://zeropress.dev/theme-authoring/" target="_blank">Open the ZeroPress Theme Authoring Guide</a>
+<a href="https://zeropress.dev/guides/theme-authoring/" target="_blank">Open the ZeroPress Theme Authoring Guide</a>
 
 ## Heading Hierarchy
 
@@ -113,7 +113,7 @@ Fenced code blocks keep language classes. When the language is recognized by Zer
 
 ```json
 {
-  "version": "0.1",
+  "version": "1.0",
   "site": {
     "title": "My Docs",
     "description": "Documentation built with ZeroPress."

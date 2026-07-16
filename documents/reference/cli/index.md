@@ -32,7 +32,7 @@ npx @zeropress/build-pages \
   --theme-path ./theme-docs
 ```
 
-`--theme-path` takes precedence over bundled themes. Custom themes must follow the ZeroPress theme contract; see [Theme Authoring](https://zeropress.dev/theme-authoring/).
+`--theme-path` takes precedence over bundled themes. Custom themes must follow the ZeroPress theme contract and fixed package resource limits; see [Theme Authoring](https://zeropress.dev/guides/theme-authoring/) and [Theme Package Limits](https://zeropress.dev/reference/theme-runtime/package-limits/).
 
 ## Bundled Themes
 

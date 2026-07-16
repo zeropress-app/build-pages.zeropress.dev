@@ -6,14 +6,16 @@ Build Pages writes plain static files to the destination directory. Deploy that 
 
 Most providers need two values:
 
-- Build command: `npx --yes @zeropress/build-pages --source ./docs --public-dir ./public --destination ./_site`
+- Build command: `npx --yes @zeropress/build-pages@1 --source ./docs --public-dir ./public --destination ./_site`
 - Output directory: `_site`
 
 ```bash
-npx --yes @zeropress/build-pages --source ./docs --public-dir ./public --destination ./_site
+npx --yes @zeropress/build-pages@1 --source ./docs --public-dir ./public --destination ./_site
 ```
 
 Adjust `--source` and `--public-dir` to match your repository. If public assets live inside the source directory, omit `--public-dir`.
+
+CI and hosting examples select `@1` so they receive compatible Build Pages 1.x updates without automatically crossing a future major-version boundary.
 
 ## GitHub Pages
 
@@ -21,7 +23,7 @@ Use the [GitHub Action](../reference/github-action/index.md) and upload `_site` 
 
 ```yaml
 - name: Build ZeroPress Pages
-  uses: zeropress-app/zeropress-build-pages@v0
+  uses: zeropress-app/zeropress-build-pages@v1
   with:
     source: ./docs
     destination: ./_site
@@ -31,7 +33,7 @@ The bundled Action is the recommended GitHub Pages path. If you prefer a plain n
 
 ```yaml
 - name: Build ZeroPress Pages
-  run: npx --yes @zeropress/build-pages --source ./docs --public-dir ./public --destination ./_site
+  run: npx --yes @zeropress/build-pages@1 --source ./docs --public-dir ./public --destination ./_site
 ```
 
 See [GitHub Action](../reference/github-action/index.md) for full workflow examples.
@@ -43,13 +45,13 @@ Use the `Other` framework preset.
 | Setting | Value |
 | --- | --- |
 | Application Preset (Framework Preset) | `Other` |
-| Build Command | `npx --yes @zeropress/build-pages --source ./docs --public-dir ./public --destination ./_site` |
+| Build Command | `npx --yes @zeropress/build-pages@1 --source ./docs --public-dir ./public --destination ./_site` |
 | Output Directory | `_site` |
 
 If your project does not have a separate public asset directory, use:
 
 ```bash
-npx --yes @zeropress/build-pages --source ./docs --destination ./_site
+npx --yes @zeropress/build-pages@1 --source ./docs --destination ./_site
 ```
 
 Vercel does not resolve every extensionless HTML path the same way as GitHub Pages, Cloudflare Pages, or Netlify. Add a `vercel.json` file at the Vercel project root and commit it:
@@ -83,7 +85,7 @@ Use the same shape in Cloudflare Pages project settings.
 | Setting | Value |
 | --- | --- |
 | Framework preset | `None` |
-| Build command | `npx --yes @zeropress/build-pages --source ./docs --public-dir ./public --destination ./_site` |
+| Build command | `npx --yes @zeropress/build-pages@1 --source ./docs --public-dir ./public --destination ./_site` |
 | Build output directory | `_site` |
 
 ## Netlify
@@ -92,7 +94,7 @@ Build settings:
 
 | Setting | Value |
 | --- | --- |
-| Build command | `npx --yes @zeropress/build-pages --source ./docs --public-dir ./public --destination ./_site` |
+| Build command | `npx --yes @zeropress/build-pages@1 --source ./docs --public-dir ./public --destination ./_site` |
 | Publish directory | `_site` |
 
 ## Optional Postbuild Steps

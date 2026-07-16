@@ -1,7 +1,7 @@
 .DS_Store
 /.vscode/
 /.zeropress/
-/.zeropress-build-page/
+/.zeropress-build-pages/
 /_site/
 /node_modules/
 localbuild.sh

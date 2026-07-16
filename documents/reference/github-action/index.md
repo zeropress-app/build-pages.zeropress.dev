@@ -6,13 +6,15 @@ Use the GitHub Action when your site should build in a repository workflow.
 
 ```yaml
 - name: Build ZeroPress Pages
-  uses: zeropress-app/zeropress-build-pages@v0
+  uses: zeropress-app/zeropress-build-pages@v1
   with:
     source: ./docs
     destination: ./_site
 ```
 
 The action builds static files only. Uploading and deploying are handled by your hosting provider's own action or CLI.
+
+`@v1` follows the latest compatible Build Pages 1.x release. Use `@v1.0.0` for the exact initial release or a full commit SHA when the workflow requires an immutable dependency.
 
 ## Full GitHub Pages Workflow
 
@@ -46,7 +48,7 @@ jobs:
         uses: actions/configure-pages@v6
 
       - name: Build ZeroPress Pages
-        uses: zeropress-app/zeropress-build-pages@v0
+        uses: zeropress-app/zeropress-build-pages@v1
         with:
           source: ./docs
           destination: ./_site
@@ -72,7 +74,7 @@ Use `public-dir` when assets live outside Markdown source files.
 
 ```yaml
 - name: Build ZeroPress Pages
-  uses: zeropress-app/zeropress-build-pages@v0
+  uses: zeropress-app/zeropress-build-pages@v1
   with:
     source: ./docs
     public-dir: ./public
@@ -85,7 +87,7 @@ Use `theme-path` for a local ZeroPress theme.
 
 ```yaml
 - name: Build ZeroPress Pages
-  uses: zeropress-app/zeropress-build-pages@v0
+  uses: zeropress-app/zeropress-build-pages@v1
   with:
     source: ./docs
     public-dir: ./public
@@ -127,7 +129,7 @@ jobs:
         uses: actions/configure-pages@v6
 
       - name: Build ZeroPress Pages
-        run: npx --yes @zeropress/build-pages --source ./docs --public-dir ./public --destination ./_site
+        run: npx --yes @zeropress/build-pages@1 --source ./docs --public-dir ./public --destination ./_site
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v5

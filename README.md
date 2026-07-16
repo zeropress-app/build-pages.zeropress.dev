@@ -17,7 +17,7 @@ theme.
 With npm ZeroPress packages:
 
 ```bash
-npx --yes @zeropress/build-pages --source ./documents --destination ./_site --public-dir ./public --theme docs2
+npx --yes @zeropress/build-pages@1 --source ./documents --destination ./_site --public-dir ./public --theme docs2
 ```
 
 For the same package-based build path used by static hosting providers:

@@ -58,8 +58,8 @@ Example `docs/.zeropress/config.json`:
 
 ```json
 {
-  "$schema": "https://schemas.zeropress.dev/build-pages-config/v0.1/schema.json",
-  "version": "0.1",
+  "$schema": "https://schemas.zeropress.dev/build-pages-config/v1.0/schema.json",
+  "version": "1.0",
   "site": {
     "title": "My Docs",
     "description": "Project documentation.",

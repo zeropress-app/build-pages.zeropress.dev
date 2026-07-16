@@ -9,8 +9,8 @@ You can also review this site's real [config.json](https://github.com/zeropress-
 
 ```json
 {
-  "$schema": "https://schemas.zeropress.dev/build-pages-config/v0.1/schema.json",
-  "version": "0.1",
+  "$schema": "https://schemas.zeropress.dev/build-pages-config/v1.0/schema.json",
+  "version": "1.0",
   "site": {
     "title": "My Docs",
     "description": "Project documentation.",
@@ -39,12 +39,12 @@ You can also review this site's real [config.json](https://github.com/zeropress-
 }
 ```
 
-The source config directory is user-authored. Build Pages generated working files are written separately under `.zeropress-build-page/`.
+The source config directory is user-authored. Build Pages generated working files are written separately under `.zeropress-build-pages/`.
 
 ## Top-level Fields
 
 - `$schema`: optional JSON Schema URI for editor support.
-- `version`: Build Pages config version. Current value: `0.1`.
+- `version`: Build Pages config contract version. The current value is `0.7`.
 - `site`: user-facing site metadata.
 - `markdown`: Markdown source processing options.
 - `front_page`: source used for the site root.
@@ -53,6 +53,12 @@ The source config directory is user-authored. Build Pages generated working file
 - `custom_html`: trusted HTML snippets inserted into generated pages.
 
 Unknown fields are rejected.
+
+Build Pages Config, Preview Data, and Theme Runtime are independent contracts. Build Pages Config 1.0 generates Preview Data 0.7 for Theme Runtime 0.7; its version does not select or imply the version of either downstream contract.
+
+Every config file that exists must declare `"version": "1.0"`; a missing, non-string, or other version is an error. When the implicit default config path does not exist, Build Pages still succeeds with its built-in defaults. A path supplied explicitly through `--config` must exist.
+
+Earlier config versions are not accepted.
 
 ## `site`
 
@@ -69,7 +75,9 @@ Unknown fields are rejected.
     },
     "search": true,
     "expose_generator": true,
-    "indexing": true,
+    "robots": {
+      "allow_indexing": true
+    },
     "footer": {
       "copyright_text": "My Docs",
       "attribution": true
@@ -85,12 +93,12 @@ Common fields:
 
 - `title`: site name.
 - `description`: optional site description used by front page title text.
-- `url`: optional canonical HTTP(S) site URL at the origin root, such as `https://example.com`. Paths, queries, fragments, and subdirectory hosting are not supported. Omit it or use an empty string while the deployment URL is unknown; without it, Build Pages does not generate `sitemap.xml`.
-- `locale`: generated document locale.
+- `url`: optional canonical HTTP(S) site origin, such as `https://example.com`. Credentials, paths, queries, fragments, and subdirectory hosting are not supported. A trailing root slash is accepted and the resolved config records `URL.origin`. Omit it or use an empty string while the deployment URL is unknown; without it, Build Pages does not generate `sitemap.xml`.
+- `locale`: canonical BCP 47 document locale. Valid non-canonical input is canonicalized; invalid values are rejected.
 - `logo`: optional theme-facing site logo.
 - `search`: enables ZeroPress search artifacts when the theme supports search.
 - `expose_generator`: controls `<meta name="generator" content="ZeroPress">`.
-- `indexing`: controls whether the generated site asks search engine crawlers to index the site.
+- `robots`: closed `{ "allow_indexing": boolean }` fallback `robots.txt` policy. Omission means indexing is allowed. Legacy `site.indexing` is not valid.
 - `footer`: footer text and visible ZeroPress attribution preference.
 - `meta`: scalar key-value data for the selected theme.
 
@@ -201,6 +209,12 @@ Supported `type` values:
 
 If `front_page` is omitted, Build Pages uses `index.md` as the front page when that file exists in the source root. If `index.md` does not exist, Build Pages falls back to `theme_index`.
 
+Generated Page references use the NFC-normalized effective route path, not the
+leaf slug. A Markdown front page is therefore materialized as
+`{ "type": "page", "page_path": "reference/guide" }`. The Page's own
+`slug` is its leaf route slug, so identical leaf slugs are valid under different
+effective paths; duplicate effective paths remain an error.
+
 For raw HTML front pages:
 
 ```json
@@ -257,6 +271,14 @@ Menu item `meta` values are scalar values only. Themes can use them for icons, b
 
 Menu `children` are nested menu items. The selected theme decides how many child levels it renders and how they appear. Use real generated URLs for menu items; if a page does not exist yet, leave it out of the menu instead of adding a placeholder URL.
 
+Omitting `menus` materializes the built-in `primary` menu with Home. An explicit
+`"menus": {}` opts out and materializes no menus. When a menu omits `name`, its
+menu id is written as the resolved name. Menu URLs must be either safe
+single-slash root-relative URLs or credential-free HTTP(S) URLs; query and
+fragment are allowed, while bare/dot-relative paths, protocol-relative URLs,
+dot segments, backslashes, whitespace/control characters, and malformed
+percent escapes are rejected.
+
 ## `collections`
 
 ```json
@@ -281,7 +303,12 @@ Menu `children` are nested menu items. The selected theme decides how many child
 }
 ```
 
-Collections are independent reading groups. Build Pages collection items are source-root relative Markdown paths.
+Collections are independent reading groups. Build Pages collection items are source-root relative Markdown paths. In generated Preview Data, each Page item becomes `{ "type": "page", "path": "guides/deployment" }` using its effective route path, so Pages under different parents may share a leaf slug without ambiguity. Omitting `collections` and an explicit `{}` both materialize no collections; when a collection omits `title`, its collection id is written as the resolved title.
+
+All configured source file paths are exact source-root relative paths. Build
+Pages does not trim them, convert backslashes, or change extension case.
+Leading/trailing whitespace, control characters, empty or dot segments,
+parent traversal, query strings, and fragments are rejected.
 
 ## `custom_html`
 
@@ -298,9 +325,21 @@ Collections are independent reading groups. Build Pages collection items are sou
 }
 ```
 
-`custom_html` files are trusted HTML snippets. They must live under the source `.zeropress/` directory.
+`custom_html` files are trusted HTML snippets. They must live under the source `.zeropress/` directory. Each file must contain non-whitespace content and may contain at most 65,536 Unicode code points.
+
+The authoring config keeps the `{ "file": "..." }` reference shown above. Build Pages reads the file as UTF-8, preserves its raw whitespace, and materializes it in Preview Data as a direct string such as:
+
+```json
+{
+  "custom_html": {
+    "head_end": "<meta name=\"site-verification\" content=\"...\">"
+  }
+}
+```
+
+On theme-rendered pages, `head_end` is inserted before `</head>` and `body_end` before `</body>`. A configured target missing from the rendered document is a build error. Standalone HTML front pages are not modified by this injection pipeline.
 
 ## Schema
 
-The canonical schema is published at: 
-[https://schemas.zeropress.dev/build-pages-config/v0.1/schema.json](https://schemas.zeropress.dev/build-pages-config/v0.1/schema.json)
+The canonical schema is published at:
+[https://schemas.zeropress.dev/build-pages-config/v1.0/schema.json](https://schemas.zeropress.dev/build-pages-config/v1.0/schema.json)

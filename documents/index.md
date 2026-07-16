@@ -37,7 +37,7 @@ Use this when an origin-root GitHub Pages site should build and deploy from CI. 
 
 ```yaml
 - name: Build ZeroPress Pages
-  uses: zeropress-app/zeropress-build-pages@v0
+  uses: zeropress-app/zeropress-build-pages@v1
   with:
     source: ./docs
     destination: ./_site

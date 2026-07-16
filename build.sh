@@ -9,7 +9,7 @@ set -eu
 SCRIPT_DIR=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
 SITE_DIR="$SCRIPT_DIR/_site"
 
-npx --yes @zeropress/build-pages@latest \
+npx --yes @zeropress/build-pages@1 \
   --source "$SCRIPT_DIR/documents" \
   --destination "$SITE_DIR" \
   --public-dir "$SCRIPT_DIR/public" \

@@ -45,6 +45,10 @@ npx --yes @zeropress/build-pages \
 
 `--theme-path` takes precedence over `--theme`.
 
+Custom themes use the same fixed safety limits as other ZeroPress theme workflows: 4 MiB in total, 1 MiB per file, and 128 entries. Build Pages reads a custom theme directory through Build Core, so the entry, per-file, and total-size limits apply consistently.
+
+See [Theme Package Limits](https://zeropress.dev/reference/theme-runtime/package-limits/) for exact counting rules and asset-placement guidance.
+
 ## Create A Theme
 
 Use `@zeropress/create-theme` when you want to scaffold a standalone theme project.
@@ -59,4 +63,4 @@ The generated theme can be edited locally and passed to Build Pages with `--them
 
 Build Pages themes are regular ZeroPress themes. They use the same `theme.json`, template syntax, partials, and asset rules as other ZeroPress themes.
 
-For the full authoring guide, see [ZeroPress Theme Authoring](https://zeropress.dev/theme-authoring/).
+For the full authoring guide, see [ZeroPress Theme Authoring](https://zeropress.dev/guides/theme-authoring/).
