@@ -14,6 +14,10 @@
     "footer": {
       "copyright_text": "ZeroPress Build Pages",
       "attribution": true
+    },
+    "logo": {
+      "src": "/favicon_padding.svg",
+      "alt": "ZeroPress Logo"
     }
   },
   "markdown": {
