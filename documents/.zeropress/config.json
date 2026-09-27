@@ -27,6 +27,11 @@
     "type": "markdown",
     "file": "index.md"
   },
+  "custom_html": {
+    "head_end": {
+      "file": ".zeropress/head_end.html"
+    }
+  },
   "menus": {
     "primary": {
       "name": "Primary",
