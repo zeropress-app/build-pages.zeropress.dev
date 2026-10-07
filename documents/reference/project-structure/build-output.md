@@ -5,7 +5,7 @@ Build Pages writes internal working files to:
 ```txt
 .zeropress-build-pages/
   build-pages-config.json
-  preview-data.json
+  zeropress-preview-data.json
   build-report.json
   public-assets/
 ```
@@ -17,7 +17,7 @@ These files help inspect the resolved build state. They are not the public outpu
 `.zeropress-build-pages/` is generated in the current working directory.
 
 - `build-pages-config.json`: resolved user-facing Build Pages config.
-- `preview-data.json`: internal generated build input passed to `@zeropress/build`.
+- `zeropress-preview-data.json`: internal generated build input passed to `@zeropress/build`.
 - `build-report.json`: summary of discovered Markdown, skipped files, front page mode, and output paths.
 - `public-assets/`: staged public root used by the underlying build.
 

@@ -9,7 +9,7 @@ You can also review this site's real [config.json](https://github.com/zeropress-
 
 ```json
 {
-  "$schema": "https://schemas.zeropress.dev/build-pages-config/v1.0/schema.json",
+  "$schema": "https://www.schemastore.org/zeropress-build-pages-config-1.0.json",
   "version": "1.0",
   "site": {
     "title": "My Docs",
@@ -341,5 +341,6 @@ On theme-rendered pages, `head_end` is inserted before `</head>` and `body_end` 
 
 ## Schema
 
-The canonical schema is published at:
-[https://schemas.zeropress.dev/build-pages-config/v1.0/schema.json](https://schemas.zeropress.dev/build-pages-config/v1.0/schema.json)
+Use the [Build Pages Config v1.0 schema on SchemaStore](https://www.schemastore.org/zeropress-build-pages-config-1.0.json) in `$schema` for editor validation and completion.
+
+The [canonical schema](https://schemas.zeropress.dev/build-pages-config/v1.0/schema.json) is also available on the ZeroPress schema host.
