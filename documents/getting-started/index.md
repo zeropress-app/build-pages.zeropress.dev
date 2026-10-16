@@ -43,6 +43,8 @@ npx serve _site
 
 Open the local URL printed by `serve` to inspect the generated HTML before deploying.
 
+To automate this build in GitHub Actions, see the [GitHub Action guide](../reference/github-action/index.md) for setup and workflow examples.
+
 ## 3. Add Site Config
 
 Optional site configuration lives under the source directory.

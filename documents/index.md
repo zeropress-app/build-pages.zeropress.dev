@@ -43,6 +43,8 @@ Use this when an origin-root GitHub Pages site should build and deploy from CI. 
     destination: ./_site
 ```
 
+<a href="https://github.com/marketplace/actions/build-zeropress-pages" target="_blank">View on GitHub Marketplace</a>.
+
 ### package.json Script
 
 Use this when you want the Build Pages package recorded in `package-lock.json` and reused through `npm run build`.

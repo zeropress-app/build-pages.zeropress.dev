@@ -1,6 +1,6 @@
 # GitHub Action
 
-Use the GitHub Action when your site should build in a repository workflow.
+Use the GitHub Action when your site should build in a repository workflow. It is available on <a href="https://github.com/marketplace/actions/build-zeropress-pages" target="_blank">GitHub Marketplace</a>.
 
 ## Minimal Action Step
 
